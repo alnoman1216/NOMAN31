@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معهد النعمان التعليمي - Al-No'man Educational Institute</title>
+    <title>معهد النُعمان التعليمي - Al-No'man Educational Institute</title>
     <meta name="description" content="معهد النعمان التعليمي - تعليم متميز للمنهاج السوري ودورات اللغات">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -931,34 +931,34 @@
 </head>
 <body>
     <!-- Header - محسن -->
-    <header>
-        <div class="header-container">
-            <div class="logo-container">
-                <!-- ضع رابط اللوغو الخاص بك هنا -->
-                <img src="https://ibb.co/Q7qnmbzn" alt="معهد النعمان التعليمي" class="logo">
-                <div class="institute-name">
-                    معهد النعمان التعليمي
-                    <span>Al-No'man Educational Institute</span>
-                </div>
+<header>
+    <div class="header-container">
+        <div class="logo-container">
+            <img src="https://i.ibb.co/b5GVLHVV/IMG-0621.png" alt="معهد النُعمان التعليمي" class="logo" style="height: 60px; width: auto; border-radius: 8px;">
+            
+            <div class="institute-name">
+                معهد النُعمان التعليمي
+                <span>Al-No'man Educational Institute</span>
             </div>
-            
-            <nav id="main-nav">
-                <button onclick="showSection('home')" class="nav-btn active" data-section="home">الصفحة الرئيسية</button>
-                <button onclick="showSection('stages')" class="nav-btn" data-section="stages">المراحل التعليمية</button>
-                <button onclick="showSection('about')" class="nav-btn" data-section="about">نبذة تعريفية</button>
-            </nav>
-            
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
-                <i class="fas fa-bars"></i>
-            </button>
         </div>
-    </header>
-
+        
+        <nav id="main-nav">
+            <button onclick="showSection('home')" class="nav-btn active" data-section="home">الصفحة الرئيسية</button>
+            <button onclick="showSection('stages')" class="nav-btn" data-section="stages">الدورات المتاحة</button>
+           
+            <button onclick="showSection('about')" class="nav-btn" data-section="about"> من نحن ؟</button>
+        </nav>
+        
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</header>
     <!-- باقي المحتوى كما هو بدون تغيير -->
     <section id="home" class="section home-section active">
         <div class="home-content">
-            <h1>مرحباً بكم في معهد نعمان التعليمي</h1>
-            <p>سجل الآن</p>
+            <h1>مرحباً بكم في معهد النُعمان التعليمي</h1>
+            <p>نور العلم.. وغرس القيم</p>
             <div class="home-divider"></div>
             <a href="javascript:void(0)" onclick="showSection('stages')" class="cta-button">
                 سجل الآن
@@ -970,7 +970,7 @@
 
     <section id="stages" class="section stages-section">
         <div class="stages-container">
-            <h2 class="section-title">المراحل التعليمية</h2>
+            <h2 class="section-title">الدورات المتاحة</h2>
             
             <div class="stages-grid">
                 <div class="stage-card" onclick="showGrades('ابتدائي')">
@@ -1084,7 +1084,8 @@
             <h2 class="section-title">نبذة تعريفية</h2>
             
             <div class="about-content">
-                <p>
+							<p>
+										<p>
                     <span class="institute-name">معهد النعمان التعليمي</span>
                     هو صرح تعليمي متميز يهدف إلى تقديم أفضل الخدمات التعليمية للطلاب في جميع المراحل الدراسية.
                 </p>
@@ -1139,8 +1140,23 @@
                     <h3>خدماتنا</h3>
                     <ul>
                         <li>المنهاج الدراسي السوري بجميع المراحل (الابتدائي - الإعدادي - الثانوي)</li>
-                        <li>دورات اللغة الإنجليزية بمستويات مختلفة<li>دورات اللغة الفرنسية بمستويات مختلفة</li>
+                        <li>دورات اللغة الإنجليزية بمستويات مختلفة</li>
+                        <li>دورات اللغة الفرنسية بمستويات مختلفة</li>
                         <li>دورات اللغة الألمانية بمستويات مختلفة</li>
+                        <li>دروس تقوية فردية وجماعية</li>
+                        <li>تحضير شهادة البكلوريا بكافة فروعها</li>
+                    </ul>
+                </div>
+
+                <div class="services-box">
+                    <h3>مميزاتنا</h3>
+                    <ul>
+                        <li>كادر تدريسي متميز وذو خبرة</li>
+                        <li>فصول دراسية مجهزة بأحدث الوسائل التعليمية</li>
+                        <li>مجموعات صغيرة لضمان جودة التعليم</li>
+                        <li>متابعة مستمرة لتقدم الطلاب</li>
+                        <li>أسعار تنافسية وتسهيلات في الدفع</li>
+                        <li>دورات مجانية لأبناء الشهداء</li>
                     </ul>
                 </div>
 
@@ -1151,12 +1167,69 @@
         </div>
     </section>
 
+    <!-- قسم لماذا نعمان -->
+    <section id="why-us" class="section why-us-home">
+        <div class="stages-container">
+            <h2 class="section-title">لماذا تختار معهد النُعمان؟</h2>
+            
+            <div class="features-grid-home">
+                <div class="feature-card-home">
+                    <div class="feature-icon-home">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>كادر تدريسي متميز</h3>
+                    <p>نخبة من المعلمين والمعلمات المؤهلين تأهيلاً عالياً وذوي خبرة طويلة في مجال التعليم</p>
+                </div>
+                
+                <div class="feature-card-home">
+                    <div class="feature-icon-home">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>مناهج متكاملة</h3>
+                    <p>نغطي جميع المناهج الدراسية السورية مع مواد إثرائية لضمان الفهم الشامل</p>
+                </div>
+                
+                <div class="feature-card-home">
+                    <div class="feature-icon-home">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>متابعة مستمرة</h3>
+                    <p>نظام متابعة وتقييم مستمر لقياس تطور الطلاب وتقديم التقارير الدورية لأولياء الأمور</p>
+                </div>
+                
+                <div class="feature-card-home">
+                    <div class="feature-icon-home">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>بيئة محفزة</h3>
+                    <p>فصول دراسية مريحة ومجهزة بوسائل تعليمية حديثة تشجع على الإبداع والتميز</p>
+                </div>
+                
+                <div class="feature-card-home">
+                    <div class="feature-icon-home">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>أسعار مناسبة</h3>
+                    <p>أسعارنا مدروسة تناسب مختلف طبقات المجتمع أهدافنا تنموية وليست مادية</p>
+                </div>
+                
+                <div class="feature-card-home">
+                    <div class="feature-icon-home">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>لغات متعددة</h3>
+                    <p>دورات متخصصة في اللغات الإنجليزية والفرنسية والألمانية بمستويات مختلفة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <div id="toast" class="toast">
         <div id="toast-message"></div>
     </div>
 
     <script>
-        // بيانات الموقع
+        // بيانات الموقع - موسعة ومحسنة
         const stagesData = {
             "ابتدائي": {
                 grades: ["الصف الأول", "الصف الثاني", "الصف الثالث", "الصف الرابع", "الصف الخامس", "الصف السادس"],
@@ -1200,49 +1273,84 @@
             "ابتدائي": {
                 "الصف الأول": {
                     "اللغة العربية": [
-                        {name: "دورة اللغة العربية - الصف الأول", price: "15000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 15},
-                        {name: "دورة القراءة والكتابة", price: "12000 ل.س", start: "1/12/2025", end: "28/2/2026", seats: 12}
+                        {name: "دورة اللغة العربية - الصف الأول", price: "15000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 15, description: "دورة شاملة لتعليم القراءة والكتابة ومهارات اللغة العربية الأساسية"},
+                        {name: "دورة القراءة والكتابة", price: "12000 ل.س", start: "1/12/2025", end: "28/2/2026", seats: 12, description: "تركيز على مهارات القراءة والكتابة الأساسية"}
                     ],
                     "الرياضيات": [
-                        {name: "دورة الرياضيات - الصف الأول", price: "15000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 15}
+                        {name: "دورة الرياضيات - الصف الأول", price: "15000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 15, description: "تعليم أساسيات الرياضيات والأعداد والعمليات الحسابية البسيطة"}
+                    ]
+                },
+                "الصف الثاني": {
+                    "اللغة العربية": [
+                        {name: "دورة اللغة العربية - الصف الثاني", price: "16000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 15, description: "تطوير مهارات القراءة والكتابة والقواعد الأساسية"}
+                    ],
+                    "الرياضيات": [
+                        {name: "دورة الرياضيات - الصف الثاني", price: "16000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 15, description: "تعلم العمليات الحسابية والمسائل الرياضية"}
                     ]
                 }
             },
             "اعدادي": {
                 "الصف السابع": {
                     "الرياضيات": [
-                        {name: "دورة الرياضيات - الصف السابع", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10}
+                        {name: "دورة الرياضيات - الصف السابع", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "شاملة لجميع مواضيع منهاج الصف السابع في الرياضيات"}
                     ],
                     "الفيزياء": [
-                        {name: "دورة الفيزياء - الصف السابع", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 8}
+                        {name: "دورة الفيزياء - الصف السابع", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 8, description: "شرح مفاهيم الفيزياء الأساسية وتطبيقاتها"}
+                    ],
+                    "الكيمياء": [
+                        {name: "دورة الكيمياء - الصف السابع", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 8, description: "تعلم أساسيات الكيمياء والمختبرات البسيطة"}
+                    ]
+                },
+                "الصف الثامن": {
+                    "الرياضيات": [
+                        {name: "دورة الرياضيات - الصف الثامن", price: "22000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "متقدمة في مواضيع الرياضيات للصف الثامن"}
                     ]
                 }
             },
             "ثانوي": {
                 "البكلوريا علمي": {
                     "الرياضيات": [
-                        {name: "دورة الرياضيات - البكلوريا علمي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10}
+                        {name: "دورة الرياضيات - البكلوريا علمي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تحضير شامل لامتحان البكلوريا في مادة الرياضيات"}
                     ],
                     "الفيزياء": [
-                        {name: "دورة الفيزياء - البكلوريا علمي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10}
+                        {name: "دورة الفيزياء - البكلوريا علمي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "مراجعة شاملة وتدريبات على امتحانات البكلوريا"}
+                    ],
+                    "الكيمياء": [
+                        {name: "دورة الكيمياء - البكلوريا علمي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تركيز على التجارب والمسائل الكيميائية"}
                     ]
                 },
                 "البكلوريا أدبي": {
                     "التاريخ": [
-                        {name: "دورة التاريخ - البكلوريا أدبي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10}
+                        {name: "دورة التاريخ - البكلوريا أدبي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تحليل الأحداث التاريخية ومراجعة شاملة للمنهاج"}
                     ],
                     "الجغرافيا": [
-                        {name: "دورة الجغرافيا - البكلوريا أدبي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10}
+                        {name: "دورة الجغرافيا - البكلوريا أدبي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "دراسة شاملة للمفاهيم الجغرافية والخرائط"}
+                    ],
+                    "الفلسفة": [
+                        {name: "دورة الفلسفة - البكلوريا أدبي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تحليل النصوص الفلسفية وتطوير مهارات التفكير النقدي"}
                     ]
                 }
             },
             "لغات": {
                 "الإنجليزية": {
                     "الإنجليزية للمبتدئين": [
-                        {name: "دورة الإنجليزية للمبتدئين", price: "18000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 12}
+                        {name: "دورة الإنجليزية للمبتدئين", price: "18000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 12, description: "تعلم الأساسيات من الصفر مع التركيز على المحادثة اليومية"}
                     ],
                     "الإنجليزية للمحادثة": [
-                        {name: "دورة الإنجليزية للمحادثة", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10}
+                        {name: "دورة الإنجليزية للمحادثة", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تحسين الطلاقة والتحدث بثقة في مختلف المواقف"}
+                    ],
+                    "الإنجليزية للأطفال": [
+                        {name: "دورة الإنجليزية للأطفال", price: "15000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 8, description: "تعلم ممتع عبر الألعاب والأنشطة التفاعلية"}
+                    ]
+                },
+                "الفرنسية": {
+                    "الفرنسية للمبتدئين": [
+                        {name: "دورة الفرنسية للمبتدئين", price: "18000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "بداية رحلة تعلم الفرنسية من الأساسيات"}
+                    ]
+                },
+                "الألمانية": {
+                    "الألمانية للمبتدئين": [
+                        {name: "دورة الألمانية للمبتدئين", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 8, description: "تعلم اللغة الألمانية من الصفر مع مدرسين متخصصين"}
                     ]
                 }
             }
@@ -1370,7 +1478,7 @@
                     card.className = 'course-card';
                     card.innerHTML = `
                         <h3>${course.name}</h3>
-                        <p>${course.description || 'دورة تعليمية شاملة'}</p>
+                        <p>${course.description}</p>
                         <div class="course-details">
                             <div class="course-detail">
                                 <i class="fas fa-money-bill-wave"></i>
@@ -1390,7 +1498,7 @@
                             </div>
                         </div>
                         <div class="course-actions">
-                            <button class="btn btn-primary" onclick="showRegister('${course.name}')">سجل الآن</button>
+                            <button class="btn btn-primary" onclick="showRegister('${course.name.replace(/'/g, "\\'")}')">سجل الآن</button>
                             <button class="btn btn-secondary" onclick="backToSubjects()">إلغاء</button>
                         </div>
                     `;
@@ -1404,15 +1512,6 @@
         function showRegister(courseName) {
             showSection('register');
             document.getElementById('selectedCourse').value = courseName;
-            
-            // تحديث breadcrumb
-            updateBreadcrumb('register-breadcrumb', [
-                {text: 'المراحل', action: 'backToStages()'},
-                {text: currentStage, action: 'backToGrades()'},
-                {text: currentGrade, action: 'backToSubjects()'},
-                {text: currentSubject, action: 'backToCourses()'},
-                {text: 'التسجيل', action: ''}
-            ]);
         }
 
         // وظائف العودة
@@ -1497,7 +1596,18 @@
                 {text: 'المراحل', action: 'backToStages()'},
                 {text: 'اختر المرحلة', action: ''}
             ]);
+            
+            // إضافة قسم "لماذا تختار معهد النُعمان" إلى القائمة
+            const nav = document.getElementById('main-nav');
+            const whyUsButton = document.createElement('button');
+                        whyUsButton.textContent = 'خدماتنا  ';
+            whyUsButton.className = 'nav-btn';
+            whyUsButton.setAttribute('data-section', 'why-us');
+            whyUsButton.onclick = () => showSection('why-us');
+            nav.insertBefore(whyUsButton, nav.children[2]);
         });
     </script>
 </body>
 </html>
+										
+										
