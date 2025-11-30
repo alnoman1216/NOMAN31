@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معهد النعمان التعليمي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* المتغيرات والأساسيات */
+        :root {
+            --primary-dark: #0a0f1c;
+            --primary-green: #00ff8c;
+            --accent-green: #00cc6f;
+            --dark-card: #121827;
+            --text-light: #f0f0f0;
+            --text-gray: #a0a0a0;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* التصميم العام */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-green);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary-green);
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        /* الشريط العلوي */
+        header {
+            background: rgba(10, 15, 28, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(0, 255, 140, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            color: var(--primary-green);
+            font-size: 1.8rem;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary-green), #00cc6f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .logo-sub {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            margin-top: -5px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a:hover {
+            color: var(--primary-green);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-green);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* البانر الرئيسي */
+        .hero {
+            background: linear-gradient(135deg, rgba(10, 15, 28, 0.9), rgba(10, 15, 28, 0.7)), 
+                        url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 255, 140, 0.1), transparent 70%);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            color: var(--primary-green);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: var(--text-gray);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-green));
+            color: var(--primary-dark);
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 255, 140, 0.3);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 255, 140, 0.4);
+        }
+        
+        /* قسم المراحل الدراسية */
+        .stages {
+            background: var(--primary-dark);
+        }
+        
+        .stage-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .stage-card {
+            background: var(--dark-card);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .stage-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary-green);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+        
+        .stage-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .stage-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .stage-icon {
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+        
+        .stage-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .stage-card p {
+            color: var(--text-gray);
+        }
+        
+        /* قسم الدورات */
+        .courses-section {
+            display: none;
+            background: var(--primary-dark);
+        }
+        
+        .courses-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .course-card {
+            background: var(--dark-card);
+            border-radius: 15px;
+            padding: 25px;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-color: rgba(0, 255, 140, 0.2);
+        }
+        
+        .course-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .course-title {
+            font-size: 1.3rem;
+            color: var(--primary-green);
+        }
+        
+        .course-price {
+            background: rgba(0, 255, 140, 0.1);
+            color: var(--primary-green);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+        
+        .course-details {
+            margin-bottom: 20px;
+        }
+        
+        .course-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: var(--text-gray);
+        }
+        
+        .course-detail i {
+            margin-left: 10px;
+            color: var(--primary-green);
+            width: 20px;
+        }
+        
+        .course-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: var(--primary-green);
+            color: var(--primary-dark);
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-green);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-gray);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+        }
+        
+        /* قسم التسجيل */
+        .register-section {
+            display: none;
+            background: var(--primary-dark);
+        }
+        
+        .register-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--dark-card);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 2px rgba(0, 255, 140, 0.2);
+        }
+        
+        /* قسم الجودة */
+        .quality {
+            background: linear-gradient(135deg, var(--primary-dark), #0c1220);
+        }
+        
+        .quality-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .quality-card {
+            background: var(--dark-card);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .quality-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .quality-icon {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+        
+        .quality-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .quality-card p {
+            color: var(--text-gray);
+        }
+        
+        /* الفوتر */
+        footer {
+            background: #080c16;
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--primary-green);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary-green);
+        }
+        
+        .contact-info {
+            list-style: none;
+        }
+        
+        .contact-info li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .contact-info i {
+            color: var(--primary-green);
+            margin-left: 10px;
+            margin-top: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+        
+        /* أزرار التنقل */
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .back-button:hover {
+            color: var(--accent-green);
+        }
+        
+        /* تأثيرات إضافية */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 140, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 255, 140, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 140, 0); }
+        }
+        
+        /* التجاوب مع الشاشات المختلفة */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            nav ul {
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .stage-cards, .quality-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .courses-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الشريط العلوي -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div>
+                    <div class="logo-text">معهد النعمان التعليمي</div>
+                    <div class="logo-sub">Al-Numan Educational Institute</div>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#stages">المراحل</a></li>
+                    <li><a href="#quality">الجودة</a></li>
+                    <li><a href="#contact">اتصل بنا</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- البانر الرئيسي -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1>مرحباً بكم في <span>معهد النعمان التعليمي</span></h1>
+            <p>التميز في تدريس المنهاج السوري لجميع المراحل الدراسية</p>
+            <button class="cta-button pulse" onclick="scrollToStages()">اكتشف مراحلنا التعليمية</button>
+        </div>
+    </section>
+
+    <!-- قسم المراحل الدراسية -->
+    <section class="stages" id="stages">
+        <div class="container">
+            <div class="section-title">
+                <h2>المراحل التعليمية</h2>
+                <p>اختر مرحلتك التعليمية للاطلاع على الدورات المتاحة</p>
+            </div>
+            <div class="stage-cards">
+                <div class="stage-card" onclick="showCourses('ابتدائي')">
+                    <div class="stage-icon">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <h3>المرحلة الابتدائية</h3>
+                    <p>تعليم أساسي متين يبني قاعدة قوية للطلاب</p>
+                </div>
+                <div class="stage-card" onclick="showCourses('اعدادي')">
+                    <div class="stage-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>المرحلة الإعدادية</h3>
+                    <p>تطوير المهارات والاستعداد للمرحلة الثانوية</p>
+                </div>
+                <div class="stage-card" onclick="showCourses('ثانوي')">
+                    <div class="stage-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>المرحلة الثانوية</h3>
+                    <p>تحضير مكثف لامتحانات الشهادة الثانوية</p>
+                </div>
+                <div class="stage-card" onclick="showCourses('لغات')">
+                    <div class="stage-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>قسم اللغات</h3>
+                    <p>تعلم اللغات الإنجليزية، الفرنسية والألمانية</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الدورات -->
+    <section class="courses-section" id="courses-section">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="courses-title">الدورات المتاحة</h2>
+                <p id="courses-subtitle">اختر الدورة المناسبة لك وسجل الآن</p>
+            </div>
+            <div class="courses-container" id="courses-container">
+                <!-- سيتم تعبئة الدورات ديناميكياً -->
+            </div>
+            <a href="#" class="back-button" onclick="backToStages()">
+                <i class="fas fa-arrow-right"></i> العودة لاختيار المرحلة
+            </a>
+        </div>
+    </section>
+
+    <!-- قسم التسجيل -->
+    <section class="register-section" id="register-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>تسجيل الدورة</h2>
+                <p>املأ النموذج لتسجيل ابنك في الدورة التعليمية</p>
+            </div>
+            <div class="register-form">
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="name">الاسم الثلاثي للطالب</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">رقم الهاتف</label>
+                        <input type="text" id="phone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="course">الدورة المختارة</label>
+                        <input type="text" id="course" class="form-control" readonly>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">إرسال التسجيل</button>
+                </form>
+                <a href="#" class="back-button" onclick="backToCourses()">
+                    <i class="fas fa-arrow-right"></i> العودة للدورات
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الجودة -->
+    <section class="quality" id="quality">
+        <div class="container">
+            <div class="section-title">
+                <h2>جودة التعليم في معهد النعمان</h2>
+                <p>نقدم تعليماً عالي الجودة يتماشى مع المنهاج السوري الرسمي</p>
+            </div>
+            <div class="quality-cards">
+                <div class="quality-card">
+                    <div class="quality-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>كادر متميز</h3>
+                    <p>فريق من المعلمين ذوي الخبرة والكفاءة العالية لضمان أفضل تعليم للطلاب</p>
+                </div>
+                <div class="quality-card">
+                    <div class="quality-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>مناهج شاملة</h3>
+                    <p>تغطية كاملة للمنهاج الدراسي بجميع المراحل، مع مواد تعليمية منظمة وسهلة الفهم</p>
+                </div>
+                <div class="quality-card">
+                    <div class="quality-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>نتائج مضمونة</h3>
+                    <p>سجل حافل بالنجاحات والتفوق الأكاديمي، لضمان تطوير مستوى كل طالب</p>
+                </div>
+                <div class="quality-card">
+                    <div class="quality-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>متابعة شهرية كاملة</h3>
+                    <p>نقدّم متابعة شهرية كاملة لكل طالب، تتضمن تقريرًا تفصيليًا لولي الأمر حول مستوى الطالب، تقدّمه دراسته، التزامه بالحصص، وملاحظات المدرسين، لضمان أعلى جودة تعليمية</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>معلومات الاتصال</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>جبلة، العمارة فوق صيدلية بشر مثبوت، الطابق الأول</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>0999-999999</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@al-numan.edu</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>المراحل التعليمية</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-arrow-left"></i> <span>المرحلة الابتدائية</span></li>
+                        <li><i class="fas fa-arrow-left"></i> <span>المرحلة الإعدادية</span></li>
+                        <li><i class="fas fa-arrow-left"></i> <span>المرحلة الثانوية</span></li>
+                        <li><i class="fas fa-arrow-left"></i> <span>قسم اللغات</span></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>ساعات العمل</h3>
+                    <ul class="contact-info">
+                        <li><i class="far fa-clock"></i> <span>السبت - الخميس: 8:00 ص - 6:00 م</span></li>
+                        <li><i class="far fa-clock"></i> <span>الجمعة: 10:00 ص - 2:00 م</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة &copy; 2023 معهد النعمان التعليمي</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // بيانات الدورات
+        const coursesData = {
+            "ابتدائي": [
+                {name: "رياضيات ابتدائي", price: "15000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 15},
+                {name: "علوم ابتدائي", price: "15000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 12},
+                {name: "لغة عربية ابتدائي", price: "15000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 18}
+            ],
+            "اعدادي": [
+                {name: "رياضيات إعدادي", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10},
+                {name: "فيزياء إعدادي", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 8},
+                {name: "كيمياء إعدادي", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 8},
+                {name: "لغة عربية إعدادي", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 12}
+            ],
+            "ثانوي": [
+                {name: "رياضيات ثانوي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10},
+                {name: "فيزياء ثانوي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10},
+                {name: "كيمياء ثانوي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10},
+                {name: "أحياء ثانوي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 8}
+            ],
+            "لغات": [
+                {name: "لغة إنجليزية - مستوى مبتدئ", price: "18000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 12},
+                {name: "لغة إنجليزية - مستوى متقدم", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10},
+                {name: "لغة فرنسية", price: "18000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 8},
+                {name: "لغة ألمانية", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 8}
+            ]
+        };
+
+        // العناصر الرئيسية
+        const stagesSection = document.querySelector('.stages');
+        const coursesSection = document.getElementById('courses-section');
+        const coursesContainer = document.getElementById('courses-container');
+        const registerSection = document.getElementById('register-section');
+        const registerForm = document.getElementById('register-form');
+        const coursesTitle = document.getElementById('courses-title');
+        const coursesSubtitle = document.getElementById('courses-subtitle');
+        const courseInput = document.getElementById('course');
+
+        // وظائف التنقل
+        function scrollToStages() {
+            document.getElementById('stages').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showCourses(stage) {
+            stagesSection.style.display = "none";
+            coursesSection.style.display = "block";
+            coursesContainer.innerHTML = "";
+            
+            coursesTitle.textContent = `الدورات المتاحة لمرحلة ${stage}`;
+            coursesSubtitle.textContent = `اختر الدورة المناسبة لمرحلة ${stage}`;
+            
+            coursesData[stage].forEach(course => {
+                const card = document.createElement('div');
+                card.classList.add('course-card');
+                card.innerHTML = `
+                    <div class="course-header">
+                        <h3 class="course-title">${course.name}</h3>
+                        <span class="course-price">${course.price}</span>
+                    </div>
+                    <div class="course-details">
+                        <div class="course-detail">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>تاريخ البداية: ${course.start}</span>
+                        </div>
+                        <div class="course-detail">
+                            <i class="far fa-calendar-check"></i>
+                            <span>تاريخ النهاية: ${course.end}</span>
+                        </div>
+                        <div class="course-detail">
+                            <i class="fas fa-users"></i>
+                            <span>المقاعد المتاحة: ${course.seats}</span>
+                        </div>
+                    </div>
+                    <div class="course-actions">
+                        <button class="btn btn-primary" onclick="showRegister('${course.name}')">سجل الآن</button>
+                        <button class="btn btn-secondary" onclick="backToStages()">إلغاء</button>
+                    </div>
+                `;
+                coursesContainer.appendChild(card);
+            });
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function backToStages() {
+            coursesSection.style.display = "none";
+            registerSection.style.display = "none";
+            stagesSection.style.display = "block";
+            window.scrollTo({ top: stagesSection.offsetTop, behavior: 'smooth' });
+        }
+
+        function showRegister(courseName) {
+            coursesSection.style.display = "none";
+            registerSection.style.display = "block";
+            courseInput.value = courseName;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function backToCourses() {
+            registerSection.style.display = "none";
+            coursesSection.style.display = "block";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // معالجة نموذج التسجيل
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const course = document.getElementById('course').value;
+            
+            // هنا يمكن إضافة كود إرسال البيانات إلى الخادم
+            alert(`شكراً ${name}! تم تسجيلك في دورة ${course} بنجاح. سنتواصل معك على الرقم ${phone} قريباً.`);
+            
+            registerForm.reset();
+            backToStages();
+        });
+
+        // إضافة تأثيرات عند التمرير
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = "rgba(10, 15, 28, 0.98)";
+            } else {
+                header.style.background = "rgba(10, 15, 28, 0.95)";
+            }
+        });
+    </script>
+</body>
+</html>
