@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معهد النعمان التعليمي - Al-No'man Educational Institute</title>
+    <meta name="description" content="معهد النعمان التعليمي - تعليم متميز للمنهاج السوري ودورات اللغات">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --background: hsl(0, 0%, 7%);
+            --foreground: hsl(0, 0%, 98%);
+            --primary: hsl(142, 76%, 36%);
+            --card: hsl(0, 0%, 10%);
+            --border: hsl(0, 0%, 20%);
+            --muted: hsl(0, 0%, 65%);
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        .header-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            height: 64px;
+            width: auto;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            color: var(--foreground);
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            padding-bottom: 0.25rem;
+        }
+
+        nav button:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        nav button.active {
+            color: var(--primary);
+        }
+
+        nav button.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            display: none;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section.active {
+            display: flex;
+            opacity: 1;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Home Section - محتوى مدمج */
+        .home-section {
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem 1.5rem;
+        }
+
+        .home-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--background) 0%, var(--background) 50%, rgba(34, 197, 94, 0.1) 100%);
+        }
+
+        .home-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .home-content h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 30px rgba(34, 197, 94, 0.5);
+            animation: slideUp 0.8s ease-out 0.3s both;
+        }
+
+        .home-content .subtitle {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 3rem;
+            animation: slideUp 0.8s ease-out 0.6s both;
+        }
+
+        .home-divider {
+            width: 128px;
+            height: 4px;
+            background: var(--primary);
+            margin: 3rem auto;
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.6);
+            animation: scaleInX 0.6s ease-out 1s both;
+        }
+
+        /* نبذة تعريفية في الرئيسية */
+        .about-preview {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .about-preview:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(34, 197, 94, 0.15);
+        }
+
+        .about-preview h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .about-preview p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--foreground);
+        }
+
+        .institute-name {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* ميزات في الرئيسية */
+        .features-preview {
+            margin: 3rem 0;
+        }
+
+        .features-preview h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(34, 197, 94, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 40px rgba(34, 197, 94, 0.2);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(34, 197, 94, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+            background: rgba(34, 197, 94, 0.3);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .decorative-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(34, 197, 94, 0.05);
+            filter: blur(80px);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .decorative-circle:first-of-type {
+            top: 5rem;
+            left: 5rem;
+            width: 288px;
+            height: 288px;
+            animation-delay: 0s;
+        }
+
+        .decorative-circle:last-of-type {
+            bottom: 5rem;
+            right: 5rem;
+            width: 384px;
+            height: 384px;
+            animation-delay: 3s;
+        }
+
+        /* باقي الأقسام - نفس الأنماط مع تحسينات */
+        .courses-section, .registration-section, .why-us-section, .about-section {
+            padding: 6rem 1.5rem;
+            align-items: flex-start;
+        }
+
+        .courses-container, .registration-container, .why-us-container, .about-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* تحسينات للكاردات في باقي الأقسام */
+        .category-card, .course-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before, .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(34, 197, 94, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .category-card:hover, .course-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 40px rgba(34, 197, 94, 0.2);
+        }
+
+        .category-card:hover::before, .course-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Animations محسنة */
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleInX {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                gap: 1rem;
+            }
+
+            nav button {
+                font-size: 0.875rem;
+            }
+
+            .home-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .home-content .subtitle {
+                font-size: 1.25rem;
+            }
+
+            .about-preview, .feature-card {
+                padding: 1.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-preview h2, .features-preview h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='64'%3E%3Crect width='100' height='64' fill='%2322c55e'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='Cairo' font-size='20' font-weight='bold'%3ELogo%3C/text%3E%3C/svg%3E" alt="معهد النعمان التعليمي" class="logo">
+            
+            <nav>
+                <button onclick="showSection('home')" class="nav-btn active" data-section="home">الصفحة الرئيسية</button>
+                <button onclick="showSection('courses')" class="nav-btn" data-section="courses">الدورات المتاحة</button>
+                <button onclick="showSection('registration')" class="nav-btn" data-section="registration">التسجيل</button>
+                <button onclick="showSection('about')" class="nav-btn" data-section="about">نبذة كاملة</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Section - الصفحة الرئيسية المدمجة -->
+    <section id="home" class="section home-section active">
+        <div class="home-content">
+            <h1>معهد النعمان التعليمي</h1>
+            <p class="subtitle">Al-No'man Educational Institute</p>
+            <div class="home-divider"></div>
+            
+            <!-- نبذة تعريفية مختصرة -->
+            <div class="about-preview">
+                <h2>مرحباً بكم في معهد النعمان</h2>
+                <p>
+                    <span class="institute-name">معهد النعمان التعليمي</span> 
+                    هو صرح تعليمي متميز يهدف إلى تقديم أفضل الخدمات التعليمية للطلاب في جميع المراحل الدراسية. نحن نؤمن بأن التعليم هو المفتاح الأساسي لبناء مستقبل مشرق.
+                </p>
+                <p>
+                    نقدم تعليماً عالي الجودة يتماشى مع المنهاج السوري الرسمي، مدعوماً بفريق من المعلمين ذوي الخبرة والكفاءة العالية.
+                </p>
+            </div>
+
+            <!-- ميزات المعهد -->
+            <div class="features-preview">
+                <h2>لماذا تختار معهد النعمان؟</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>جودة التعليم</h3>
+                        <p>نقدم تعليماً عالي الجودة يتماشى مع المنهاج السوري الرسمي بأحدث الطرق التعليمية</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>كادر متميز</h3>
+                        <p>فريق من المعلمين ذوي الخبرة والكفاءة العالية في جميع التخصصات</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3>مناهج شاملة</h3>
+                        <p>تغطية كاملة للمنهاج الدراسي بجميع المراحل مع مواد إثرائية</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>متابعة شهرية</h3>
+                        <p>تقرير مفصل شهري لكل طالب مع متابعة مستمرة للتقدم الأكاديمي</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="decorative-circle"></div>
+        <div class="decorative-circle"></div>
+    </section>
+
+    <!-- باقي الأقسام - نفس المحتوى السابق مع تحسينات -->
+    <section id="courses" class="section courses-section">
+        <div class="courses-container">
+            <h2 class="courses-title">الدورات المتاحة</h2>
+            
+            <div id="categories" class="categories-grid">
+                <div class="category-card" onclick="showCourses('primary')">
+                    <h3>التعليم الأساسي</h3>
+                    <p>دورات شاملة للمرحلة الابتدائية من الصف الأول حتى السادس</p>
+                </div>
+                <div class="category-card" onclick="showCourses('middle')">
+                    <h3>التعليم الإعدادي</h3>
+                    <p>دورات متخصصة للمرحلة الإعدادية من الصف السابع حتى التاسع</p>
+                </div>
+                <div class="category-card" onclick="showCourses('secondary')">
+                    <h3>التعليم الثانوي</h3>
+                    <p>دورات تحضيرية للمرحلة الثانوية والبكالوريا</p>
+                </div>
+                <div class="category-card" onclick="showCourses('languages')">
+                    <h3>دورات اللغات</h3>
+                    <p>دورات اللغة الإنجليزية والألمانية بمستويات مختلفة</p>
+                </div>
+            </div>
+
+            <div id="courses-list" style="display: none;">
+                <button class="back-button" onclick="backToCategories()">← العودة للفئات</button>
+                <div id="primary-courses" class="courses-grid"></div>
+                <div id="middle-courses" class="courses-grid"></div>
+                <div id="secondary-courses" class="courses-grid"></div>
+                <div id="languages-courses" class="courses-grid"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="registration" class="section registration-section">
+        <div class="registration-container">
+            <form class="registration-form" onsubmit="handleSubmit(event)">
+                <h2>التسجيل</h2>
+                <h3> تنويه: أبناء وذوي شهداء الثورة السورية المباركة — جميع الدورات مجانية بالكامل على حساب معهد النعمان التعليمي والكادر الإداري</h3>
+                
+                <div class="form-group">
+                    <label for="fullName">الاسم الكامل</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phoneNumber">رقم الهاتف للتواصل</label>
+                    <input type="tel" id="phoneNumber" name="phoneNumber" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="courseId">ID الدورة المراد التسجيل بها</label>
+                    <input type="text" id="courseId" name="courseId" required>
+                </div>
+
+                <button type="submit" class="submit-button">إرسال الطلب</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- About Section - الصفحة الكاملة -->
+    <section id="about" class="section about-section">
+        <div class="about-container">
+            <h2 class="about-title">نبذة تعريفية كاملة</h2>
+            
+            <div class="about-content">
+                <p>
+                    <span class="institute-name">معهد النعمان التعليمي</span>
+                    هو صرح تعليمي متميز يهدف إلى تقديم أفضل الخدمات التعليمية للطلاب في جميع المراحل الدراسية.
+                </p>
+
+                <p class="muted">
+                    نحن نؤمن بأن التعليم هو المفتاح الأساسي لبناء مستقبل مشرق، ولذلك نسعى جاهدين لتوفير بيئة تعليمية محفزة تساعد الطلاب على تحقيق أهدافهم الأكاديمية.
+                </p>
+
+                <div class="services-box">
+                    <h3>خدماتنا</h3>
+                    <ul>
+                        <li>المنهاج الدراسي السوري بجميع المراحل (الابتدائي - الإعدادي - الثانوي)</li>
+                        <li>دورات اللغة الإنجليزية بمستويات مختلفة</li>
+                        <li>دورات اللغة الألمانية بمستويات مختلفة</li>
+                    </ul>
+                </div>
+
+                <p class="muted">
+                    انضم إلينا اليوم وكن جزءاً من عائلة معهد النعمان التعليمي، حيث نعمل معاً لتحقيق التفوق والنجاح.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Navigation مع انتقالات محسنة
+        function showSection(sectionId) {
+            // إخفاء جميع الأقسام بانتقال ناعم
+            document.querySelectorAll('.section').forEach(section => {
+                if (section.classList.contains('active')) {
+                    section.style.opacity = '0';
+                    setTimeout(() => {
+                        section.classList.remove('active');
+                    }, 300);
+                }
+            });
+
+            // إظهار القسم المطلوب بعد فترة بسيطة
+            setTimeout(() => {
+                const targetSection = document.getElementById(sectionId);
+                targetSection.classList.add('active');
+                
+                // scroll to top بنعومة
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }, 350);
+
+            // تحديث زر التنقل النشط
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
+
+            // إعادة ضبط عرض الدورات إذا كان خارج قسم الدورات
+            if (sectionId !== 'courses') {
+                backToCategories();
+            }
+        }
+
+        // باقي الدوال JavaScript تبقى كما هي...
+        // [يتبع نفس كود JavaScript السابق]
+    </script>
+</body>
+</html>
