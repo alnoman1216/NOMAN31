@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معهد النعمان التعليمي - Al-No'man Educational Institute</title>
+    <meta name="description" content="معهد النعمان التعليمي - تعليم متميز للمنهاج السوري ودورات اللغات">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --background: hsl(0, 0%, 7%);
+            --foreground: hsl(0, 0%, 98%);
+            --primary: hsl(142, 76%, 36%);
+            --card: hsl(0, 0%, 10%);
+            --border: hsl(0, 0%, 20%);
+            --muted: hsl(0, 0%, 65%);
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(18, 18, 18, 0.9);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        .header-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            height: 64px;
+            width: auto;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            color: var(--foreground);
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            padding-bottom: 0.25rem;
+        }
+
+        nav button:hover {
+            color: var(--primary);
+        }
+
+        nav button.active {
+            color: var(--primary);
+        }
+
+        nav button.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            display: none;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .section.active {
+            display: flex;
+        }
+
+        /* Home Section */
+        .home-section {
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--background) 0%, var(--background) 50%, rgba(34, 197, 94, 0.1) 100%);
+        }
+
+        .home-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            animation: scaleIn 1s ease-out;
+        }
+
+        .home-content h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 30px rgba(34, 197, 94, 0.5);
+            animation: slideUp 0.8s ease-out 0.3s both;
+        }
+
+        .home-content p {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary);
+            animation: slideUp 0.8s ease-out 0.6s both;
+        }
+
+        .home-divider {
+            width: 128px;
+            height: 4px;
+            background: var(--primary);
+            margin: 3rem auto 0;
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.6);
+            animation: scaleInX 0.6s ease-out 1s both;
+        }
+
+        .decorative-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(34, 197, 94, 0.05);
+            filter: blur(80px);
+        }
+
+        .decorative-circle:first-of-type {
+            top: 5rem;
+            left: 5rem;
+            width: 288px;
+            height: 288px;
+        }
+
+        .decorative-circle:last-of-type {
+            bottom: 5rem;
+            right: 5rem;
+            width: 384px;
+            height: 384px;
+        }
+
+        /* Courses Section */
+        .courses-section {
+            padding: 6rem 1.5rem;
+            align-items: flex-start;
+        }
+
+        .courses-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .courses-title {
+            font-size: 3rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-card, .course-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-card:hover, .course-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 40px rgba(34, 197, 94, 0.2);
+        }
+
+        .category-card h3, .course-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-card p, .course-card p {
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .courses-grid {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .courses-grid.active {
+            display: grid;
+        }
+
+        .back-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            background: hsl(142, 76%, 46%);
+            transform: translateX(8px);
+        }
+
+        /* Registration Section */
+        .registration-section {
+            padding: 6rem 1.5rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .registration-container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .registration-form {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 3rem;
+        }
+
+        .registration-form h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--foreground);
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+        }
+
+        .submit-button {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .submit-button:hover {
+            background: hsl(142, 76%, 46%);
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3);
+        }
+
+        /* Why Us Section */
+        .why-us-section {
+            padding: 6rem 1.5rem;
+            align-items: flex-start;
+        }
+
+        .why-us-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .why-us-title {
+            font-size: 3rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: scale(1.03);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(34, 197, 94, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 1.125rem;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 6rem 1.5rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .about-title {
+            font-size: 3rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .about-content {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 0 50px rgba(34, 197, 94, 0.15);
+        }
+
+        .about-content p {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content .institute-name {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .about-content .muted {
+            color: var(--muted);
+        }
+
+        .services-box {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .services-box h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .services-box ul {
+            list-style: none;
+        }
+
+        .services-box li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .services-box li::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleInX {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                gap: 1rem;
+            }
+
+            nav button {
+                font-size: 0.875rem;
+            }
+
+            .home-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .home-content p {
+                font-size: 1.25rem;
+            }
+
+            .courses-title, .why-us-title, .about-title {
+                font-size: 2rem;
+            }
+
+            .categories-grid, .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .registration-form {
+                padding: 2rem;
+            }
+
+            .about-content {
+                padding: 2rem;
+            }
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--card);
+            border: 1px solid var(--primary);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            animation: slideInUp 0.3s ease-out;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            display: block;
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <!-- ضع صورة اللوغو هنا: استبدل src بمسار الصورة الخاصة بك -->
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='64'%3E%3Crect width='100' height='64' fill='%2322c55e'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='Cairo' font-size='20' font-weight='bold'%3ELogo%3C/text%3E%3C/svg%3E" alt="معهد النعمان التعليمي" class="logo">
+            
+            <nav>
+                <button onclick="showSection('home')" class="nav-btn active" data-section="home">الصفحة الرئيسية</button>
+                <button onclick="showSection('courses')" class="nav-btn" data-section="courses">الدورات المتاحة</button>
+                <button onclick="showSection('registration')" class="nav-btn" data-section="registration">التسجيل</button>
+                <button onclick="showSection('why-us')" class="nav-btn" data-section="why-us">لماذا نحن</button>
+                <button onclick="showSection('about')" class="nav-btn" data-section="about">نبذة تعريفية</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="section home-section active">
+        <div class="home-content">
+            <h1>معهد النعمان التعليمي</h1>
+            <p>Al-No'man Educational Institute</p>
+            <div class="home-divider"></div>
+        </div>
+        <div class="decorative-circle"></div>
+        <div class="decorative-circle"></div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="section courses-section">
+        <div class="courses-container">
+            <h2 class="courses-title">الدورات المتاحة</h2>
+            
+            <div id="categories" class="categories-grid">
+                <div class="category-card" onclick="showCourses('primary')">
+                    <h3>التعليم الأساسي</h3>
+                    <p>دورات شاملة للمرحلة الابتدائية من الصف الأول حتى السادس</p>
+                </div>
+                <div class="category-card" onclick="showCourses('middle')">
+                    <h3>التعليم الإعدادي</h3>
+                    <p>دورات متخصصة للمرحلة الإعدادية من الصف السابع حتى التاسع</p>
+                </div>
+                <div class="category-card" onclick="showCourses('secondary')">
+                    <h3>التعليم الثانوي</h3>
+                    <p>دورات تحضيرية للمرحلة الثانوية والبكالوريا</p>
+                </div>
+                <div class="category-card" onclick="showCourses('languages')">
+                    <h3>دورات اللغات</h3>
+                    <p>دورات اللغة الإنجليزية والألمانية بمستويات مختلفة</p>
+                </div>
+            </div>
+
+            <div id="courses-list" style="display: none;">
+                <button class="back-button" onclick="backToCategories()">← العودة للفئات</button>
+                <div id="primary-courses" class="courses-grid"></div>
+                <div id="middle-courses" class="courses-grid"></div>
+                <div id="secondary-courses" class="courses-grid"></div>
+                <div id="languages-courses" class="courses-grid"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="registration" class="section registration-section">
+        <div class="registration-container">
+            <form class="registration-form" onsubmit="handleSubmit(event)">
+              
+                <h2>التسجيل</h2>
+                <h3> تنويه: أبناء وذوي شهداء الثورة السورية المباركة — جميع الدورات مجانية بالكامل على حساب معهد النعمان التعليمي والكادر الإداري</h3>
+                
+                
+                <div class="form-group">
+                    <label for="fullName">الاسم الكامل</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phoneNumber">رقم الهاتف للتواصل</label>
+                    <input type="tel" id="phoneNumber" name="phoneNumber" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="courseId">ID الدورة المراد التسجيل بها</label>
+                    <input type="text" id="courseId" name="courseId" required>
+                </div>
+
+                <button type="submit" class="submit-button">إرسال الطلب</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section id="why-us" class="section why-us-section">
+        <div class="why-us-container">
+            <h2 class="why-us-title">لماذا نحن</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>جودة التعليم</h3>
+                    <p>نقدم تعليماً عالي الجودة يتماشى مع المنهاج السوري الرسمي</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>كادر متميز</h3>
+                    <p>فريق من المعلمين ذوي الخبرة والكفاءة العالية</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>مناهج شاملة</h3>
+                    <p>تغطية كاملة للمنهاج الدراسي بجميع المراحل</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>نتائج مضمونة</h3>
+                    <p>سجل حافل بالنجاحات والتفوق الأكاديمي</p>
+                </div>
+               <div class="feature-card">
+                    <div class="feature-icon">👀</div>
+                    <h3>متابعة شهرية كاملة</h3>
+                    <p>تقدّم متابعة شهرية لكل طالب. تتضمن تقريراً تفصيلياً لولي الأمر حول مستوى الطالب. تقدم دراسته. التزامه بالحصص. ملاحظات المدرسين. لضمان أعلى جودة تعليمية.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+        <div class="about-container">
+            <h2 class="about-title">نبذة تعريفية</h2>
+            
+            <div class="about-content">
+                <p>
+                    <span class="institute-name">معهد النعمان التعليمي</span>
+                    هو صرح تعليمي متميز يهدف إلى تقديم أفضل الخدمات التعليمية للطلاب في جميع المراحل الدراسية.
+                </p>
+
+                <p class="muted">
+                    نحن نؤمن بأن التعليم هو المفتاح الأساسي لبناء مستقبل مشرق، ولذلك نسعى جاهدين لتوفير بيئة تعليمية محفزة تساعد الطلاب على تحقيق أهدافهم الأكاديمية.
+                </p>
+
+                <div class="services-box">
+                    <h3>خدماتنا</h3>
+                    <ul>
+                        <li>المنهاج الدراسي السوري بجميع المراحل (الابتدائي - الإعدادي - الثانوي)</li>
+                        <li>دورات اللغة الإنجليزية بمستويات مختلفة</li>
+                        <li>دورات اللغة الألمانية بمستويات مختلفة</li>
+                    </ul>
+                </div>
+
+                <p class="muted">
+                    انضم إلينا اليوم وكن جزءاً من عائلة معهد النعمان التعليمي، حيث نعمل معاً لتحقيق التفوق والنجاح.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <div id="toast-message"></div>
+    </div>
+
+    <script>
+        // Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Update active nav button
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
+
+            // Reset courses view if leaving courses section
+            if (sectionId !== 'courses') {
+                backToCategories();
+            }
+        }
+
+        // Courses Data
+        const coursesData = {
+            primary: [
+                { id: 'PRI-001', title: 'الصف الأول الابتدائي', description: 'دورة شاملة لجميع المواد' },
+                { id: 'PRI-002', title: 'الصف الثاني الابتدائي', description: 'دورة شاملة لجميع المواد' },
+                { id: 'PRI-003', title: 'الصف الثالث الابتدائي', description: 'دورة شاملة لجميع المواد' },
+                { id: 'PRI-004', title: 'الصف الرابع الابتدائي', description: 'دورة شاملة لجميع المواد' },
+                { id: 'PRI-005', title: 'الصف الخامس الابتدائي', description: 'دورة شاملة لجميع المواد' },
+                { id: 'PRI-006', title: 'الصف السادس الابتدائي', description: 'دورة شاملة لجميع المواد' }
+            ],
+            middle: [
+                { id: 'MID-001', title: 'الصف السابع', description: 'دورة شاملة لجميع المواد' },
+                { id: 'MID-002', title: 'الصف الثامن', description: 'دورة شاملة لجميع المواد' },
+                { id: 'MID-003', title: 'الصف التاسع', description: 'دورة تحضيرية لشهادة التعليم الأساسي' }
+            ],
+            secondary: [
+                { id: 'SEC-001', title: 'الصف الأول الثانوي', description: 'دورة شاملة لجميع المواد' },
+                { id: 'SEC-002', title: 'الصف الثاني الثانوي', description: 'دورة شاملة لجميع المواد' },
+                { id: 'SEC-003', title: 'الصف الثالث الثانوي', description: 'دورة تحضيرية للبكالوريا' }
+            ],
+            languages: [
+                { id: 'ENG-001', title: 'اللغة الإنجليزية - مستوى مبتدئ', description: 'تعلم أساسيات اللغة الإنجليزية' },
+                { id: 'ENG-002', title: 'اللغة الإنجليزية - مستوى متوسط', description: 'تطوير مهارات اللغة الإنجليزية' },
+                { id: 'ENG-003', title: 'اللغة الإنجليزية - مستوى متقدم', description: 'إتقان اللغة الإنجليزية' },
+                { id: 'GER-001', title: 'اللغة الألمانية - مستوى A1', description: 'تعلم أساسيات اللغة الألمانية' },
+                { id: 'GER-002', title: 'اللغة الألمانية - مستوى A2', description: 'تطوير مهارات اللغة الألمانية' },
+                { id: 'GER-003', title: 'اللغة الألمانية - مستوى B1', description: 'مستوى متقدم في اللغة الألمانية' }
+            ]
+        };
+
+        function showCourses(category) {
+            // Hide categories
+            document.getElementById('categories').style.display = 'none';
+            document.getElementById('courses-list').style.display = 'block';
+
+            // Hide all course grids
+            document.querySelectorAll('.courses-grid').forEach(grid => {
+                grid.classList.remove('active');
+            });
+
+            // Show selected category courses
+            const categoryGrid = document.getElementById(`${category}-courses`);
+            categoryGrid.innerHTML = '';
+            
+            coursesData[category].forEach(course => {
+                const courseCard = document.createElement('div');
+                courseCard.className = 'course-card';
+                courseCard.innerHTML = `
+                    <h3>${course.title}</h3>
+                    <p>${course.description}</p>
+                    <p style="color: var(--primary); font-weight: 600; margin-top: 1rem;">رمز الدورة: ${course.id}</p>
+                `;
+                categoryGrid.appendChild(courseCard);
+            });
+
+            categoryGrid.classList.add('active');
+        }
+
+        function backToCategories() {
+            document.getElementById('categories').style.display = 'grid';
+            document.getElementById('courses-list').style.display = 'none';
+        }
+
+        // Form Submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const courseId = document.getElementById('courseId').value;
+
+            // Show toast notification
+            showToast(`تم إرسال طلب التسجيل بنجاح!`);
+
+            // Reset form
+            event.target.reset();
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Smooth scroll to top when changing sections
+        window.addEventListener('load', () => {
+            window.scrollTo(0, 0);
+        });
+    </script>
+</body>
+</html>
