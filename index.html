@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>معهد النعمان التعليمي - Al-No'man Educational Institute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+    * {margin:0;padding:0;box-sizing:border-box;}
+    :root {
+        --background: hsl(0,0%,7%);
+        --foreground: hsl(0,0%,98%);
+        --primary: hsl(142,76%,36%);
+        --card: hsl(0,0%,10%);
+        --border: hsl(0,0%,20%);
+        --muted: hsl(0,0%,65%);
+    }
+    body{font-family:'Cairo',sans-serif;background:var(--background);color:var(--foreground);overflow-x:hidden;}
+    header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(18,18,18,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);animation:slideDown 0.6s ease-out;}
+    .header-container{max-width:1280px;margin:0 auto;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+    .logo{height:50px;width:auto;max-width:150px;object-fit:contain;transition:all 0.3s ease;}
+    nav{display:flex;gap:2rem;align-items:center;}
+    nav button{background:none;border:none;color:var(--foreground);font-size:1.125rem;font-weight:600;cursor:pointer;position:relative;padding-bottom:0.25rem;transition:all 0.3s;}
+    nav button:hover, nav button.active{color:var(--primary);}
+    nav button.active::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--primary);animation:slideIn 0.3s ease-out;}
+    .section{min-height:100vh;display:none;opacity:0;animation:fadeIn 0.5s ease-out forwards;}
+    .section.active{display:flex;}
+    .home-section{align-items:center;justify-content:center;position:relative;overflow:hidden;background:var(--background);flex-direction:column;}
+    .home-content{position:relative;z-index:10;text-align:center;animation:scaleIn 1s ease-out;margin-top:2rem;}
+    .home-content h1{font-size:clamp(2rem,6vw,4rem);font-weight:900;color:var(--primary);text-shadow:0 0 10px rgba(34,197,94,0.8);margin-bottom:1.5rem;animation:slideUp 0.8s ease-out 0.3s both;}
+    .home-content p{font-size:clamp(1rem,2.5vw,2rem);font-weight:600;color:var(--primary);animation:slideUp 0.8s ease-out 0.6s both;margin-top:1rem;}
+    .home-divider{width:128px;height:4px;background:var(--primary);margin:3rem auto 0;box-shadow:0 0 20px rgba(34,197,94,0.6);animation:scaleInX 0.6s ease-out 1s both;}
+    .main-content{max-width:1280px;margin:0 auto;padding:4rem 1.5rem;width:100%;}
+    .content-section{margin-bottom:4rem;}
+    .section-title{font-size:3rem;font-weight:900;text-align:center;margin-bottom:3rem;color:var(--primary);}
+    /* وزارة التربية */
+    .ministry-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;margin:2rem auto;max-width:800px;text-align:center;}
+    .ministry-header{color:var(--primary);font-size:1.5rem;font-weight:700;margin-bottom:1.5rem;border-bottom:2px solid var(--primary);padding-bottom:0.5rem;}
+    .education-types{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin:2rem 0;}
+    .education-type{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:12px;padding:1.5rem;transition:all 0.3s;}
+    .education-type:hover{transform:translateY(-5px);background:rgba(34,197,94,0.2);}
+    .education-type h4{color:var(--primary);font-size:1.25rem;font-weight:700;margin-bottom:0.5rem;}
+    .footer-note{color:var(--muted);font-size:0.9rem;margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);}
+    /* لماذا نحن */
+    .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;max-width:1000px;margin:0 auto;}
+    .feature-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;cursor:pointer;transition:transform 0.4s ease,box-shadow 0.4s ease,border-color 0.4s ease;opacity:0;transform:translateY(20px);animation:fadeInUp 0.5s ease forwards;}
+    .feature-card:nth-child(1){animation-delay:0.2s;}
+    .feature-card:nth-child(2){animation-delay:0.4s;}
+    .feature-card:nth-child(3){animation-delay:0.6s;}
+    .feature-card:nth-child(4){animation-delay:0.8s;}
+    .feature-card:nth-child(5){animation-delay:1s;}
+    .feature-card:hover{transform:translateY(-6px);border-color:var(--primary);box-shadow:0 12px 30px rgba(34,197,94,0.2);}
+    .feature-card:hover .feature-icon{transform:scale(1.15) rotate(5deg);}
+    .feature-icon{width:64px;height:64px;border-radius:50%;background:rgba(34,197,94,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;transition:transform 0.4s ease;}
+    h3{font-size:1.5rem;font-weight:700;margin-bottom:1rem;}
+    p{color:var(--muted);line-height:1.8;font-size:1.125rem;}
+    .institute-name{color:var(--primary);font-weight:900;font-size:1.25rem;}
+    /* Animations */
+    @keyframes slideDown{from{transform:translateY(-100%);opacity:0;}to{transform:translateY(0);opacity:1;}}
+    @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+    @keyframes scaleIn{from{opacity:0;transform:scale(0.8);}to{opacity:1;transform:scale(1);}}
+    @keyframes slideUp{from{opacity:0;transform:translateY(50px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes scaleInX{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+    @keyframes slideIn{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+    @keyframes fadeInUp{to{opacity:1;transform:translateY(0);}}
+    @media (max-width:768px){.header-container{padding:0.75rem 1rem;}.logo{height:40px;max-width:120px;}nav{gap:1rem;}nav button{font-size:0.875rem;}.home-content h1{font-size:2.5rem;}.home-content p{font-size:1.25rem;}.section-title,.courses-title{font-size:2rem;}.categories-grid,.features-grid,.education-types{grid-template-columns:1fr;}.registration-form,.about-content,.ministry-section{padding:2rem;}.main-content{padding:2rem 1rem;}}
+    @media (max-width:480px){.logo{height:35px;max-width:100px;}nav button{font-size:0.75rem;padding:0.25rem 0.5rem;}}
+</style>
+</head>
+<body>
+<!-- Header -->
+<header>
+<div class="header-container">
+    <img src="IMG_0553.png" alt="معهد النعمان التعليمي" class="logo">
+    <nav>
+        <button onclick="showSection('home')" class="nav-btn active" data-section="home">الصفحة الرئيسية</button>
+        <button onclick="showSection('courses')" class="nav-btn" data-section="courses">الدورات المتاحة</button>
+        <button onclick="showSection('registration')" class="nav-btn" data-section="registration">التسجيل</button>
+    </nav>
+</div>
+</header>
+
+<!-- Home Section -->
+<section id="home" class="section home-section active">
+<div class="home-content">
+<h1>معهد النعمان التعليمي</h1>
+<p>Al-No'man Educational Institute</p>
+<div class="home-divider"></div>
+</div>
+
+<div class="main-content">
+    <!-- وزارة التربية -->
+    <div class="content-section">
+        <div class="ministry-section">
+            <div class="ministry-header">
+                الجمهورية العربية السورية<br>
+                وزارة التربية والتعليم - منصة المناهج
+            </div>
+            <div class="education-types">
+                <div class="education-type"><h4>التعليم العام</h4><p>مناهج التعليم الأساسي والثانوي</p></div>
+                <div class="education-type"><h4>التعليم المهني والتقني</h4><p>برامج التعليم المهني والتقني المتخصص</p></div>
+            </div>
+            <div class="footer-note">
+                جميع الحقوق محفوظة لـ وزارة التربية | 2025 تصميم وتطوير مديرية المعلوماتية
+            </div>
+        </div>
+    </div>
+
+    <!-- لماذا نحن -->
+    <div class="content-section">
+        <h2 class="section-title">لماذا نحن</h2>
+        <div class="features-grid">
+            <!-- Feature Cards مثل المثال السابق مع أيقونات SVG -->
+            <!-- يمكن نسخ الكود السابق هنا مباشرة لكل 5 Feature Cards -->
+        </div>
+    </div>
+
+    <!-- نبذة تعريفية -->
+    <div class="content-section">
+        <h2 class="section-title">نبذة تعريفية</h2>
+        <div class="about-content">
+            <p><span class="institute-name">معهد النعمان التعليمي</span> هو صرح تعليمي متميز يهدف إلى تقديم أفضل الخدمات التعليمية للطلاب في جميع المراحل الدراسية.</p>
+            <p class="muted">نحن نؤمن بأن التعليم هو المفتاح لبناء مستقبل مشرق...</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- باقي الأقسام (الدورات + التسجيل) تبقى كما هي -->
+<script>
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));document.querySelector(`[data-section="${id}"]`).classList.add('active');window.scrollTo(0,0);}
+</script>
+</body>
+</html>
