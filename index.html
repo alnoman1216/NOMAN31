@@ -701,10 +701,10 @@
             box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
         }
 
-        /* زر التسجيل عبر الواتساب - الجديد */
+        /* زر التسجيل عبر الواتساب - بلون أخضر موحد */
         .whatsapp-register-btn {
             width: 100%;
-            background: linear-gradient(135deg, #25D366, #128C7E);
+            background: linear-gradient(135deg, var(--primary), hsl(142, 76%, 32%));
             color: white;
             border: none;
             padding: 1.2rem;
@@ -719,13 +719,13 @@
             align-items: center;
             justify-content: center;
             gap: 1rem;
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3);
         }
 
         .whatsapp-register-btn:hover {
-            background: linear-gradient(135deg, #128C7E, #25D366);
+            background: linear-gradient(135deg, hsl(142, 76%, 46%), var(--primary));
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 12px 35px rgba(34, 197, 94, 0.4);
         }
 
         .whatsapp-register-btn:active {
@@ -734,6 +734,116 @@
 
         .whatsapp-register-btn i {
             font-size: 1.5rem;
+        }
+
+        /* زر العودة للدورات - رمادي */
+        .back-to-courses-btn {
+            background: rgba(255, 255, 255, 0.08) !important;
+            color: var(--muted) !important;
+            border: 1px solid var(--border) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .back-to-courses-btn:hover {
+            background: rgba(255, 255, 255, 0.12) !important;
+            color: var(--foreground) !important;
+            border-color: var(--muted) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        /* رسالة الشكر */
+        .thank-you-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(15px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .thank-you-overlay.active {
+            display: flex;
+        }
+
+      .thank-you-card {
+    background: var(--card);
+    border: 2px solid var(--primary);
+    border-radius: 20px;
+    padding: 2rem;           /* ← صغرت من 3rem إلى 2rem */
+    max-width: 400px;        /* ← صغرت من 500px إلى 400px */
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: scaleIn 0.5s ease-out 0.2s both;
+    position: relative;
+    overflow: hidden;
+}
+
+        .thank-you-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+        }
+
+        .thank-you-icon {
+            font-size: 4.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            animation: bounce 1s ease-out;
+        }
+
+        .thank-you-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-family: 'Cairo', sans-serif !important;
+            text-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+        }
+
+        .thank-you-message {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: var(--foreground);
+            margin-bottom: 2.5rem;
+            font-family: 'Cairo', sans-serif !important;
+        }
+
+        .thank-you-btn {
+            background: linear-gradient(135deg, var(--primary), hsl(142, 76%, 32%));
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Cairo', sans-serif !important;
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
+            width: 200px;
+            margin: 0 auto;
+        }
+
+        .thank-you-btn:hover {
+            background: linear-gradient(135deg, hsl(142, 76%, 46%), var(--primary));
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(34, 197, 94, 0.6);
+        }
+
+        .thank-you-btn:active {
+            transform: translateY(-1px);
         }
 
         .about-section {
@@ -948,6 +1058,18 @@
             }
         }
 
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+
         @media (max-width: 768px) {
             .header-container {
                 padding: 0.5rem 1rem;
@@ -1051,6 +1173,29 @@
             .whatsapp-register-btn {
                 padding: 1rem;
                 font-size: 1.1rem;
+            }
+
+            .thank-you-card {
+                padding: 2rem;
+                width: 95%;
+            }
+
+            .thank-you-icon {
+                font-size: 3.5rem;
+            }
+
+            .thank-you-title {
+                font-size: 1.8rem;
+            }
+
+            .thank-you-message {
+                font-size: 1.1rem;
+            }
+
+            .thank-you-btn {
+                padding: 0.8rem 2rem;
+                font-size: 1.1rem;
+                width: 180px;
             }
         }
 
@@ -1162,6 +1307,24 @@
         <a href="https://instagram.com/username" class="social-icon instagram" target="_blank">
             <i class="fab fa-instagram"></i>
         </a>
+    </div>
+
+    <!-- رسالة الشكر -->
+    <div id="thankYouOverlay" class="thank-you-overlay">
+        <div class="thank-you-card">
+            <div class="thank-you-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="thank-you-title">شكراً لك!</h2>
+            <p class="thank-you-message">
+                هام : يرجى إرسال الرسالة عبر واتساب لتأكيد تسجيلك   <br>
+                شكراً لاختيارك معهد النُعمان التعليمي.<br>
+                سنتواصل معك قريباً
+								لتأكيد الحجز.<br>
+               
+            </p>
+            <button class="thank-you-btn" onclick="closeThankYou()">تم</button>
+        </div>
     </div>
 
     <!-- الصفحة الرئيسية -->
@@ -1288,12 +1451,9 @@
     <section id="register" class="section register-section">
         <div class="register-container">
             <form class="register-form">
-                <h2>تسجيل الدورة</h2>
+                <h2>نموذج تسجيل</h2>
                 
-                <div class="martyr-notice">
-                    <h3>تنويه هام</h3>
-                    <p>أبناء وذوي شهداء الثورة السورية المباركة — جميع الدورات مجانية بالكامل على حساب معهد النعمان التعليمي والكادر الإداري</p>
-                </div>
+               
 
                 <div class="form-group">
                     <label for="fullName">الاسم الثلاثي للطالب</label>
@@ -1316,14 +1476,14 @@
                     <input type="hidden" id="courseCode" name="courseCode">
                 </div>
 
-                <!-- زر التسجيل عبر الواتساب - الجديد -->
+                <!-- زر التسجيل عبر الواتساب - بلون أخضر موحد -->
                 <button type="button" class="whatsapp-register-btn" onclick="registerViaWhatsApp()">
                     <i class="fab fa-whatsapp"></i> التسجيل عبر الواتساب
                 </button>
                 
-                <!-- زر العودة الموحد -->
+                <!-- زر العودة للدورات - بلون رمادي -->
                 <div class="back-button-center" style="margin-top: 1.5rem;">
-                    <button type="button" class="back-button-unified" onclick="backToCourses()">
+                    <button type="button" class="back-button-unified back-to-courses-btn" onclick="backToCourses()">
                         <i class="fas fa-arrow-right"></i> العودة للدورات
                     </button>
                 </div>
@@ -1399,18 +1559,7 @@
                     </ul>
                 </div>
 
-                <div class="services-box">
-                    <h3>مميزاتنا</h3>
-                    <ul>
-                        <li>كادر تدريسي متميز وذو خبرة</li>
-                        <li>فصول دراسية مجهزة بأحدث الوسائل التعليمية</li>
-                        <li>مجموعات صغيرة لضمان جودة التعليم</li>
-                        <li>متابعة مستمرة لتقدم الطلاب</li>
-                        <li>أسعار تنافسية وتسهيلات في الدفع</li>
-                        <li>دورات مجانية لأبناء الشهداء</li>
-                    </ul>
-                </div>
-
+								
                 <p class="muted">
                     انضم إلينا اليوم وكن جزءاً من عائلة معهد النعمان التعليمي، حيث نعمل معاً لتحقيق التفوق والنجاح.
                 </p>
@@ -1841,8 +1990,6 @@
 
 📍 *الموقع:* جبلة، العمارة فوق صيدلية بشر مثبوت، الطابق الأول
 
-🔔 *تنويه:* أبناء وذوي شهداء الثورة السورية المباركة — جميع الدورات مجانية بالكامل على حساب معهد النعمان التعليمي والكادر الإداري
-
 ✅ يرجى تأكيد استلام طلب التسجيل.`;
             
             // ترميز الرسالة للرابط
@@ -1852,14 +1999,31 @@
             const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
             window.open(whatsappUrl, '_blank');
             
-            // إظهار رسالة تأكيد للمستخدم
-            showToast('✅ تم فتح الواتساب مع رسالة جاهزة. يرجى إرسال الرسالة لإكمال التسجيل.');
+            // إظهار رسالة الشكر بعد فتح الواتساب
+            setTimeout(showThankYouMessage, 1000);
             
             // إعادة تعيين الحقول بعد إرسال الطلب
             setTimeout(() => {
                 document.getElementById('fullName').value = '';
                 document.getElementById('phoneNumber').value = '';
             }, 2000);
+        }
+
+        // وظيفة إظهار رسالة الشكر
+        function showThankYouMessage() {
+            const overlay = document.getElementById('thankYouOverlay');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // منع التمرير عند ظهور الرسالة
+        }
+
+        // وظيفة إغلاق رسالة الشكر والعودة للصفحة الرئيسية
+        function closeThankYou() {
+            const overlay = document.getElementById('thankYouOverlay');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto'; // إعادة التمرير
+            
+            // العودة للصفحة الرئيسية
+            showSection('home');
         }
 
         // وظائف العودة
