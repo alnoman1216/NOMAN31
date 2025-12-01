@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معهد النُعمان التعليمي - Al-No'man Educational Institute</title>
+    <meta name="description" content="معهد النعمان التعليمي - تعليم متميز للمنهاج السوري ودورات اللغات">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --background: hsl(0, 0%, 7%);
+            --foreground: hsl(0, 0%, 98%);
+            --primary: hsl(142, 76%, 36%);
+            --card: hsl(0, 0%, 10%);
+            --border: hsl(0, 0%, 20%);
+            --muted: hsl(0, 0%, 65%);
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            overflow-x: hidden;
+        }
+
+        /* Header - محسن */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            animation: slideDown 0.6s ease-out;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .institute-name {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--foreground);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .institute-name span {
+            color: var(--primary);
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 0.2rem;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            color: var(--foreground);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            overflow: hidden;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        nav button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: -1;
+            border-radius: 6px;
+        }
+
+        nav button:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        nav button:hover::before {
+            opacity: 0.1;
+        }
+
+        nav button.active {
+            color: var(--primary);
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        nav button.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary);
+            animation: slideIn 0.3s ease-out;
+            border-radius: 3px 3px 0 0;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--foreground);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* باقي الأنماط كما هي بدون تغيير */
+        .section {
+            min-height: 100vh;
+            display: none;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .section.active {
+            display: flex;
+        }
+
+        .home-section {
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+      .home-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        linear-gradient(135deg, var(--background) 0%, var(--background) 40%, rgba(34, 197, 94, 0.1) 70%),
+        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(34, 197, 94, 0.03) 10px, rgba(34, 197, 94, 0.03) 20px);
+}
+
+
+        .home-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            animation: scaleIn 1s ease-out;
+        }
+
+        .home-content h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 30px rgba(34, 197, 94, 0.5);
+            animation: slideUp 0.8s ease-out 0.3s both;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .home-content p {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary);
+            animation: slideUp 0.8s ease-out 0.6s both;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .home-divider {
+            width: 128px;
+            height: 4px;
+            background: var(--primary);
+            margin: 3rem auto 0;
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.6);
+            animation: scaleInX 0.6s ease-out 1s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--primary));
+            color: white;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.4s;
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.5);
+            border: 2px solid transparent;
+            animation: pulse 2s infinite;
+            margin-top: 3rem;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 50px rgba(34, 197, 94, 0.8);
+            background: transparent;
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .decorative-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(34, 197, 94, 0.05);
+            filter: blur(80px);
+        }
+
+        .decorative-circle:first-of-type {
+            top: 5rem;
+            left: 5rem;
+            width: 288px;
+            height: 288px;
+        }
+
+        .decorative-circle:last-of-type {
+            bottom: 5rem;
+            right: 5rem;
+            width: 384px;
+            height: 384px;
+        }
+
+        .why-us-home {
+            background: var(--card);
+            border-top: 1px solid var(--border);
+            padding: 4rem 1.5rem;
+            text-align: center;
+        }
+
+        .why-us-home .section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .features-grid-home {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card-home {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .feature-card-home:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 40px rgba(34, 197, 94, 0.2);
+        }
+
+        .feature-icon-home {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-card-home h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .feature-card-home p {
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 1.1rem;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .stages-section {
+            padding: 6rem 1.5rem;
+            align-items: flex-start;
+        }
+
+        .stages-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 4rem;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .stages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stage-card, .grade-card, .subject-card, .course-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .stage-card:hover, .grade-card:hover, .subject-card:hover, .course-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 40px rgba(34, 197, 94, 0.2);
+        }
+
+        .stage-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .stage-card h3, .grade-card h3, .subject-card h3, .course-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .stage-card p, .grade-card p, .subject-card p, .course-card p {
+            color: var(--muted);
+            line-height: 1.6;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .grades-section, .subjects-section, .courses-section, .register-section {
+            padding: 6rem 1.5rem;
+            align-items: flex-start;
+            display: none;
+        }
+
+        .grades-container, .subjects-container, .courses-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .grades-grid, .subjects-grid, .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .course-details {
+            margin-top: 1rem;
+            text-align: right;
+        }
+
+        .course-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .course-detail i {
+            margin-left: 0.5rem;
+            color: var(--primary);
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb-item {
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .breadcrumb-item.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .breadcrumb-separator {
+            margin: 0 0.5rem;
+            color: var(--muted);
+        }
+
+        .breadcrumb-item a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb-item a:hover {
+            color: var(--primary);
+        }
+
+        .back-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .back-button:hover {
+            background: hsl(142, 76%, 46%);
+            transform: translateX(8px);
+        }
+
+        .course-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            flex: 1;
+            text-align: center;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: hsl(142, 76%, 46%);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--muted);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--foreground);
+        }
+
+        .register-section {
+            align-items: center;
+            justify-content: center;
+        }
+
+        .register-container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .register-form {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 3rem;
+        }
+
+        .register-form h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .martyr-notice {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .martyr-notice h3 {
+            color: var(--primary);
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--foreground);
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+        }
+
+        .submit-button {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .submit-button:hover {
+            background: hsl(142, 76%, 46%);
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3);
+        }
+
+        .about-section {
+            padding: 6rem 1.5rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .about-content {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 0 50px rgba(34, 197, 94, 0.15);
+        }
+
+        .about-content p {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .about-content .institute-name {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.5rem;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .about-content .muted {
+            color: var(--muted);
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .contact-info {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .contact-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: translateX(-5px);
+            border-color: var(--primary);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .contact-text {
+            flex: 1;
+        }
+
+        .contact-text strong {
+            display: block;
+            margin-bottom: 0.25rem;
+            color: var(--primary);
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .services-box {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .services-box h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .services-box ul {
+            list-style: none;
+        }
+
+        .services-box li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .services-box li::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleInX {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(34, 197, 94, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0.5rem 1rem;
+            }
+            
+            .logo-container {
+                gap: 0.5rem;
+            }
+            
+            .logo {
+                height: 45px;
+            }
+            
+            .institute-name {
+                font-size: 1.1rem;
+            }
+            
+            .institute-name span {
+                font-size: 0.7rem;
+            }
+            
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(18, 18, 18, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 1rem;
+                border-top: 1px solid var(--border);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            }
+            
+            nav.show {
+                display: flex;
+            }
+            
+            nav button {
+                width: 100%;
+                text-align: center;
+                padding: 1rem;
+                border-radius: 8px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .home-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .home-content p {
+                font-size: 1.25rem;
+            }
+
+            .cta-button {
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .why-us-home .section-title {
+                font-size: 2rem;
+            }
+
+            .stages-grid, .grades-grid, .subjects-grid, .courses-grid, .features-grid-home {
+                grid-template-columns: 1fr;
+            }
+
+            .register-form, .about-content {
+                padding: 2rem;
+            }
+
+            .contact-details {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--card);
+            border: 1px solid var(--primary);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            animation: slideInUp 0.3s ease-out;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            display: block;
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header - محسن -->
+<header>
+    <div class="header-container">
+        <div class="logo-container" onclick="showSection('home')">
+            <img src="https://i.ibb.co/b5GVLHVV/IMG-0621.png" alt="معهد النُعمان التعليمي" class="logo" style="height: 60px; width: auto; border-radius: 8px;">
+            
+            <div class="institute-name">
+                معهد النُعمان التعليمي
+                <span>Al-No'man Educational Institute</span>
+            </div>
+        </div>
+        
+        <nav id="main-nav">
+            <button onclick="showSection('home')" class="nav-btn active" data-section="home">الصفحة الرئيسية</button>
+            <button onclick="showSection('stages')" class="nav-btn" data-section="stages">الدورات المتاحة</button>
+           
+            <button onclick="showSection('about')" class="nav-btn" data-section="about"> من نحن ؟</button>
+        </nav>
+        
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</header>
+    <!-- باقي المحتوى كما هو بدون تغيير -->
+    <section id="home" class="section home-section active">
+        <div class="home-content">
+            <h1>مرحباً بكم في معهد النُعمان التعليمي</h1>
+            <p>نور العلم.. وغرس القيم</p>
+            <div class="home-divider"></div>
+            <a href="javascript:void(0)" onclick="showSection('stages')" class="cta-button">
+                سجل الآن
+            </a>
+        </div>
+        <div class="decorative-circle"></div>
+        <div class="decorative-circle"></div>
+    </section>
+
+    <section id="stages" class="section stages-section">
+        <div class="stages-container">
+            <h2 class="section-title">الدورات المتاحة</h2>
+            
+            <div class="stages-grid">
+                <div class="stage-card" onclick="showGrades('ابتدائي')">
+                    <div class="stage-icon">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <h3>المرحلة الابتدائية</h3>
+                    <p>من الصف الأول إلى الصف السادس</p>
+                </div>
+                <div class="stage-card" onclick="showGrades('اعدادي')">
+                    <div class="stage-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>المرحلة الإعدادية</h3>
+                    <p>من الصف السابع إلى الصف التاسع</p>
+                </div>
+                <div class="stage-card" onclick="showGrades('ثانوي')">
+                    <div class="stage-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>المرحلة الثانوية</h3>
+                    <p>الصف العاشر، الحادي عشر والبكلوريا</p>
+                </div>
+                <div class="stage-card" onclick="showGrades('لغات')">
+                    <div class="stage-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>قسم اللغات</h3>
+                    <p>تعلم اللغات الإنجليزية، الفرنسية والألمانية</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- باقي الأقسام تبقى كما هي -->
+    <section id="grades" class="section grades-section">
+        <div class="grades-container">
+            <div class="breadcrumb" id="grades-breadcrumb"></div>
+            <h2 class="section-title" id="grades-title">الصفوف المتاحة</h2>
+            
+            <div class="grades-grid" id="grades-container"></div>
+            
+            <button class="back-button" onclick="backToStages()">
+                <i class="fas fa-arrow-right"></i> العودة لاختيار المرحلة
+            </button>
+        </div>
+    </section>
+
+    <section id="subjects" class="section subjects-section">
+        <div class="subjects-container">
+            <div class="breadcrumb" id="subjects-breadcrumb"></div>
+            <h2 class="section-title" id="subjects-title">المواد الدراسية</h2>
+            
+            <div class="subjects-grid" id="subjects-container"></div>
+            
+            <button class="back-button" onclick="backToGrades()">
+                <i class="fas fa-arrow-right"></i> العودة لاختيار الصف
+            </button>
+        </div>
+    </section>
+
+    <section id="courses" class="section courses-section">
+        <div class="courses-container">
+            <div class="breadcrumb" id="courses-breadcrumb"></div>
+            <h2 class="section-title" id="courses-title">الدورات المتاحة</h2>
+            
+            <div class="courses-grid" id="courses-container"></div>
+            
+            <button class="back-button" onclick="backToSubjects()">
+                <i class="fas fa-arrow-right"></i> العودة لاختيار المادة
+            </button>
+        </div>
+    </section>
+
+    <section id="register" class="section register-section">
+        <div class="register-container">
+            <form class="register-form" onsubmit="handleSubmit(event)">
+                <h2>تسجيل الدورة</h2>
+                
+                <div class="martyr-notice">
+                    <h3>تنويه هام</h3>
+                    <p>أبناء وذوي شهداء الثورة السورية المباركة — جميع الدورات مجانية بالكامل على حساب معهد النعمان التعليمي والكادر الإداري</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="fullName">الاسم الثلاثي للطالب</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phoneNumber">رقم الهاتف للتواصل</label>
+                    <input type="tel" id="phoneNumber" name="phoneNumber" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="selectedCourse">الدورة المختارة</label>
+                    <input type="text" id="selectedCourse" name="selectedCourse" readonly>
+                </div>
+
+                <button type="submit" class="submit-button">إرسال الطلب</button>
+                
+                <button type="button" class="back-button" onclick="backToCourses()" style="margin-top: 1rem; background: transparent; border: 1px solid var(--border);">
+                    <i class="fas fa-arrow-right"></i> العودة للدورات
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <section id="about" class="section about-section">
+        <div class="about-container">
+            <h2 class="section-title">نبذة تعريفية</h2>
+            
+            <div class="about-content">
+							<p>
+										<p>
+                    <span class="institute-name">معهد النعمان التعليمي</span>
+                    هو صرح تعليمي متميز يهدف إلى تقديم أفضل الخدمات التعليمية للطلاب في جميع المراحل الدراسية.
+                </p>
+
+                <p class="muted">
+                    نحن نؤمن بأن التعليم هو المفتاح الأساسي لبناء مستقبل مشرق، ولذلك نسعى جاهدين لتوفير بيئة تعليمية محفزة تساعد الطلاب على تحقيق أهدافهم الأكاديمية.
+                </p>
+
+                <div class="contact-info">
+                    <h3>معلومات التواصل والموقع</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <strong>العنوان</strong>
+                                <span>جبلة، العمارة فوق صيدلية بشر مثبوت، الطابق الأول</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <strong>رقم الهاتف</strong>
+                                <span>0999-999999</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <strong>البريد الإلكتروني</strong>
+                                <span>info@al-numan.edu</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-text">
+                                <strong>ساعات العمل</strong>
+                                <span>السبت - الخميس: 8:00 ص - 6:00 م</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="services-box">
+                    <h3>خدماتنا</h3>
+                    <ul>
+                        <li>المنهاج الدراسي السوري بجميع المراحل (الابتدائي - الإعدادي - الثانوي)</li>
+                        <li>دورات اللغة الإنجليزية بمستويات مختلفة</li>
+                        <li>دورات اللغة الفرنسية بمستويات مختلفة</li>
+                        <li>دورات اللغة الألمانية بمستويات مختلفة</li>
+                        <li>دروس تقوية فردية وجماعية</li>
+                        <li>تحضير شهادة البكلوريا بكافة فروعها</li>
+                    </ul>
+                </div>
+
+                <div class="services-box">
+                    <h3>مميزاتنا</h3>
+                    <ul>
+                        <li>كادر تدريسي متميز وذو خبرة</li>
+                        <li>فصول دراسية مجهزة بأحدث الوسائل التعليمية</li>
+                        <li>مجموعات صغيرة لضمان جودة التعليم</li>
+                        <li>متابعة مستمرة لتقدم الطلاب</li>
+                        <li>أسعار تنافسية وتسهيلات في الدفع</li>
+                        <li>دورات مجانية لأبناء الشهداء</li>
+                    </ul>
+                </div>
+
+                <p class="muted">
+                    انضم إلينا اليوم وكن جزءاً من عائلة معهد النعمان التعليمي، حيث نعمل معاً لتحقيق التفوق والنجاح.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم لماذا نعمان -->
+    <section id="why-us" class="section why-us-home">
+        <div class="stages-container">
+            <h2 class="section-title">لماذا تختار معهد النُعمان؟</h2>
+            
+            <div class="features-grid-home">
+                <div class="feature-card-home">
+                    <div class="feature-icon-home">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>كادر تدريسي متميز</h3>
+                    <p>نخبة من المعلمين والمعلمات المؤهلين تأهيلاً عالياً وذوي خبرة طويلة في مجال التعليم</p>
+                </div>
+                
+                <div class="feature-card-home">
+                    <div class="feature-icon-home">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>مناهج متكاملة</h3>
+                    <p>نغطي جميع المناهج الدراسية السورية مع مواد إثرائية لضمان الفهم الشامل</p>
+                </div>
+                
+                <div class="feature-card-home">
+                    <div class="feature-icon-home">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>متابعة مستمرة</h3>
+                    <p>نظام متابعة وتقييم مستمر لقياس تطور الطلاب وتقديم التقارير الدورية لأولياء الأمور</p>
+                </div>
+                
+                <div class="feature-card-home">
+                    <div class="feature-icon-home">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>بيئة محفزة</h3>
+                    <p>فصول دراسية مريحة ومجهزة بوسائل تعليمية حديثة تشجع على الإبداع والتميز</p>
+                </div>
+                
+                <div class="feature-card-home">
+                    <div class="feature-icon-home">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>أسعار مناسبة</h3>
+                    <p>أسعارنا مدروسة تناسب مختلف طبقات المجتمع أهدافنا تنموية وليست مادية</p>
+                </div>
+                
+                <div class="feature-card-home">
+                    <div class="feature-icon-home">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>لغات متعددة</h3>
+                    <p>دورات متخصصة في اللغات الإنجليزية والفرنسية والألمانية بمستويات مختلفة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="toast" class="toast">
+        <div id="toast-message"></div>
+    </div>
+
+    <script>
+        // بيانات الموقع - موسعة ومحسنة
+        const stagesData = {
+            "ابتدائي": {
+                grades: ["الصف الأول", "الصف الثاني", "الصف الثالث", "الصف الرابع", "الصف الخامس", "الصف السادس"],
+                subjects: {
+                    "الصف الأول": ["اللغة العربية", "الرياضيات", "التربية الدينية", "التربية الوطنية"],
+                    "الصف الثاني": ["اللغة العربية", "الرياضيات", "التربية الدينية", "التربية الوطنية", "العلوم"],
+                    "الصف الثالث": ["اللغة العربية", "الرياضيات", "التربية الدينية", "التربية الوطنية", "العلوم", "اللغة الإنجليزية"],
+                    "الصف الرابع": ["اللغة العربية", "الرياضيات", "التربية الدينية", "التربية الوطنية", "العلوم", "اللغة الإنجليزية", "التربية الفنية"],
+                    "الصف الخامس": ["اللغة العربية", "الرياضيات", "التربية الدينية", "التربية الوطنية", "العلوم", "اللغة الإنجليزية", "التربية الفنية", "الاجتماعيات"],
+                    "الصف السادس": ["اللغة العربية", "الرياضيات", "التربية الدينية", "التربية الوطنية", "العلوم", "اللغة الإنجليزية", "التربية الفنية", "الاجتماعيات"]
+                }
+            },
+            "اعدادي": {
+                grades: ["الصف السابع", "الصف الثامن", "الصف التاسع"],
+                subjects: {
+                    "الصف السابع": ["اللغة العربية", "الرياضيات", "الفيزياء", "الكيمياء", "الأحياء", "اللغة الإنجليزية", "التربية الوطنية", "التربية الدينية", "الاجتماعيات"],
+                    "الصف الثامن": ["اللغة العربية", "الرياضيات", "الفيزياء", "الكيمياء", "الأحياء", "اللغة الإنجليزية", "التربية الوطنية", "التربية الدينية", "الاجتماعيات"],
+                    "الصف التاسع": ["اللغة العربية", "الرياضيات", "الفيزياء", "الكيمياء", "الأحياء", "اللغة الإنجليزية", "التربية الوطنية", "التربية الدينية", "الاجتماعيات"]
+                }
+            },
+            "ثانوي": {
+                grades: ["الصف العاشر", "الصف الحادي عشر", "البكلوريا علمي", "البكلوريا أدبي"],
+                subjects: {
+                    "الصف العاشر": ["اللغة العربية", "الرياضيات", "الفيزياء", "الكيمياء", "الأحياء", "اللغة الإنجليزية", "التربية الوطنية", "التربية الدينية", "التاريخ", "الجغرافيا"],
+                    "الصف الحادي عشر": ["اللغة العربية", "الرياضيات", "الفيزياء", "الكيمياء", "الأحياء", "اللغة الإنجليزية", "التربية الوطنية", "التربية الدينية", "التاريخ", "الجغرافيا"],
+                    "البكلوريا علمي": ["اللغة العربية", "الرياضيات", "الفيزياء", "الكيمياء", "الأحياء", "اللغة الإنجليزية", "التربية الوطنية", "التربية الدينية"],
+                    "البكلوريا أدبي": ["اللغة العربية", "التاريخ", "الجغرافيا", "الفلسفة", "علم النفس", "اللغة الإنجليزية", "التربية الوطنية", "التربية الدينية"]
+                }
+            },
+            "لغات": {
+                grades: ["الإنجليزية", "الفرنسية", "الألمانية"],
+                subjects: {
+                    "الإنجليزية": ["الإنجليزية للمبتدئين", "الإنجليزية للمتوسطين", "الإنجليزية للمتقدمين", "الإنجليزية للأطفال", "الإنجليزية للمحادثة"],
+                    "الفرنسية": ["الفرنسية للمبتدئين", "الفرنسية للمتوسطين", "الفرنسية للمتقدمين", "الفرنسية للأطفال", "الفرنسية للمحادثة"],
+                    "الألمانية": ["الألمانية للمبتدئين", "الألمانية للمتوسطين", "الألمانية للمتقدمين", "الألمانية للأطفال", "الألمانية للمحادثة"]
+                }
+            }
+        };
+
+        const coursesData = {
+            "ابتدائي": {
+                "الصف الأول": {
+                    "اللغة العربية": [
+                        {name: "دورة اللغة العربية - الصف الأول", price: "15000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 15, description: "دورة شاملة لتعليم القراءة والكتابة ومهارات اللغة العربية الأساسية"},
+                        {name: "دورة القراءة والكتابة", price: "12000 ل.س", start: "1/12/2025", end: "28/2/2026", seats: 12, description: "تركيز على مهارات القراءة والكتابة الأساسية"}
+                    ],
+                    "الرياضيات": [
+                        {name: "دورة الرياضيات - الصف الأول", price: "15000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 15, description: "تعليم أساسيات الرياضيات والأعداد والعمليات الحسابية البسيطة"}
+                    ]
+                },
+                "الصف الثاني": {
+                    "اللغة العربية": [
+                        {name: "دورة اللغة العربية - الصف الثاني", price: "16000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 15, description: "تطوير مهارات القراءة والكتابة والقواعد الأساسية"}
+                    ],
+                    "الرياضيات": [
+                        {name: "دورة الرياضيات - الصف الثاني", price: "16000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 15, description: "تعلم العمليات الحسابية والمسائل الرياضية"}
+                    ]
+                }
+            },
+            "اعدادي": {
+                "الصف السابع": {
+                    "الرياضيات": [
+                        {name: "دورة الرياضيات - الصف السابع", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "شاملة لجميع مواضيع منهاج الصف السابع في الرياضيات"}
+                    ],
+                    "الفيزياء": [
+                        {name: "دورة الفيزياء - الصف السابع", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 8, description: "شرح مفاهيم الفيزياء الأساسية وتطبيقاتها"}
+                    ],
+                    "الكيمياء": [
+                        {name: "دورة الكيمياء - الصف السابع", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 8, description: "تعلم أساسيات الكيمياء والمختبرات البسيطة"}
+                    ]
+                },
+                "الصف الثامن": {
+                    "الرياضيات": [
+                        {name: "دورة الرياضيات - الصف الثامن", price: "22000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "متقدمة في مواضيع الرياضيات للصف الثامن"}
+                    ]
+                }
+            },
+            "ثانوي": {
+                "البكلوريا علمي": {
+                    "الرياضيات": [
+                        {name: "دورة الرياضيات - البكلوريا علمي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تحضير شامل لامتحان البكلوريا في مادة الرياضيات"}
+                    ],
+                    "الفيزياء": [
+                        {name: "دورة الفيزياء - البكلوريا علمي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "مراجعة شاملة وتدريبات على امتحانات البكلوريا"}
+                    ],
+                    "الكيمياء": [
+                        {name: "دورة الكيمياء - البكلوريا علمي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تركيز على التجارب والمسائل الكيميائية"}
+                    ]
+                },
+                "البكلوريا أدبي": {
+                    "التاريخ": [
+                        {name: "دورة التاريخ - البكلوريا أدبي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تحليل الأحداث التاريخية ومراجعة شاملة للمنهاج"}
+                    ],
+                    "الجغرافيا": [
+                        {name: "دورة الجغرافيا - البكلوريا أدبي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "دراسة شاملة للمفاهيم الجغرافية والخرائط"}
+                    ],
+                    "الفلسفة": [
+                        {name: "دورة الفلسفة - البكلوريا أدبي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تحليل النصوص الفلسفية وتطوير مهارات التفكير النقدي"}
+                    ]
+                }
+            },
+            "لغات": {
+                "الإنجليزية": {
+                    "الإنجليزية للمبتدئين": [
+                        {name: "دورة الإنجليزية للمبتدئين", price: "18000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 12, description: "تعلم الأساسيات من الصفر مع التركيز على المحادثة اليومية"}
+                    ],
+                    "الإنجليزية للمحادثة": [
+                        {name: "دورة الإنجليزية للمحادثة", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تحسين الطلاقة والتحدث بثقة في مختلف المواقف"}
+                    ],
+                    "الإنجليزية للأطفال": [
+                        {name: "دورة الإنجليزية للأطفال", price: "15000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 8, description: "تعلم ممتع عبر الألعاب والأنشطة التفاعلية"}
+                    ]
+                },
+                "الفرنسية": {
+                    "الفرنسية للمبتدئين": [
+                        {name: "دورة الفرنسية للمبتدئين", price: "18000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "بداية رحلة تعلم الفرنسية من الأساسيات"}
+                    ]
+                },
+                "الألمانية": {
+                    "الألمانية للمبتدئين": [
+                        {name: "دورة الألمانية للمبتدئين", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 8, description: "تعلم اللغة الألمانية من الصفر مع مدرسين متخصصين"}
+                    ]
+                }
+            }
+        };
+
+        // المتغيرات لتتبع المسار
+        let currentStage = '';
+        let currentGrade = '';
+        let currentSubject = '';
+
+        // Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Update active nav button
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            const navBtn = document.querySelector(`[data-section="${sectionId}"]`);
+            if (navBtn) {
+                navBtn.classList.add('active');
+            }
+
+            // إغلاق القائمة المتنقلة إذا كانت مفتوحة
+            document.getElementById('main-nav').classList.remove('show');
+
+            // Reset to top
+            window.scrollTo(0, 0);
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('main-nav').classList.toggle('show');
+        }
+
+        function showGrades(stage) {
+            currentStage = stage;
+            showSection('grades');
+            
+            document.getElementById('grades-title').textContent = `الصفوف المتاحة لمرحلة ${stage}`;
+            
+            // تحديث breadcrumb
+            updateBreadcrumb('grades-breadcrumb', [
+                {text: 'المراحل', action: 'backToStages()'},
+                {text: stage, action: ''}
+            ]);
+            
+            const gradesContainer = document.getElementById('grades-container');
+            gradesContainer.innerHTML = '';
+            
+            stagesData[stage].grades.forEach(grade => {
+                const card = document.createElement('div');
+                card.className = 'grade-card';
+                card.innerHTML = `
+                    <div class="stage-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>${grade}</h3>
+                    <p>انقر للاطلاع على المواد الدراسية</p>
+                `;
+                card.addEventListener('click', () => showSubjects(grade));
+                gradesContainer.appendChild(card);
+            });
+        }
+
+        function showSubjects(grade) {
+            currentGrade = grade;
+            showSection('subjects');
+            
+            document.getElementById('subjects-title').textContent = `المواد الدراسية للصف ${grade}`;
+            
+            // تحديث breadcrumb
+            updateBreadcrumb('subjects-breadcrumb', [
+                {text: 'المراحل', action: 'backToStages()'},
+                {text: currentStage, action: 'backToGrades()'},
+                {text: grade, action: ''}
+            ]);
+            
+            const subjectsContainer = document.getElementById('subjects-container');
+            subjectsContainer.innerHTML = '';
+            
+            if (stagesData[currentStage].subjects[grade]) {
+                stagesData[currentStage].subjects[grade].forEach(subject => {
+                    const card = document.createElement('div');
+                    card.className = 'subject-card';
+                    card.innerHTML = `
+                        <div class="stage-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3>${subject}</h3>
+                        <p>انقر للاطلاع على الدورات المتاحة</p>
+                    `;
+                    card.addEventListener('click', () => showCourses(subject));
+                    subjectsContainer.appendChild(card);
+                });
+            }
+        }
+
+        function showCourses(subject) {
+            currentSubject = subject;
+            showSection('courses');
+            
+            document.getElementById('courses-title').textContent = `الدورات المتاحة لمادة ${subject}`;
+            
+            // تحديث breadcrumb
+            updateBreadcrumb('courses-breadcrumb', [
+                {text: 'المراحل', action: 'backToStages()'},
+                {text: currentStage, action: 'backToGrades()'},
+                {text: currentGrade, action: 'backToSubjects()'},
+                {text: subject, action: ''}
+            ]);
+            
+            const coursesContainer = document.getElementById('courses-container');
+            coursesContainer.innerHTML = '';
+            
+            if (coursesData[currentStage] && coursesData[currentStage][currentGrade] && coursesData[currentStage][currentGrade][subject]) {
+                coursesData[currentStage][currentGrade][subject].forEach(course => {
+                    const card = document.createElement('div');
+                    card.className = 'course-card';
+                    card.innerHTML = `
+                        <h3>${course.name}</h3>
+                        <p>${course.description}</p>
+                        <div class="course-details">
+                            <div class="course-detail">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <span>السعر: ${course.price}</span>
+                            </div>
+                            <div class="course-detail">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>تاريخ البداية: ${course.start}</span>
+                            </div>
+                            <div class="course-detail">
+                                <i class="far fa-calendar-check"></i>
+                                <span>تاريخ النهاية: ${course.end}</span>
+                            </div>
+                            <div class="course-detail">
+                                <i class="fas fa-users"></i>
+                                <span>المقاعد المتاحة: ${course.seats}</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-primary" onclick="showRegister('${course.name.replace(/'/g, "\\'")}')">سجل الآن</button>
+                            <button class="btn btn-secondary" onclick="backToSubjects()">إلغاء</button>
+                        </div>
+                    `;
+                    coursesContainer.appendChild(card);
+                });
+            } else {
+                coursesContainer.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: var(--muted);">لا توجد دورات متاحة حالياً لهذه المادة</p>';
+            }
+        }
+
+        function showRegister(courseName) {
+            showSection('register');
+            document.getElementById('selectedCourse').value = courseName;
+        }
+
+        // وظائف العودة
+        function backToStages() {
+            showSection('stages');
+        }
+
+        function backToGrades() {
+            showSection('grades');
+        }
+
+        function backToSubjects() {
+            showSection('subjects');
+        }
+
+        function backToCourses() {
+            showSection('courses');
+        }
+
+        // وظيفة تحديث breadcrumb
+        function updateBreadcrumb(containerId, items) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            items.forEach((item, index) => {
+                const itemElement = document.createElement('span');
+                itemElement.className = `breadcrumb-item ${index === items.length - 1 ? 'active' : ''}`;
+                
+                if (item.action && index < items.length - 1) {
+                    itemElement.innerHTML = `<a href="javascript:${item.action}" style="color: inherit; text-decoration: none;">${item.text}</a>`;
+                } else {
+                    itemElement.textContent = item.text;
+                }
+                
+                container.appendChild(itemElement);
+                
+                if (index < items.length - 1) {
+                    const separator = document.createElement('span');
+                    separator.className = 'breadcrumb-separator';
+                    separator.innerHTML = ' / ';
+                    container.appendChild(separator);
+                }
+            });
+        }
+
+        // Form Submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const selectedCourse = document.getElementById('selectedCourse').value;
+
+            // Show toast notification
+            showToast(`شكراً ${fullName}! تم إرسال طلب التسجيل في دورة ${selectedCourse} بنجاح. سنتواصل معك على الرقم ${phoneNumber} قريباً.`);
+
+            // Reset form
+            event.target.reset();
+            
+            // العودة للصفحة الرئيسية بعد 3 ثواني
+            setTimeout(() => {
+                showSection('home');
+            }, 3000);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add initial breadcrumb for stages
+            updateBreadcrumb('grades-breadcrumb', [
+                {text: 'المراحل', action: 'backToStages()'},
+                {text: 'اختر المرحلة', action: ''}
+            ]);
+            
+            // إضافة قسم "لماذا تختار معهد النُعمان" إلى القائمة
+            const nav = document.getElementById('main-nav');
+            const whyUsButton = document.createElement('button');
+                        whyUsButton.textContent = 'خدماتنا  ';
+            whyUsButton.className = 'nav-btn';
+            whyUsButton.setAttribute('data-section', 'why-us');
+            whyUsButton.onclick = () => showSection('why-us');
+            nav.insertBefore(whyUsButton, nav.children[2]);
+        });
+    </script>
+</body>
+</html>
