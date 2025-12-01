@@ -33,7 +33,7 @@
             overflow-x: hidden;
         }
 
-        /* Header - محسن */
+        /* Header */
         header {
             position: fixed;
             top: 0;
@@ -79,7 +79,7 @@
             font-weight: 800;
             color: var(--foreground);
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .institute-name span {
@@ -88,7 +88,7 @@
             font-size: 0.9rem;
             font-weight: 600;
             margin-top: 0.2rem;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
         }
 
         nav {
@@ -108,7 +108,9 @@
             padding: 0.5rem 1rem;
             border-radius: 6px;
             overflow: hidden;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
+            font-weight: 700 !important;
+            letter-spacing: 0 !important;
         }
 
         nav button::before {
@@ -158,10 +160,12 @@
             color: var(--foreground);
             font-size: 1.5rem;
             cursor: pointer;
+            font-family: 'Cairo', sans-serif !important;
         }
 
-        /* باقي الأنماط كما هي بدون تغيير */
+        /* الأنماط الأساسية */
         .section {
+            position: relative;
             min-height: 100vh;
             display: none;
             opacity: 0;
@@ -179,15 +183,22 @@
             overflow: hidden;
         }
 
-      .home-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: 
-        linear-gradient(135deg, var(--background) 0%, var(--background) 40%, rgba(34, 197, 94, 0.1) 70%),
-        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(34, 197, 94, 0.03) 10px, rgba(34, 197, 94, 0.03) 20px);
-}
-
+        .home-section::before,
+        .stages-section::before,
+        .grades-section::before,
+        .subjects-section::before,
+        .courses-section::before,
+        .register-section::before,
+        .about-section::before,
+        .why-us-home::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                linear-gradient(135deg, var(--background) 0%, var(--background) 40%, rgba(34, 197, 94, 0.1) 70%),
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(34, 197, 94, 0.03) 10px, rgba(34, 197, 94, 0.03) 20px);
+            z-index: -1;
+        }
 
         .home-content {
             position: relative;
@@ -202,7 +213,7 @@
             margin-bottom: 1.5rem;
             text-shadow: 0 0 30px rgba(34, 197, 94, 0.5);
             animation: slideUp 0.8s ease-out 0.3s both;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .home-content p {
@@ -210,7 +221,7 @@
             font-weight: 600;
             color: var(--primary);
             animation: slideUp 0.8s ease-out 0.6s both;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .home-divider {
@@ -236,7 +247,7 @@
             border: 2px solid transparent;
             animation: pulse 2s infinite;
             margin-top: 3rem;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .cta-button:hover {
@@ -268,6 +279,78 @@
             height: 384px;
         }
 
+        /* Social Icons - إصلاح المشكلة هنا */
+        .social-icons-container {
+            position: fixed;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 1rem;
+            z-index: 100;
+            animation: fadeIn 0.5s ease-out 0.5s both;
+            pointer-events: none;
+        }
+
+        .social-icon {
+            pointer-events: auto;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.3rem;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(34, 197, 94, 0.3);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* إخفاء الأيقونات في الصفحات الأخرى */
+        .social-icons-container.hidden {
+            display: none;
+        }
+
+        /* Social Icon Colors - إزالة الألوان القوية */
+        .social-icon.whatsapp:hover {
+            background: rgba(37, 211, 102, 0.2);
+            text-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
+        }
+
+        .social-icon.telegram:hover {
+            background: rgba(0, 136, 204, 0.2);
+            text-shadow: 0 0 20px rgba(0, 136, 204, 0.6);
+        }
+
+        .social-icon.facebook:hover {
+            background: rgba(24, 119, 242, 0.2);
+            text-shadow: 0 0 20px rgba(24, 119, 242, 0.6);
+        }
+
+        .social-icon.instagram:hover {
+            background: rgba(131, 58, 180, 0.2);
+            text-shadow: 0 0 20px rgba(131, 58, 180, 0.6);
+        }
+
+        /* تأثير تنقيط مائي عند الضغط */
+        .social-icon:active {
+            transform: translateY(-3px) scale(0.95);
+            transition: all 0.1s;
+        }
+
         .why-us-home {
             background: var(--card);
             border-top: 1px solid var(--border);
@@ -278,9 +361,9 @@
         .why-us-home .section-title {
             font-size: 2.5rem;
             font-weight: 900;
-            margin-bottom: 3rem;
+            margin: 6rem 0 3rem 0;
             color: var(--primary);
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .features-grid-home {
@@ -319,14 +402,14 @@
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .feature-card-home p {
             color: var(--muted);
             line-height: 1.8;
             font-size: 1.1rem;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .stages-section {
@@ -345,7 +428,8 @@
             font-weight: 900;
             text-align: center;
             margin-bottom: 4rem;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
+            font-weight: 900 !important;
         }
 
         .stages-grid {
@@ -381,13 +465,13 @@
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .stage-card p, .grade-card p, .subject-card p, .course-card p {
             color: var(--muted);
             line-height: 1.6;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .grades-section, .subjects-section, .courses-section, .register-section {
@@ -420,7 +504,7 @@
             margin-bottom: 0.5rem;
             color: var(--muted);
             font-size: 0.9rem;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .course-detail i {
@@ -439,7 +523,8 @@
         .breadcrumb-item {
             color: var(--muted);
             font-size: 0.9rem;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
+            font-weight: 600 !important;
         }
 
         .breadcrumb-item.active {
@@ -450,12 +535,15 @@
         .breadcrumb-separator {
             margin: 0 0.5rem;
             color: var(--muted);
+            font-family: 'Cairo', sans-serif !important;
+            font-weight: 600 !important;
         }
 
         .breadcrumb-item a {
             color: var(--muted);
             text-decoration: none;
             transition: color 0.3s;
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .breadcrumb-item a:hover {
@@ -476,7 +564,9 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
+            font-weight: 700 !important;
+            font-size: 1.1rem !important;
         }
 
         .back-button:hover {
@@ -499,7 +589,8 @@
             border: none;
             flex: 1;
             text-align: center;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
+            font-weight: 600 !important;
         }
 
         .btn-primary {
@@ -544,7 +635,7 @@
             font-weight: 900;
             text-align: center;
             margin-bottom: 2rem;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .martyr-notice {
@@ -560,7 +651,11 @@
             color: var(--primary);
             font-size: 1.25rem;
             margin-bottom: 0.5rem;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
+        }
+
+        .martyr-notice p {
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .form-group {
@@ -571,7 +666,7 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .form-group input {
@@ -581,8 +676,8 @@
             border: 1px solid var(--border);
             border-radius: 8px;
             color: var(--foreground);
-            font-family: 'Cairo', sans-serif;
             font-size: 1rem;
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .form-group input:focus {
@@ -603,7 +698,7 @@
             cursor: pointer;
             transition: all 0.3s;
             margin-top: 1rem;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .submit-button:hover {
@@ -634,19 +729,19 @@
             font-size: 1.125rem;
             line-height: 1.8;
             margin-bottom: 1.5rem;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .about-content .institute-name {
             color: var(--primary);
             font-weight: 700;
             font-size: 1.5rem;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .about-content .muted {
             color: var(--muted);
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .contact-info {
@@ -663,7 +758,7 @@
             color: var(--primary);
             margin-bottom: 1.5rem;
             text-align: center;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .contact-details {
@@ -707,7 +802,11 @@
             display: block;
             margin-bottom: 0.25rem;
             color: var(--primary);
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
+        }
+
+        .contact-text span {
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .services-box {
@@ -723,7 +822,7 @@
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 1rem;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .services-box ul {
@@ -735,7 +834,7 @@
             align-items: center;
             gap: 0.75rem;
             margin-bottom: 0.75rem;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', sans-serif !important;
         }
 
         .services-box li::before {
@@ -888,6 +987,7 @@
 
             .why-us-home .section-title {
                 font-size: 2rem;
+                margin: 4rem 0 2rem 0;
             }
 
             .stages-grid, .grades-grid, .subjects-grid, .courses-grid, .features-grid-home {
@@ -900,6 +1000,17 @@
 
             .contact-details {
                 grid-template-columns: 1fr;
+            }
+
+            .social-icons-container {
+                bottom: 20px;
+                gap: 1rem;
+            }
+
+            .social-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
             }
         }
 
@@ -921,6 +1032,11 @@
             display: block;
         }
 
+        .toast div {
+            font-family: 'Cairo', sans-serif !important;
+            font-weight: 600;
+        }
+
         @keyframes slideInUp {
             from {
                 transform: translateY(100px);
@@ -931,47 +1047,99 @@
                 opacity: 1;
             }
         }
+
+        /* إصلاح إضافي للخطوط في النصوص الصغيرة */
+        .course-detail span, 
+        .feature-card-home p,
+        .stage-card p,
+        .grade-card p,
+        .subject-card p,
+        .course-card p {
+            font-family: 'Cairo', sans-serif !important;
+            font-weight: 400 !important;
+        }
+
+        /* إصلاح خط أزرار التسجيل */
+        .submit-button,
+        .btn-primary,
+        .btn-secondary {
+            font-family: 'Cairo', sans-serif !important;
+            font-weight: 700 !important;
+            letter-spacing: 0 !important;
+        }
     </style>
 </head>
 <body>
-    <!-- Header - محسن -->
-<header>
-    <div class="header-container">
-        <div class="logo-container" onclick="showSection('home')">
-            <img src="https://i.ibb.co/b5GVLHVV/IMG-0621.png" alt="معهد النُعمان التعليمي" class="logo" style="height: 60px; width: auto; border-radius: 8px;">
-            
-            <div class="institute-name">
-                معهد النُعمان التعليمي
-                <span>Al-No'man Educational Institute</span>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo-container" onclick="showSection('home')">
+                <img src="https://i.ibb.co/b5GVLHVV/IMG-0621.png" alt="معهد النُعمان التعليمي" class="logo" style="height: 60px; width: auto; border-radius: 8px;">
+                
+                <div class="institute-name">
+                    معهد النُعمان التعليمي
+                    <span>Al-No'man Educational Institute</span>
+                </div>
             </div>
+            
+            <nav id="main-nav">
+                <button onclick="showSection('home')" class="nav-btn active" data-section="home">الصفحة الرئيسية</button>
+                <button onclick="showSection('stages')" class="nav-btn" data-section="stages">الدورات المتاحة</button>
+                <button onclick="showSection('why-us')" class="nav-btn" data-section="why-us">خدماتنا</button>
+                <button onclick="showSection('about')" class="nav-btn" data-section="about"> من نحن ؟</button>
+            </nav>
+            
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-        
-        <nav id="main-nav">
-            <button onclick="showSection('home')" class="nav-btn active" data-section="home">الصفحة الرئيسية</button>
-            <button onclick="showSection('stages')" class="nav-btn" data-section="stages">الدورات المتاحة</button>
-           
-            <button onclick="showSection('about')" class="nav-btn" data-section="about"> من نحن ؟</button>
-        </nav>
-        
-        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
-            <i class="fas fa-bars"></i>
-        </button>
+    </header>
+
+    <!-- أيقونات وسائل التواصل الاجتماعي - الآن خارج كل الأقسام -->
+    <div class="social-icons-container" id="social-icons">
+        <a href="https://wa.me/1234567890" class="social-icon whatsapp" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://t.me/username" class="social-icon telegram" target="_blank">
+            <i class="fab fa-telegram"></i>
+        </a>
+        <a href="https://facebook.com/username" class="social-icon facebook" target="_blank">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://instagram.com/username" class="social-icon instagram" target="_blank">
+            <i class="fab fa-instagram"></i>
+        </a>
     </div>
-</header>
-    <!-- باقي المحتوى كما هو بدون تغيير -->
+
+    <!-- الصفحة الرئيسية -->
     <section id="home" class="section home-section active">
         <div class="home-content">
             <h1>مرحباً بكم في معهد النُعمان التعليمي</h1>
-            <p>نور العلم.. وغرس القيم</p>
-            <div class="home-divider"></div>
+<p>خطوتك نحو العلم والقيم</p>
+            
+            <div style="
+                width: 200px;
+                height: 2px;
+                background: linear-gradient(90deg, 
+                    transparent, 
+                    rgba(34, 197, 94, 0.3), 
+                    var(--primary), 
+                    rgba(34, 197, 94, 0.3), 
+                    transparent);
+                margin: 2.5rem auto;
+                border-radius: 1px;
+                box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
+            "></div>
+            
             <a href="javascript:void(0)" onclick="showSection('stages')" class="cta-button">
-                سجل الآن
+                سجل الآن عبر الموقع
             </a>
         </div>
         <div class="decorative-circle"></div>
         <div class="decorative-circle"></div>
     </section>
 
+    <!-- باقي الأقسام -->
     <section id="stages" class="section stages-section">
         <div class="stages-container">
             <h2 class="section-title">الدورات المتاحة</h2>
@@ -1009,7 +1177,6 @@
         </div>
     </section>
 
-    <!-- باقي الأقسام تبقى كما هي -->
     <section id="grades" class="section grades-section">
         <div class="grades-container">
             <div class="breadcrumb" id="grades-breadcrumb"></div>
@@ -1088,8 +1255,7 @@
             <h2 class="section-title">نبذة تعريفية</h2>
             
             <div class="about-content">
-							<p>
-										<p>
+                <p>
                     <span class="institute-name">معهد النعمان التعليمي</span>
                     هو صرح تعليمي متميز يهدف إلى تقديم أفضل الخدمات التعليمية للطلاب في جميع المراحل الدراسية.
                 </p>
@@ -1164,10 +1330,27 @@
                     </ul>
                 </div>
 
-                <p class="muted">
+              <p class="muted">
                     انضم إلينا اليوم وكن جزءاً من عائلة معهد النعمان التعليمي، حيث نعمل معاً لتحقيق التفوق والنجاح.
                 </p>
+
             </div>
+            
+            <!-- حقوق النشر هنا - خارج الصندوق -->
+            <div style="
+                margin-top: 2rem;
+                padding-top: 1.5rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                text-align: center;
+                color: rgba(255, 255, 255, 0.5);
+                font-size: 0.8rem;
+                font-family: 'Cairo', sans-serif;
+                line-height: 1.4;
+            ">
+                <div>جميع الحقوق محفوظة © 2025 معهد النُعمان التعليمي</div>
+                <div style="margin-top: 0.2rem;">تصميم وتطوير بأيدي شباب سوري طموح</div>
+            </div>
+
         </div>
     </section>
 
@@ -1233,7 +1416,7 @@
     </div>
 
     <script>
-        // بيانات الموقع - موسعة ومحسنة
+        // بيانات الموقع
         const stagesData = {
             "ابتدائي": {
                 grades: ["الصف الأول", "الصف الثاني", "الصف الثالث", "الصف الرابع", "الصف الخامس", "الصف السادس"],
@@ -1385,6 +1568,14 @@
                 navBtn.classList.add('active');
             }
 
+            // التحكم في إظهار وإخفاء أيقونات التواصل الاجتماعي
+            const socialIcons = document.getElementById('social-icons');
+            if (sectionId === 'home') {
+                socialIcons.classList.remove('hidden');
+            } else {
+                socialIcons.classList.add('hidden');
+            }
+
             // إغلاق القائمة المتنقلة إذا كانت مفتوحة
             document.getElementById('main-nav').classList.remove('show');
 
@@ -1509,7 +1700,7 @@
                     coursesContainer.appendChild(card);
                 });
             } else {
-                coursesContainer.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: var(--muted);">لا توجد دورات متاحة حالياً لهذه المادة</p>';
+                coursesContainer.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: var(--muted); font-family: \'Cairo\', sans-serif !important;">لا توجد دورات متاحة حالياً لهذه المادة</p>';
             }
         }
 
@@ -1545,7 +1736,7 @@
                 itemElement.className = `breadcrumb-item ${index === items.length - 1 ? 'active' : ''}`;
                 
                 if (item.action && index < items.length - 1) {
-                    itemElement.innerHTML = `<a href="javascript:${item.action}" style="color: inherit; text-decoration: none;">${item.text}</a>`;
+                    itemElement.innerHTML = `<a href="javascript:${item.action}" style="color: inherit; text-decoration: none; font-family: 'Cairo', sans-serif !important;">${item.text}</a>`;
                 } else {
                     itemElement.textContent = item.text;
                 }
@@ -1601,14 +1792,16 @@
                 {text: 'اختر المرحلة', action: ''}
             ]);
             
-            // إضافة قسم "لماذا تختار معهد النُعمان" إلى القائمة
-            const nav = document.getElementById('main-nav');
-            const whyUsButton = document.createElement('button');
-                        whyUsButton.textContent = 'خدماتنا  ';
-            whyUsButton.className = 'nav-btn';
-            whyUsButton.setAttribute('data-section', 'why-us');
-            whyUsButton.onclick = () => showSection('why-us');
-            nav.insertBefore(whyUsButton, nav.children[2]);
+            // إخفاء أيقونات التواصل الاجتماعي عند التحميل
+            const socialIcons = document.getElementById('social-icons');
+            socialIcons.classList.add('hidden');
+            
+            // إظهارها فقط عند فتح الصفحة الرئيسية
+            setTimeout(() => {
+                if (window.location.hash === '' || window.location.hash === '#home') {
+                    socialIcons.classList.remove('hidden');
+                }
+            }, 100);
         });
     </script>
 </body>
