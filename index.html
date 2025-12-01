@@ -279,7 +279,7 @@
             height: 384px;
         }
 
-        /* Social Icons - إصلاح المشكلة هنا */
+        /* Social Icons */
         .social-icons-container {
             position: fixed;
             bottom: 30px;
@@ -324,7 +324,7 @@
             display: none;
         }
 
-        /* Social Icon Colors - إزالة الألوان القوية */
+        /* Social Icon Colors */
         .social-icon.whatsapp:hover {
             background: rgba(37, 211, 102, 0.2);
             text-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
@@ -550,28 +550,43 @@
             color: var(--primary);
         }
 
-        .back-button {
-            background: var(--primary);
+        /* زر العودة الموحد */
+        .back-button-unified {
+            background: linear-gradient(135deg, var(--primary), hsl(142, 76%, 32%));
             color: white;
             border: none;
-            padding: 0.75rem 2rem;
+            padding: 0.8rem 2.5rem;
             border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: 1.1rem;
+            font-weight: 700;
             cursor: pointer;
-            margin-bottom: 2rem;
+            margin: 4rem auto 2rem;
             transition: all 0.3s;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            justify-content: center;
+            gap: 0.8rem;
             font-family: 'Cairo', sans-serif !important;
-            font-weight: 700 !important;
-            font-size: 1.1rem !important;
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3);
+            width: fit-content;
+            text-decoration: none;
         }
 
-        .back-button:hover {
-            background: hsl(142, 76%, 46%);
-            transform: translateX(8px);
+        .back-button-unified:hover {
+            background: linear-gradient(135deg, hsl(142, 76%, 46%), var(--primary));
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(34, 197, 94, 0.5);
+        }
+
+        .back-button-unified:active {
+            transform: translateY(-2px);
+            transition: all 0.1s;
+        }
+
+        .back-button-center {
+            display: flex;
+            justify-content: center;
+            width: 100%;
         }
 
         .course-actions {
@@ -686,24 +701,39 @@
             box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
         }
 
-        .submit-button {
+        /* زر التسجيل عبر الواتساب - الجديد */
+        .whatsapp-register-btn {
             width: 100%;
-            background: var(--primary);
+            background: linear-gradient(135deg, #25D366, #128C7E);
             color: white;
             border: none;
-            padding: 1rem;
-            border-radius: 8px;
-            font-size: 1.125rem;
+            padding: 1.2rem;
+            border-radius: 12px;
+            font-size: 1.25rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             font-family: 'Cairo', sans-serif !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
         }
 
-        .submit-button:hover {
-            background: hsl(142, 76%, 46%);
-            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3);
+        .whatsapp-register-btn:hover {
+            background: linear-gradient(135deg, #128C7E, #25D366);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-register-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .whatsapp-register-btn i {
+            font-size: 1.5rem;
         }
 
         .about-section {
@@ -1012,6 +1042,16 @@
                 height: 45px;
                 font-size: 1.2rem;
             }
+
+            .back-button-unified {
+                padding: 0.7rem 2rem;
+                font-size: 1rem;
+            }
+
+            .whatsapp-register-btn {
+                padding: 1rem;
+                font-size: 1.1rem;
+            }
         }
 
         .toast {
@@ -1060,12 +1100,25 @@
         }
 
         /* إصلاح خط أزرار التسجيل */
-        .submit-button,
         .btn-primary,
         .btn-secondary {
             font-family: 'Cairo', sans-serif !important;
             font-weight: 700 !important;
             letter-spacing: 0 !important;
+        }
+
+        /* عرض كود الدورة */
+        .course-code-display {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 8px;
+            padding: 0.8rem 1.2rem;
+            margin-top: 0.5rem;
+            font-family: 'Cairo', sans-serif !important;
+            font-weight: 700;
+            color: var(--primary);
+            text-align: center;
+            display: inline-block;
         }
     </style>
 </head>
@@ -1095,7 +1148,7 @@
         </div>
     </header>
 
-    <!-- أيقونات وسائل التواصل الاجتماعي - الآن خارج كل الأقسام -->
+    <!-- أيقونات وسائل التواصل الاجتماعي -->
     <div class="social-icons-container" id="social-icons">
         <a href="https://wa.me/1234567890" class="social-icon whatsapp" target="_blank">
             <i class="fab fa-whatsapp"></i>
@@ -1174,6 +1227,13 @@
                     <p>تعلم اللغات الإنجليزية، الفرنسية والألمانية</p>
                 </div>
             </div>
+            
+            <!-- زر العودة الموحد -->
+            <div class="back-button-center">
+                <button class="back-button-unified" onclick="showSection('home')">
+                    <i class="fas fa-home"></i> العودة للصفحة الرئيسية
+                </button>
+            </div>
         </div>
     </section>
 
@@ -1184,9 +1244,12 @@
             
             <div class="grades-grid" id="grades-container"></div>
             
-            <button class="back-button" onclick="backToStages()">
-                <i class="fas fa-arrow-right"></i> العودة لاختيار المرحلة
-            </button>
+            <!-- زر العودة الموحد -->
+            <div class="back-button-center">
+                <button class="back-button-unified" onclick="backToStages()">
+                    <i class="fas fa-arrow-right"></i> العودة لاختيار المرحلة
+                </button>
+            </div>
         </div>
     </section>
 
@@ -1197,9 +1260,12 @@
             
             <div class="subjects-grid" id="subjects-container"></div>
             
-            <button class="back-button" onclick="backToGrades()">
-                <i class="fas fa-arrow-right"></i> العودة لاختيار الصف
-            </button>
+            <!-- زر العودة الموحد -->
+            <div class="back-button-center">
+                <button class="back-button-unified" onclick="backToGrades()">
+                    <i class="fas fa-arrow-right"></i> العودة لاختيار الصف
+                </button>
+            </div>
         </div>
     </section>
 
@@ -1210,15 +1276,18 @@
             
             <div class="courses-grid" id="courses-container"></div>
             
-            <button class="back-button" onclick="backToSubjects()">
-                <i class="fas fa-arrow-right"></i> العودة لاختيار المادة
-            </button>
+            <!-- زر العودة الموحد -->
+            <div class="back-button-center">
+                <button class="back-button-unified" onclick="backToSubjects()">
+                    <i class="fas fa-arrow-right"></i> العودة لاختيار المادة
+                </button>
+            </div>
         </div>
     </section>
 
     <section id="register" class="section register-section">
         <div class="register-container">
-            <form class="register-form" onsubmit="handleSubmit(event)">
+            <form class="register-form">
                 <h2>تسجيل الدورة</h2>
                 
                 <div class="martyr-notice">
@@ -1241,11 +1310,23 @@
                     <input type="text" id="selectedCourse" name="selectedCourse" readonly>
                 </div>
 
-                <button type="submit" class="submit-button">إرسال الطلب</button>
-                
-                <button type="button" class="back-button" onclick="backToCourses()" style="margin-top: 1rem; background: transparent; border: 1px solid var(--border);">
-                    <i class="fas fa-arrow-right"></i> العودة للدورات
+                <div class="form-group">
+                    <label for="courseCode">كود الدورة</label>
+                    <div class="course-code-display" id="courseCodeDisplay">-</div>
+                    <input type="hidden" id="courseCode" name="courseCode">
+                </div>
+
+                <!-- زر التسجيل عبر الواتساب - الجديد -->
+                <button type="button" class="whatsapp-register-btn" onclick="registerViaWhatsApp()">
+                    <i class="fab fa-whatsapp"></i> التسجيل عبر الواتساب
                 </button>
+                
+                <!-- زر العودة الموحد -->
+                <div class="back-button-center" style="margin-top: 1.5rem;">
+                    <button type="button" class="back-button-unified" onclick="backToCourses()">
+                        <i class="fas fa-arrow-right"></i> العودة للدورات
+                    </button>
+                </div>
             </form>
         </div>
     </section>
@@ -1330,13 +1411,12 @@
                     </ul>
                 </div>
 
-              <p class="muted">
+                <p class="muted">
                     انضم إلينا اليوم وكن جزءاً من عائلة معهد النعمان التعليمي، حيث نعمل معاً لتحقيق التفوق والنجاح.
                 </p>
-
             </div>
             
-            <!-- حقوق النشر هنا - خارج الصندوق -->
+            <!-- حقوق النشر -->
             <div style="
                 margin-top: 2rem;
                 padding-top: 1.5rem;
@@ -1350,7 +1430,13 @@
                 <div>جميع الحقوق محفوظة © 2025 معهد النُعمان التعليمي</div>
                 <div style="margin-top: 0.2rem;">تصميم وتطوير بأيدي شباب سوري طموح</div>
             </div>
-
+            
+            <!-- زر العودة الموحد -->
+            <div class="back-button-center" style="margin-top: 3rem;">
+                <button class="back-button-unified" onclick="showSection('home')">
+                    <i class="fas fa-home"></i> العودة للصفحة الرئيسية
+                </button>
+            </div>
         </div>
     </section>
 
@@ -1408,6 +1494,13 @@
                     <p>دورات متخصصة في اللغات الإنجليزية والفرنسية والألمانية بمستويات مختلفة</p>
                 </div>
             </div>
+            
+            <!-- زر العودة الموحد -->
+            <div class="back-button-center">
+                <button class="back-button-unified" onclick="showSection('home')">
+                    <i class="fas fa-home"></i> العودة للصفحة الرئيسية
+                </button>
+            </div>
         </div>
     </section>
 
@@ -1416,7 +1509,7 @@
     </div>
 
     <script>
-        // بيانات الموقع
+        // بيانات الموقع مع الأكواد الجديدة
         const stagesData = {
             "ابتدائي": {
                 grades: ["الصف الأول", "الصف الثاني", "الصف الثالث", "الصف الرابع", "الصف الخامس", "الصف السادس"],
@@ -1460,84 +1553,84 @@
             "ابتدائي": {
                 "الصف الأول": {
                     "اللغة العربية": [
-                        {name: "دورة اللغة العربية - الصف الأول", price: "15000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 15, description: "دورة شاملة لتعليم القراءة والكتابة ومهارات اللغة العربية الأساسية"},
-                        {name: "دورة القراءة والكتابة", price: "12000 ل.س", start: "1/12/2025", end: "28/2/2026", seats: 12, description: "تركيز على مهارات القراءة والكتابة الأساسية"}
+                        {name: "دورة اللغة العربية - الصف الأول", price: "15000 ل.س", code: "N-101", start: "1/12/2025", end: "31/3/2026", seats: 15, description: "دورة شاملة لتعليم القراءة والكتابة ومهارات اللغة العربية الأساسية"},
+                        {name: "دورة القراءة والكتابة", price: "12000 ل.س", code: "N-102", start: "1/12/2025", end: "28/2/2026", seats: 12, description: "تركيز على مهارات القراءة والكتابة الأساسية"}
                     ],
                     "الرياضيات": [
-                        {name: "دورة الرياضيات - الصف الأول", price: "15000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 15, description: "تعليم أساسيات الرياضيات والأعداد والعمليات الحسابية البسيطة"}
+                        {name: "دورة الرياضيات - الصف الأول", price: "15000 ل.س", code: "N-111", start: "1/12/2025", end: "31/3/2026", seats: 15, description: "تعليم أساسيات الرياضيات والأعداد والعمليات الحسابية البسيطة"}
                     ]
                 },
                 "الصف الثاني": {
                     "اللغة العربية": [
-                        {name: "دورة اللغة العربية - الصف الثاني", price: "16000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 15, description: "تطوير مهارات القراءة والكتابة والقواعد الأساسية"}
+                        {name: "دورة اللغة العربية - الصف الثاني", price: "16000 ل.س", code: "N-103", start: "1/12/2025", end: "31/3/2026", seats: 15, description: "تطوير مهارات القراءة والكتابة والقواعد الأساسية"}
                     ],
                     "الرياضيات": [
-                        {name: "دورة الرياضيات - الصف الثاني", price: "16000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 15, description: "تعلم العمليات الحسابية والمسائل الرياضية"}
+                        {name: "دورة الرياضيات - الصف الثاني", price: "16000 ل.س", code: "N-112", start: "1/12/2025", end: "31/3/2026", seats: 15, description: "تعلم العمليات الحسابية والمسائل الرياضية"}
                     ]
                 }
             },
             "اعدادي": {
                 "الصف السابع": {
                     "الرياضيات": [
-                        {name: "دورة الرياضيات - الصف السابع", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "شاملة لجميع مواضيع منهاج الصف السابع في الرياضيات"}
+                        {name: "دورة الرياضيات - الصف السابع", price: "20000 ل.س", code: "N-211", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "شاملة لجميع مواضيع منهاج الصف السابع في الرياضيات"}
                     ],
                     "الفيزياء": [
-                        {name: "دورة الفيزياء - الصف السابع", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 8, description: "شرح مفاهيم الفيزياء الأساسية وتطبيقاتها"}
+                        {name: "دورة الفيزياء - الصف السابع", price: "20000 ل.س", code: "N-221", start: "1/12/2025", end: "31/3/2026", seats: 8, description: "شرح مفاهيم الفيزياء الأساسية وتطبيقاتها"}
                     ],
                     "الكيمياء": [
-                        {name: "دورة الكيمياء - الصف السابع", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 8, description: "تعلم أساسيات الكيمياء والمختبرات البسيطة"}
+                        {name: "دورة الكيمياء - الصف السابع", price: "20000 ل.س", code: "N-231", start: "1/12/2025", end: "31/3/2026", seats: 8, description: "تعلم أساسيات الكيمياء والمختبرات البسيطة"}
                     ]
                 },
                 "الصف الثامن": {
                     "الرياضيات": [
-                        {name: "دورة الرياضيات - الصف الثامن", price: "22000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "متقدمة في مواضيع الرياضيات للصف الثامن"}
+                        {name: "دورة الرياضيات - الصف الثامن", price: "22000 ل.س", code: "N-212", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "متقدمة في مواضيع الرياضيات للصف الثامن"}
                     ]
                 }
             },
             "ثانوي": {
                 "البكلوريا علمي": {
                     "الرياضيات": [
-                        {name: "دورة الرياضيات - البكلوريا علمي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تحضير شامل لامتحان البكلوريا في مادة الرياضيات"}
+                        {name: "دورة الرياضيات - البكلوريا علمي", price: "25000 ل.س", code: "N-311", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تحضير شامل لامتحان البكلوريا في مادة الرياضيات"}
                     ],
                     "الفيزياء": [
-                        {name: "دورة الفيزياء - البكلوريا علمي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "مراجعة شاملة وتدريبات على امتحانات البكلوريا"}
+                        {name: "دورة الفيزياء - البكلوريا علمي", price: "25000 ل.س", code: "N-321", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "مراجعة شاملة وتدريبات على امتحانات البكلوريا"}
                     ],
                     "الكيمياء": [
-                        {name: "دورة الكيمياء - البكلوريا علمي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تركيز على التجارب والمسائل الكيميائية"}
+                        {name: "دورة الكيمياء - البكلوريا علمي", price: "25000 ل.س", code: "N-331", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تركيز على التجارب والمسائل الكيميائية"}
                     ]
                 },
                 "البكلوريا أدبي": {
                     "التاريخ": [
-                        {name: "دورة التاريخ - البكلوريا أدبي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تحليل الأحداث التاريخية ومراجعة شاملة للمنهاج"}
+                        {name: "دورة التاريخ - البكلوريا أدبي", price: "25000 ل.س", code: "N-341", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تحليل الأحداث التاريخية ومراجعة شاملة للمنهاج"}
                     ],
                     "الجغرافيا": [
-                        {name: "دورة الجغرافيا - البكلوريا أدبي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "دراسة شاملة للمفاهيم الجغرافية والخرائط"}
+                        {name: "دورة الجغرافيا - البكلوريا أدبي", price: "25000 ل.س", code: "N-351", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "دراسة شاملة للمفاهيم الجغرافية والخرائط"}
                     ],
                     "الفلسفة": [
-                        {name: "دورة الفلسفة - البكلوريا أدبي", price: "25000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تحليل النصوص الفلسفية وتطوير مهارات التفكير النقدي"}
+                        {name: "دورة الفلسفة - البكلوريا أدبي", price: "25000 ل.س", code: "N-361", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تحليل النصوص الفلسفية وتطوير مهارات التفكير النقدي"}
                     ]
                 }
             },
             "لغات": {
                 "الإنجليزية": {
                     "الإنجليزية للمبتدئين": [
-                        {name: "دورة الإنجليزية للمبتدئين", price: "18000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 12, description: "تعلم الأساسيات من الصفر مع التركيز على المحادثة اليومية"}
+                        {name: "دورة الإنجليزية للمبتدئين", price: "18000 ل.س", code: "N-401", start: "1/12/2025", end: "31/3/2026", seats: 12, description: "تعلم الأساسيات من الصفر مع التركيز على المحادثة اليومية"}
                     ],
                     "الإنجليزية للمحادثة": [
-                        {name: "دورة الإنجليزية للمحادثة", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تحسين الطلاقة والتحدث بثقة في مختلف المواقف"}
+                        {name: "دورة الإنجليزية للمحادثة", price: "20000 ل.س", code: "N-402", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تحسين الطلاقة والتحدث بثقة في مختلف المواقف"}
                     ],
                     "الإنجليزية للأطفال": [
-                        {name: "دورة الإنجليزية للأطفال", price: "15000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 8, description: "تعلم ممتع عبر الألعاب والأنشطة التفاعلية"}
+                        {name: "دورة الإنجليزية للأطفال", price: "15000 ل.س", code: "N-403", start: "1/12/2025", end: "31/3/2026", seats: 8, description: "تعلم ممتع عبر الألعاب والأنشطة التفاعلية"}
                     ]
                 },
                 "الفرنسية": {
                     "الفرنسية للمبتدئين": [
-                        {name: "دورة الفرنسية للمبتدئين", price: "18000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "بداية رحلة تعلم الفرنسية من الأساسيات"}
+                        {name: "دورة الفرنسية للمبتدئين", price: "18000 ل.س", code: "N-411", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "بداية رحلة تعلم الفرنسية من الأساسيات"}
                     ]
                 },
                 "الألمانية": {
                     "الألمانية للمبتدئين": [
-                        {name: "دورة الألمانية للمبتدئين", price: "20000 ل.س", start: "1/12/2025", end: "31/3/2026", seats: 8, description: "تعلم اللغة الألمانية من الصفر مع مدرسين متخصصين"}
+                        {name: "دورة الألمانية للمبتدئين", price: "20000 ل.س", code: "N-421", start: "1/12/2025", end: "31/3/2026", seats: 8, description: "تعلم اللغة الألمانية من الصفر مع مدرسين متخصصين"}
                     ]
                 }
             }
@@ -1547,6 +1640,10 @@
         let currentStage = '';
         let currentGrade = '';
         let currentSubject = '';
+        let currentCourseCode = '';
+
+        // رقم الواتساب الخاص بالمعهد
+        const WHATSAPP_NUMBER = '+4917616624880'; // الرقم الذي أعطيتني إياه
 
         // Navigation
         function showSection(sectionId) {
@@ -1676,6 +1773,10 @@
                         <p>${course.description}</p>
                         <div class="course-details">
                             <div class="course-detail">
+                                <i class="fas fa-hashtag"></i>
+                                <span>كود الدورة: <strong>${course.code}</strong></span>
+                            </div>
+                            <div class="course-detail">
                                 <i class="fas fa-money-bill-wave"></i>
                                 <span>السعر: ${course.price}</span>
                             </div>
@@ -1693,7 +1794,7 @@
                             </div>
                         </div>
                         <div class="course-actions">
-                            <button class="btn btn-primary" onclick="showRegister('${course.name.replace(/'/g, "\\'")}')">سجل الآن</button>
+                            <button class="btn btn-primary" onclick="showRegister('${course.name.replace(/'/g, "\\'")}', '${course.code}')">سجل الآن</button>
                             <button class="btn btn-secondary" onclick="backToSubjects()">إلغاء</button>
                         </div>
                     `;
@@ -1704,9 +1805,61 @@
             }
         }
 
-        function showRegister(courseName) {
+        function showRegister(courseName, courseCode) {
             showSection('register');
             document.getElementById('selectedCourse').value = courseName;
+            document.getElementById('courseCode').value = courseCode;
+            document.getElementById('courseCodeDisplay').textContent = courseCode;
+            currentCourseCode = courseCode;
+        }
+
+        // وظيفة التسجيل عبر الواتساب - الجديدة
+        function registerViaWhatsApp() {
+            const fullName = document.getElementById('fullName').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const selectedCourse = document.getElementById('selectedCourse').value;
+            const courseCode = document.getElementById('courseCode').value;
+            
+            // التحقق من ملء جميع الحقول
+            if (!fullName || !phoneNumber || !selectedCourse) {
+                showToast('⚠️ الرجاء ملء جميع الحقول المطلوبة');
+                return;
+            }
+            
+            // تاريخ اليوم
+            const today = new Date();
+            const formattedDate = `${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
+            
+            // رسالة الواتساب المعدة
+            const message = `📚 *تسجيل جديد في معهد النعمان التعليمي*
+            
+👤 *اسم الطالب:* ${fullName}
+📞 *رقم الهاتف:* ${phoneNumber}
+📖 *الدورة المختارة:* ${selectedCourse}
+🔢 *كود الدورة:* ${courseCode}
+📅 *تاريخ التسجيل:* ${formattedDate}
+
+📍 *الموقع:* جبلة، العمارة فوق صيدلية بشر مثبوت، الطابق الأول
+
+🔔 *تنويه:* أبناء وذوي شهداء الثورة السورية المباركة — جميع الدورات مجانية بالكامل على حساب معهد النعمان التعليمي والكادر الإداري
+
+✅ يرجى تأكيد استلام طلب التسجيل.`;
+            
+            // ترميز الرسالة للرابط
+            const encodedMessage = encodeURIComponent(message);
+            
+            // فتح الواتساب مع الرسالة المعدة
+            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank');
+            
+            // إظهار رسالة تأكيد للمستخدم
+            showToast('✅ تم فتح الواتساب مع رسالة جاهزة. يرجى إرسال الرسالة لإكمال التسجيل.');
+            
+            // إعادة تعيين الحقول بعد إرسال الطلب
+            setTimeout(() => {
+                document.getElementById('fullName').value = '';
+                document.getElementById('phoneNumber').value = '';
+            }, 2000);
         }
 
         // وظائف العودة
@@ -1752,26 +1905,7 @@
             });
         }
 
-        // Form Submission
-        function handleSubmit(event) {
-            event.preventDefault();
-            
-            const fullName = document.getElementById('fullName').value;
-            const phoneNumber = document.getElementById('phoneNumber').value;
-            const selectedCourse = document.getElementById('selectedCourse').value;
-
-            // Show toast notification
-            showToast(`شكراً ${fullName}! تم إرسال طلب التسجيل في دورة ${selectedCourse} بنجاح. سنتواصل معك على الرقم ${phoneNumber} قريباً.`);
-
-            // Reset form
-            event.target.reset();
-            
-            // العودة للصفحة الرئيسية بعد 3 ثواني
-            setTimeout(() => {
-                showSection('home');
-            }, 3000);
-        }
-
+        // Toast Notification
         function showToast(message) {
             const toast = document.getElementById('toast');
             const toastMessage = document.getElementById('toast-message');
