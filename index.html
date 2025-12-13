@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+
+<html dir="rtl" lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دليل مدينة جبلة - كل الخدمات والأماكن المهمة</title>
-    <meta name="description" content="دليل خدمي شامل لمدينة جبلة السورية - مشافي، صيدليات، مطاعم، خدمات، مدارس وأرقام الطوارئ">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Supabase JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-    
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>دليل مدينة جبلة - كل الخدمات والأماكن المهمة</title>
+<meta content="دليل خدمي شامل لمدينة جبلة السورية - مشافي، صيدليات، مطاعم، خدمات، مدارس وأرقام الطوارئ" name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<!-- Supabase JS -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
         /* ================================
            RESET & BASE
            ================================ */
@@ -952,853 +952,438 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container header-content">
-            <a href="#" class="logo" onclick="showPage('home')">
-                <img src="https://i.ibb.co/zHX2kdTp/IMG-0880.png" alt="شعار دليل جبلة" class="logo-img">
-                <div class="logo-text">
-                    <span class="logo-title">دليل مدينة جبلة</span>
-                    <span class="logo-subtitle"> </span>
-                </div>
+<!-- Header -->
+<header class="header">
+<div class="container header-content">
+<a class="logo" href="#" onclick="showPage('home')">
+<img alt="شعار دليل جبلة" class="logo-img" src="https://i.ibb.co/zHX2kdTp/IMG-0880.png"/>
+<div class="logo-text">
+<span class="logo-title">دليل مدينة جبلة</span>
+<span class="logo-subtitle"> </span>
+</div>
+</a>
+<nav class="nav-desktop">
+<a class="nav-link active" href="#" id="nav-home" onclick="showPage('home')">الرئيسية</a>
+<a class="nav-link" href="#" id="nav-about" onclick="showPage('about')">عن الدليل</a>
+<a class="nav-link" href="#" id="nav-contact" onclick="showPage('contact')">تواصل معنا</a>
+</nav>
+<a class="btn btn-emergency" href="tel:110">
+<i class="fas fa-exclamation-triangle"></i> طوارئ
             </a>
-            <nav class="nav-desktop">
-                <a href="#" class="nav-link active" onclick="showPage('home')" id="nav-home">الرئيسية</a>
-                <a href="#" class="nav-link" onclick="showPage('about')" id="nav-about">عن الدليل</a>
-                <a href="#" class="nav-link" onclick="showPage('contact')" id="nav-contact">تواصل معنا</a>
-            </nav>
-            <a href="tel:110" class="btn btn-emergency">
-                <i class="fas fa-exclamation-triangle"></i> طوارئ
-            </a>
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-        <nav class="nav-mobile" id="mobileMenu">
-            <a href="#" class="nav-link active" onclick="showPage('home')">الرئيسية</a>
-            <a href="#" class="nav-link" onclick="showPage('about')">عن الدليل</a>
-            <a href="#" class="nav-link" onclick="showPage('contact')">تواصل معنا</a>
-        </nav>
-    </header>
-
-    <!-- HOME PAGE -->
-    <div id="page-home" class="page active">
-        <section class="hero">
-            <div class="container">
-                <div class="hero-badge"><i class="fas fa-city"></i> دليلك الشامل لمدينة جبلة</div>
-                <h1 class="hero-title">كل ما تحتاجه في <span class="highlight">جبلة</span></h1>
-                <p class="hero-description">ابحث عن المشافي، الصيدليات، المطاعم، وكل الخدمات المهمة في مدينتك</p>
-                <div class="search-box">
-                    <input type="text" class="search-input" placeholder="ابحث عن مكان أو خدمة..." id="searchInput">
-                    <button class="search-btn" onclick="handleSearch()"><i class="fas fa-search"></i> بحث</button>
-                </div>
-                <div class="quick-search">
-                    <span class="quick-label">بحث سريع:</span>
-                    <span class="quick-tag" onclick="showPage('night')"><i class="fas fa-moon"></i> صيدلية مناوبة</span>
-                    <span class="quick-tag" onclick="showCategory('hospitals')"><i class="fas fa-hospital"></i> مشفى</span>
-                    <span class="quick-tag" onclick="showCategory('restaurants')"><i class="fas fa-utensils"></i> مطعم</span>
-                </div>
-            </div>
-        </section>
-
-        <section class="categories">
-            <div class="container">
-                <h2 class="section-title">الأقسام الرئيسية</h2>
-                <p class="section-description">اختر القسم المناسب للوصول السريع</p>
-                <div class="categories-grid">
-                    <div class="category-card" onclick="showCategory('hospitals')">
-                        <div class="category-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
-                            <i class="fas fa-hospital"></i>
-                        </div>
-                        <h3 class="category-name">مشافي وعيادات</h3>
-                        <p class="category-desc">مشافي، عيادات، مخابر</p>
-                        <span class="category-count">1 مكان</span>
-                    </div>
-                    <div class="category-card" onclick="showCategory('pharmacies')">
-                        <div class="category-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
-                            <i class="fas fa-pills"></i>
-                        </div>
-                        <h3 class="category-name">صيدليات</h3>
-                        <p class="category-desc">صيدليات ومناوبات</p>
-                        <span class="category-count">1 مكان</span>
-                    </div>
-                    <div class="category-card" onclick="showCategory('restaurants')">
-                        <div class="category-icon" style="background: linear-gradient(135deg, #166534, #15803d);">
-                            <i class="fas fa-utensils"></i>
-                        </div>
-                        <h3 class="category-name">مطاعم ومقاهي</h3>
-                        <p class="category-desc">مطاعم، كافيهات، حلويات</p>
-                        <span class="category-count">1 مكان</span>
-                    </div>
-                    <div class="category-card" onclick="showCategory('services')">
-                        <div class="category-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
-                            <i class="fas fa-tools"></i>
-                        </div>
-                        <h3 class="category-name">خدمات</h3>
-                        <p class="category-desc">تكاسي، صيانة، توصيل</p>
-                        <span class="category-count">1 مكان</span>
-                    </div>
-                    <div class="category-card" onclick="showCategory('schools')">
-                        <div class="category-icon" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <h3 class="category-name">مدارس ومعاهد</h3>
-                        <p class="category-desc">مدارس، معاهد، دورات</p>
-                        <span class="category-count">1 مكان</span>
-                    </div>
-                    <div class="category-card emergency" onclick="showCategory('emergency')">
-                        <div class="category-icon" style="background: linear-gradient(135deg, #ef4444, #b91c1c);">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <h3 class="category-name">أرقام الطوارئ</h3>
-                        <p class="category-desc">إسعاف، إطفاء، شرطة</p>
-                        <span class="category-count">أرقام مهمة</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="quick-access">
-            <div class="container">
-                <div class="quick-access-card">
-                    <div class="quick-access-content">
-                        <div class="quick-access-badge"><i class="fas fa-clock"></i> متاح الآن</div>
-                        <h3 class="quick-access-title">تحتاج صيدلية مناوبة؟</h3>
-                        <p class="quick-access-desc">شاهد جدول المناوبات الأسبوعي الكامل</p>
-                    </div>
-                    <button class="btn btn-secondary btn-lg" onclick="showPage('night')">
-                        <i class="fas fa-calendar-alt"></i> جدول المناوبات
+<button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+<span></span><span></span><span></span>
+</button>
+</div>
+<nav class="nav-mobile" id="mobileMenu">
+<a class="nav-link active" href="#" onclick="showPage('home')">الرئيسية</a>
+<a class="nav-link" href="#" onclick="showPage('about')">عن الدليل</a>
+<a class="nav-link" href="#" onclick="showPage('contact')">تواصل معنا</a>
+</nav>
+</header>
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+<section class="hero">
+<div class="container">
+<div class="hero-badge"><i class="fas fa-city"></i> دليلك الشامل لمدينة جبلة</div>
+<h1 class="hero-title">كل ما تحتاجه في <span class="highlight">جبلة</span></h1>
+<p class="hero-description">ابحث عن المشافي، الصيدليات، المطاعم، وكل الخدمات المهمة في مدينتك</p>
+<div class="search-box">
+<input class="search-input" id="searchInput" placeholder="ابحث عن مكان أو خدمة..." type="text"/>
+<button class="search-btn" onclick="handleSearch()"><i class="fas fa-search"></i> بحث</button>
+</div>
+<div class="quick-search">
+<span class="quick-label">بحث سريع:</span>
+<span class="quick-tag" onclick="showPage('night')"><i class="fas fa-moon"></i> صيدلية مناوبة</span>
+<span class="quick-tag" onclick="showCategory('hospitals')"><i class="fas fa-hospital"></i> مشفى</span>
+<span class="quick-tag" onclick="showCategory('restaurants')"><i class="fas fa-utensils"></i> مطعم</span>
+</div>
+</div>
+</section>
+<section class="categories">
+<div class="container">
+<h2 class="section-title">الأقسام الرئيسية</h2>
+<p class="section-description">اختر القسم المناسب للوصول السريع</p>
+<div class="categories-grid">
+<div class="category-card" onclick="showCategory('hospitals')">
+<div class="category-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+<i class="fas fa-hospital"></i>
+</div>
+<h3 class="category-name">مشافي وعيادات</h3>
+<p class="category-desc">مشافي، عيادات، مخابر</p>
+<span class="category-count">1 مكان</span>
+</div>
+<div class="category-card" onclick="showCategory('pharmacies')">
+<div class="category-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+<i class="fas fa-pills"></i>
+</div>
+<h3 class="category-name">صيدليات</h3>
+<p class="category-desc">صيدليات ومناوبات</p>
+<span class="category-count">1 مكان</span>
+</div>
+<div class="category-card" onclick="showCategory('restaurants')">
+<div class="category-icon" style="background: linear-gradient(135deg, #166534, #15803d);">
+<i class="fas fa-utensils"></i>
+</div>
+<h3 class="category-name">مطاعم ومقاهي</h3>
+<p class="category-desc">مطاعم، كافيهات، حلويات</p>
+<span class="category-count">1 مكان</span>
+</div>
+<div class="category-card" onclick="showCategory('services')">
+<div class="category-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+<i class="fas fa-tools"></i>
+</div>
+<h3 class="category-name">خدمات</h3>
+<p class="category-desc">تكاسي، صيانة، توصيل</p>
+<span class="category-count">1 مكان</span>
+</div>
+<div class="category-card" onclick="showCategory('schools')">
+<div class="category-icon" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">
+<i class="fas fa-graduation-cap"></i>
+</div>
+<h3 class="category-name">مدارس ومعاهد</h3>
+<p class="category-desc">مدارس، معاهد، دورات</p>
+<span class="category-count">1 مكان</span>
+</div>
+<div class="category-card emergency" onclick="showCategory('emergency')">
+<div class="category-icon" style="background: linear-gradient(135deg, #ef4444, #b91c1c);">
+<i class="fas fa-exclamation-triangle"></i>
+</div>
+<h3 class="category-name">أرقام الطوارئ</h3>
+<p class="category-desc">إسعاف، إطفاء، شرطة</p>
+<span class="category-count">أرقام مهمة</span>
+</div>
+</div>
+</div>
+</section>
+<section class="quick-access">
+<div class="container">
+<div class="quick-access-card">
+<div class="quick-access-content">
+<div class="quick-access-badge"><i class="fas fa-clock"></i> متاح الآن</div>
+<h3 class="quick-access-title">تحتاج صيدلية مناوبة؟</h3>
+<p class="quick-access-desc">شاهد جدول المناوبات الأسبوعي الكامل</p>
+</div>
+<button class="btn btn-secondary btn-lg" onclick="showPage('night')">
+<i class="fas fa-calendar-alt"></i> جدول المناوبات
                     </button>
-                </div>
-            </div>
-        </section>
-
-        <section class="stats">
-            <div class="container">
-                <div class="stats-grid">
-                    <div class="stat-item"><div class="stat-number">6</div><div class="stat-label">مكان مسجل</div></div>
-                    <div class="stat-item"><div class="stat-number">6</div><div class="stat-label">أقسام رئيسية</div></div>
-                    <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">خدمة مستمرة</div></div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- CATEGORY PAGE -->
-    <div id="page-category" class="page">
-        <section class="category-header">
-            <div class="container">
-                <div class="breadcrumb">
-                    <a href="#" onclick="showPage('home')">الرئيسية</a><span>←</span>
-                    <span id="categoryBreadcrumb">الصيدليات</span>
-                </div>
-                <h1 class="page-title" id="categoryTitle"><i class="fas fa-pills"></i> الصيدليات</h1>
-                <p class="page-description" id="categoryDesc">صيدليات ومناوبات ليلية في مدينة جبلة</p>
-            </div>
-        </section>
-        <!-- هذا البنر سيظهر فقط في صفحة الصيدليات -->
-        <section class="container">
-            <div class="night-banner" id="nightBanner">
-                <div class="banner-content">
-                    <div>
-                        <h4><i class="fas fa-moon"></i> تبحث عن صيدلية مناوبة؟</h4>
-                        <p>شاهد جدول المناوبات لأسبوع كامل مع العناوين والأرقام</p>
-                    </div>
-                    <a href="#" onclick="showPage('night')" class="btn btn-primary">
-                        <i class="fas fa-calendar"></i> عرض جدول المناوبات
+</div>
+</div>
+</section>
+<section class="stats">
+<div class="container">
+<div class="stats-grid">
+<div class="stat-item"><div class="stat-number">6</div><div class="stat-label">مكان مسجل</div></div>
+<div class="stat-item"><div class="stat-number">6</div><div class="stat-label">أقسام رئيسية</div></div>
+<div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">خدمة مستمرة</div></div>
+</div>
+</div>
+</section>
+</div>
+<!-- CATEGORY PAGE -->
+<div class="page" id="page-category">
+<section class="category-header">
+<div class="container">
+<div class="breadcrumb">
+<a href="#" onclick="showPage('home')">الرئيسية</a><span>←</span>
+<span id="categoryBreadcrumb">الصيدليات</span>
+</div>
+<h1 class="page-title" id="categoryTitle"><i class="fas fa-pills"></i> الصيدليات</h1>
+<p class="page-description" id="categoryDesc">صيدليات ومناوبات ليلية في مدينة جبلة</p>
+</div>
+</section>
+<!-- هذا البنر سيظهر فقط في صفحة الصيدليات -->
+<section class="container">
+<div class="night-banner" id="nightBanner">
+<div class="banner-content">
+<div>
+<h4><i class="fas fa-moon"></i> تبحث عن صيدلية مناوبة؟</h4>
+<p>شاهد جدول المناوبات لأسبوع كامل مع العناوين والأرقام</p>
+</div>
+<a class="btn btn-primary" href="#" onclick="showPage('night')">
+<i class="fas fa-calendar"></i> عرض جدول المناوبات
                     </a>
-                </div>
-            </div>
-        </section>
-        <section class="places-section">
-            <div class="container">
-                <div class="places-grid" id="placesGrid"></div>
-            </div>
-        </section>
-    </div>
-
-    <!-- NIGHT SCHEDULE PAGE -->
-    <div id="page-night" class="page">
-        <section class="category-header">
-            <div class="container">
-                <div class="breadcrumb">
-                    <a href="#" onclick="showPage('home')">الرئيسية</a><span>←</span>
-                    <a href="#" onclick="showCategory('pharmacies')">الصيدليات</a><span>←</span>
-                    <span>جدول المناوبات</span>
-                </div>
-                <h1 class="page-title"><i class="fas fa-calendar-alt"></i> جدول المناوبات الأسبوعي</h1>
-                <p class="page-description">صيدليات المناوبة الليلية في مدينة جبلة</p>
-            </div>
-        </section>
-        <section class="night-schedule-section">
-            <div class="container">
-                <div class="week-schedule" id="weekSchedule"></div>
-                <div class="schedule-notes">
-                    <p><i class="fas fa-info-circle"></i> الجدول قد يتغير، يرجى التأكد بالاتصال قبل الذهاب</p>
-                    <p><i class="fas fa-phone"></i> للتبليغ عن تحديث في الجدول: <strong>099XXXXXXX</strong></p>
-                    <p><i class="fas fa-clock"></i> آخر تحديث: اليوم 8:00 مساءً</p>
-                </div>
-                <div style="text-align: center; margin-top: 2rem;">
-                    <a href="#" onclick="showCategory('pharmacies')" class="back-link">
-                        <i class="fas fa-arrow-right"></i> العودة لقائمة الصيدليات
+</div>
+</div>
+</section>
+<section class="places-section">
+<div class="container">
+<div class="places-grid" id="placesGrid"></div>
+</div>
+</section>
+</div>
+<!-- NIGHT SCHEDULE PAGE -->
+<div class="page" id="page-night">
+<section class="category-header">
+<div class="container">
+<div class="breadcrumb">
+<a href="#" onclick="showPage('home')">الرئيسية</a><span>←</span>
+<a href="#" onclick="showCategory('pharmacies')">الصيدليات</a><span>←</span>
+<span>جدول المناوبات</span>
+</div>
+<h1 class="page-title"><i class="fas fa-calendar-alt"></i> جدول المناوبات الأسبوعي</h1>
+<p class="page-description">صيدليات المناوبة الليلية في مدينة جبلة</p>
+</div>
+</section>
+<section class="night-schedule-section">
+<div class="container">
+<div class="week-schedule" id="weekSchedule"></div>
+<div class="schedule-notes">
+<p><i class="fas fa-info-circle"></i> الجدول قد يتغير، يرجى التأكد بالاتصال قبل الذهاب</p>
+<p><i class="fas fa-phone"></i> للتبليغ عن تحديث في الجدول: <strong>099XXXXXXX</strong></p>
+<p><i class="fas fa-clock"></i> آخر تحديث: اليوم 8:00 مساءً</p>
+</div>
+<div style="text-align: center; margin-top: 2rem;">
+<a class="back-link" href="#" onclick="showCategory('pharmacies')">
+<i class="fas fa-arrow-right"></i> العودة لقائمة الصيدليات
                     </a>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- PLACE DETAILS PAGE -->
-    <div id="page-place" class="page">
-        <section class="category-header">
-            <div class="container">
-                <div class="breadcrumb">
-                    <a href="#" onclick="showPage('home')">الرئيسية</a><span>←</span>
-                    <a href="#" onclick="goBackToCategory()" id="placeCategoryLink">الصيدليات</a><span>←</span>
-                    <span id="placeBreadcrumb">صيدلية الشفاء</span>
-                </div>
-            </div>
-        </section>
-        <section class="place-details-section">
-            <div class="container">
-                <div class="place-details-card">
-                    <div class="place-image">
-                        <img src="" alt="صورة المكان" id="placeImage">
-                    </div>
-                    <div class="place-info">
-                        <span class="place-category-badge" id="placeCategoryBadge"><i class="fas fa-pills"></i> صيدلية</span>
-                        <h1 class="place-title" id="placeTitle">صيدلية الشفاء</h1>
-                        <div class="place-meta">
-                            <div class="meta-item">
-                                <span class="meta-icon"><i class="fas fa-map-marker-alt"></i></span>
-                                <div>
-                                    <span class="meta-label">العنوان</span>
-                                    <span class="meta-value" id="placeAddress">شارع الثورة، بجانب البريد</span>
-                                </div>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-icon"><i class="fas fa-phone"></i></span>
-                                <div>
-                                    <span class="meta-label">رقم الهاتف</span>
-                                    <span class="meta-value" id="placePhone">041-123456</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="place-description">
-                            <h3>عن المكان</h3>
-                            <p id="placeDesc">صيدلية متكاملة تقدم جميع الأدوية والمستلزمات الطبية.</p>
-                        </div>
-                        <div class="place-cta">
-                            <a href="#" class="btn btn-primary btn-xl" id="placeCallBtn">
-                                <i class="fas fa-phone-alt"></i> اتصل الآن
+</div>
+</div>
+</section>
+</div>
+<!-- PLACE DETAILS PAGE -->
+<div class="page" id="page-place">
+<section class="category-header">
+<div class="container">
+<div class="breadcrumb">
+<a href="#" onclick="showPage('home')">الرئيسية</a><span>←</span>
+<a href="#" id="placeCategoryLink" onclick="goBackToCategory()">الصيدليات</a><span>←</span>
+<span id="placeBreadcrumb">صيدلية الشفاء</span>
+</div>
+</div>
+</section>
+<section class="place-details-section">
+<div class="container">
+<div class="place-details-card">
+<div class="place-image">
+<img alt="صورة المكان" id="placeImage" src=""/>
+</div>
+<div class="place-info">
+<span class="place-category-badge" id="placeCategoryBadge"><i class="fas fa-pills"></i> صيدلية</span>
+<h1 class="place-title" id="placeTitle">صيدلية الشفاء</h1>
+<div class="place-meta">
+<div class="meta-item">
+<span class="meta-icon"><i class="fas fa-map-marker-alt"></i></span>
+<div>
+<span class="meta-label">العنوان</span>
+<span class="meta-value" id="placeAddressText">شارع الثورة، بجانب البريد</span>
+</div>
+</div>
+<div class="meta-item">
+<span class="meta-icon"><i class="fas fa-phone"></i></span>
+<div>
+<span class="meta-label">رقم الهاتف</span>
+<span class="meta-value" id="placePhoneText">041-123456</span>
+</div>
+</div>
+</div>
+<div class="place-description">
+<h3>عن المكان</h3>
+<p id="placeDesc">صيدلية متكاملة تقدم جميع الأدوية والمستلزمات الطبية.</p>
+</div>
+<div class="place-cta">
+<a class="btn btn-primary btn-xl" href="#" id="placeCallBtn">
+<i class="fas fa-phone-alt"></i> اتصل الآن
                                 <span class="phone-number" id="placePhoneNumber">041-123456</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <a href="#" onclick="goBackToCategory()" class="back-link"><i class="fas fa-arrow-right"></i> العودة للقائمة</a>
-            </div>
-        </section>
-    </div>
-
-    <!-- ADD PLACE PAGE -->
-    <div id="page-add-place" class="page">
-        <section class="category-header">
-            <div class="container">
-                <div class="breadcrumb">
-                    <a href="#" onclick="showPage('home')">الرئيسية</a><span>←</span>
-                    <span>إضافة مكان جديد</span>
-                </div>
-                <h1 class="page-title"><i class="fas fa-map-marker-alt"></i> إضافة مكان جديد</h1>
-                <p class="page-description">أضف مكانك إلى دليل مدينة جبلة</p>
-            </div>
-        </section>
-        <section class="form-section">
-            <div class="container">
-                <div class="form-card">
-                    <div id="successMessage" class="form-success" style="display: none;">
-                        <h3><i class="fas fa-check-circle"></i> تم الإرسال بنجاح</h3>
-                        <p>تم إرسال بيانات المكان بنجاح وبانتظار الموافقة ✅</p>
-                    </div>
-                    
-                    <form id="addPlaceForm">
-                        <div class="form-group">
-                            <label for="placeName" class="form-label required">اسم المكان</label>
-                            <input type="text" id="placeName" class="form-control" placeholder="مثال: صيدلية الشفاء" required>
-                            <div class="form-error" id="nameError">يرجى إدخال اسم المكان</div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="placeAddress" class="form-label required">العنوان</label>
-                            <input type="text" id="placeAddress" class="form-control" placeholder="مثال: شارع الثورة، بجانب البريد" required>
-                            <div class="form-error" id="addressError">يرجى إدخال عنوان المكان</div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="placePhone" class="form-label required">رقم الهاتف</label>
-                            <input type="tel" id="placePhone" class="form-control" placeholder="مثال: 041-123456" required>
-                            <div class="form-error" id="phoneError">يرجى إدخال رقم هاتف صحيح</div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="placeCategory" class="form-label required">القسم</label>
-                            <select id="placeCategory" class="form-select" required>
-                                <option value="">اختر القسم المناسب</option>
-                                <option value="hospitals">مشافي وعيادات</option>
-                                <option value="pharmacies">صيدليات</option>
-                                <option value="restaurants">مطاعم ومقاهي</option>
-                                <option value="services">خدمات</option>
-                                <option value="schools">مدارس ومعاهد</option>
-                                <option value="emergency">أرقام الطوارئ</option>
-                            </select>
-                            <div class="form-error" id="categoryError">يرجى اختيار القسم المناسب</div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="placeDescription" class="form-label">الوصف (اختياري)</label>
-                            <textarea id="placeDescription" class="form-control form-textarea" placeholder="وصف مختصر للمكان والخدمات المقدمة..."></textarea>
-                            <div class="form-help">يمكنك كتابة وصف مختصر للمكان (لا يزيد عن 500 حرف)</div>
-                        </div>
-
-                        <div class="form-group" style="margin-top: 2rem;">
-                            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;" id="submitBtn">
-                                <i class="fas fa-paper-plane"></i> إرسال البيانات
+</a>
+</div>
+</div>
+</div>
+<a class="back-link" href="#" onclick="goBackToCategory()"><i class="fas fa-arrow-right"></i> العودة للقائمة</a>
+</div>
+</section>
+</div>
+<!-- ADD PLACE PAGE -->
+<div class="page" id="page-add-place">
+<section class="category-header">
+<div class="container">
+<div class="breadcrumb">
+<a href="#" onclick="showPage('home')">الرئيسية</a><span>←</span>
+<span>إضافة مكان جديد</span>
+</div>
+<h1 class="page-title"><i class="fas fa-map-marker-alt"></i> إضافة مكان جديد</h1>
+<p class="page-description">أضف مكانك إلى دليل مدينة جبلة</p>
+</div>
+</section>
+<section class="form-section">
+<div class="container">
+<div class="form-card">
+<div class="form-success" id="successMessage" style="display: none;">
+<h3><i class="fas fa-check-circle"></i> تم الإرسال بنجاح</h3>
+<p>تم إرسال بيانات المكان بنجاح وبانتظار الموافقة ✅</p>
+</div>
+<form id="addPlaceForm">
+<div class="form-group">
+<label class="form-label required" for="placeName">اسم المكان</label>
+<input class="form-control" id="placeName" placeholder="مثال: صيدلية الشفاء" required="" type="text"/>
+<div class="form-error" id="nameError">يرجى إدخال اسم المكان</div>
+</div>
+<div class="form-group">
+<label class="form-label required" for="placeAddress">العنوان</label>
+<input class="form-control" id="placeAddress" placeholder="مثال: شارع الثورة، بجانب البريد" required="" type="text"/>
+<div class="form-error" id="addressError">يرجى إدخال عنوان المكان</div>
+</div>
+<div class="form-group">
+<label class="form-label required" for="placePhone">رقم الهاتف</label>
+<input class="form-control" id="placePhone" placeholder="مثال: 041-123456" required="" type="tel"/>
+<div class="form-error" id="phoneError">يرجى إدخال رقم هاتف صحيح</div>
+</div>
+<div class="form-group">
+<label class="form-label required" for="placeCategory">القسم</label>
+<select class="form-select" id="placeCategory" required="">
+<option value="">اختر القسم المناسب</option>
+<option value="hospitals">مشافي وعيادات</option>
+<option value="pharmacies">صيدليات</option>
+<option value="restaurants">مطاعم ومقاهي</option>
+<option value="services">خدمات</option>
+<option value="schools">مدارس ومعاهد</option>
+<option value="emergency">أرقام الطوارئ</option>
+</select>
+<div class="form-error" id="categoryError">يرجى اختيار القسم المناسب</div>
+</div>
+<div class="form-group">
+<label class="form-label" for="placeDescription">الوصف (اختياري)</label>
+<textarea class="form-control form-textarea" id="placeDescription" placeholder="وصف مختصر للمكان والخدمات المقدمة..."></textarea>
+<div class="form-help">يمكنك كتابة وصف مختصر للمكان (لا يزيد عن 500 حرف)</div>
+</div>
+<div class="form-group" style="margin-top: 2rem;">
+<button class="btn btn-primary btn-lg" id="submitBtn" style="width: 100%;" type="submit">
+<i class="fas fa-paper-plane"></i> إرسال البيانات
                             </button>
-                            <p class="form-help" style="text-align: center; margin-top: 1rem;">
+<p class="form-help" style="text-align: center; margin-top: 1rem;">
                                 سيتم مراجعة البيانات من قبل الإدارة قبل النشر
                             </p>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- ABOUT PAGE -->
-    <div id="page-about" class="page">
-        <section class="category-header">
-            <div class="container">
-                <div class="breadcrumb">
-                    <a href="#" onclick="showPage('home')">الرئيسية</a><span>←</span>
-                    <span>عن الدليل</span>
-                </div>
-                <h1 class="page-title">عن دليل جبلة</h1>
-                <p class="page-description">تعرف على قصتنا وهدفنا</p>
-            </div>
-        </section>
-        <section class="about-section">
-            <div class="container">
-                <div class="about-content">
-                    <div class="about-card">
-                        <div class="about-icon"><i class="fas fa-city"></i></div>
-                        <h2>ما هو دليل جبلة؟</h2>
-                        <p>دليل جبلة هو منصة خدمية محلية تهدف لتسهيل وصول سكان وزوار مدينة جبلة السورية إلى جميع الخدمات والأماكن المهمة في المدينة بسرعة وسهولة.</p>
-                    </div>
-                    <div class="about-card">
-                        <div class="about-icon"><i class="fas fa-bullseye"></i></div>
-                        <h2>هدفنا</h2>
-                        <p>تمكين أي شخص من الوصول إلى المعلومة التي يحتاجها خلال أقل من 30 ثانية، بدون الحاجة للسؤال على فيسبوك أو واتساب.</p>
-                    </div>
-                    <div class="about-card">
-                        <div class="about-icon"><i class="fas fa-users"></i></div>
-                        <h2>للجميع</h2>
-                        <p>صممنا الدليل ليكون سهل الاستخدام للجميع - كبار السن، الشباب، الزوار، والمقيمين على حد سواء.</p>
-                    </div>
-                    <div class="about-card highlight">
-                        <div class="about-icon"><i class="fas fa-heart"></i></div>
-                        <h2>مجاني بالكامل</h2>
-                        <p>دليل جبلة خدمة مجانية بالكامل، بدون إعلانات مزعجة، هدفنا الوحيد خدمة أهل جبلة.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- CONTACT PAGE -->
-    <div id="page-contact" class="page">
-        <section class="category-header">
-            <div class="container">
-                <div class="breadcrumb">
-                    <a href="#" onclick="showPage('home')">الرئيسية</a><span>←</span>
-                    <span>تواصل معنا</span>
-                </div>
-                <h1 class="page-title">تواصل معنا</h1>
-                <p class="page-description">نسعد بتواصلكم واقتراحاتكم</p>
-            </div>
-        </section>
-        <section class="contact-section">
-            <div class="container">
-                <div class="contact-grid">
-                    <div class="contact-options">
-                        <a href="https://wa.me/963912345678" class="contact-card whatsapp" target="_blank">
-                            <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
-                            <h3>واتساب</h3>
-                            <p>تواصل معنا مباشرة عبر واتساب</p>
-                            <span class="contact-action">راسلنا الآن</span>
-                        </a>
-                        <a href="mailto:info@jableh-guide.com" class="contact-card email">
-                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-                            <h3>البريد الإلكتروني</h3>
-                            <p>أرسل لنا رسالة بالبريد</p>
-                            <span class="contact-action">info@jableh-guide.com</span>
-                        </a>
-                    </div>
-                    <div class="add-place-card" onclick="showPage('add-place')">
-                        <div class="add-place-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <h2>أضف مكانك للدليل</h2>
-                        <p>لديك محل أو خدمة في جبلة؟ أضفها مجاناً للدليل</p>
-                        <span class="btn">
-                            <i class="fas fa-plus"></i> أضف مكان جديد
+</div>
+</form>
+</div>
+</div>
+</section>
+</div>
+<!-- ABOUT PAGE -->
+<div class="page" id="page-about">
+<section class="category-header">
+<div class="container">
+<div class="breadcrumb">
+<a href="#" onclick="showPage('home')">الرئيسية</a><span>←</span>
+<span>عن الدليل</span>
+</div>
+<h1 class="page-title">عن دليل جبلة</h1>
+<p class="page-description">تعرف على قصتنا وهدفنا</p>
+</div>
+</section>
+<section class="about-section">
+<div class="container">
+<div class="about-content">
+<div class="about-card">
+<div class="about-icon"><i class="fas fa-city"></i></div>
+<h2>ما هو دليل جبلة؟</h2>
+<p>دليل جبلة هو منصة خدمية محلية تهدف لتسهيل وصول سكان وزوار مدينة جبلة السورية إلى جميع الخدمات والأماكن المهمة في المدينة بسرعة وسهولة.</p>
+</div>
+<div class="about-card">
+<div class="about-icon"><i class="fas fa-bullseye"></i></div>
+<h2>هدفنا</h2>
+<p>تمكين أي شخص من الوصول إلى المعلومة التي يحتاجها خلال أقل من 30 ثانية، بدون الحاجة للسؤال على فيسبوك أو واتساب.</p>
+</div>
+<div class="about-card">
+<div class="about-icon"><i class="fas fa-users"></i></div>
+<h2>للجميع</h2>
+<p>صممنا الدليل ليكون سهل الاستخدام للجميع - كبار السن، الشباب، الزوار، والمقيمين على حد سواء.</p>
+</div>
+<div class="about-card highlight">
+<div class="about-icon"><i class="fas fa-heart"></i></div>
+<h2>مجاني بالكامل</h2>
+<p>دليل جبلة خدمة مجانية بالكامل، بدون إعلانات مزعجة، هدفنا الوحيد خدمة أهل جبلة.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- CONTACT PAGE -->
+<div class="page" id="page-contact">
+<section class="category-header">
+<div class="container">
+<div class="breadcrumb">
+<a href="#" onclick="showPage('home')">الرئيسية</a><span>←</span>
+<span>تواصل معنا</span>
+</div>
+<h1 class="page-title">تواصل معنا</h1>
+<p class="page-description">نسعد بتواصلكم واقتراحاتكم</p>
+</div>
+</section>
+<section class="contact-section">
+<div class="container">
+<div class="contact-grid">
+<div class="contact-options">
+<a class="contact-card whatsapp" href="https://wa.me/963912345678" target="_blank">
+<div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+<h3>واتساب</h3>
+<p>تواصل معنا مباشرة عبر واتساب</p>
+<span class="contact-action">راسلنا الآن</span>
+</a>
+<a class="contact-card email" href="mailto:info@jableh-guide.com">
+<div class="contact-icon"><i class="fas fa-envelope"></i></div>
+<h3>البريد الإلكتروني</h3>
+<p>أرسل لنا رسالة بالبريد</p>
+<span class="contact-action">info@jableh-guide.com</span>
+</a>
+</div>
+<div class="add-place-card" onclick="showPage('add-place')">
+<div class="add-place-icon"><i class="fas fa-map-marker-alt"></i></div>
+<h2>أضف مكانك للدليل</h2>
+<p>لديك محل أو خدمة في جبلة؟ أضفها مجاناً للدليل</p>
+<span class="btn">
+<i class="fas fa-plus"></i> أضف مكان جديد
                         </span>
-                    </div>
-                    <div class="faq-section">
-                        <h2>أسئلة شائعة</h2>
-                        <div class="faq-item">
-                            <h4>هل الخدمة مجانية؟</h4>
-                            <p>نعم، دليل جبلة مجاني بالكامل للمستخدمين وأصحاب الأماكن.</p>
-                        </div>
-                        <div class="faq-item">
-                            <h4>كيف أضيف مكاني؟</h4>
-                            <p>يمكنك إضافة مكانك عبر صفحة "إضافة مكان جديد" أو التواصل معنا عبر واتساب.</p>
-                        </div>
-                        <div class="faq-item">
-                            <h4>كيف أبلغ عن خطأ؟</h4>
-                            <p>إذا وجدت معلومة خاطئة، راسلنا وسنصححها فوراً.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
+</div>
+<div class="faq-section">
+<h2>أسئلة شائعة</h2>
+<div class="faq-item">
+<h4>هل الخدمة مجانية؟</h4>
+<p>نعم، دليل جبلة مجاني بالكامل للمستخدمين وأصحاب الأماكن.</p>
+</div>
+<div class="faq-item">
+<h4>كيف أضيف مكاني؟</h4>
+<p>يمكنك إضافة مكانك عبر صفحة "إضافة مكان جديد" أو التواصل معنا عبر واتساب.</p>
+</div>
+<div class="faq-item">
+<h4>كيف أبلغ عن خطأ؟</h4>
+<p>إذا وجدت معلومة خاطئة، راسلنا وسنصححها فوراً.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer -->
+<footer class="footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-section">
+<div class="footer-logo"><i class="fas fa-map-marker-alt"></i><span>دليل مدينة جبلة</span></div>
+<p class="footer-desc">دليلك الشامل لكل الخدمات والأماكن المهمة في مدينة جبلة السورية</p>
+</div>
+<div class="footer-section">
+<h4 class="footer-title">روابط سريعة</h4>
+<ul class="footer-links">
+<li><a href="#" onclick="showPage('home')"><i class="fas fa-home"></i> الرئيسية</a></li>
+<li><a href="#" onclick="showPage('about')"><i class="fas fa-info-circle"></i> عن الدليل</a></li>
+<li><a href="#" onclick="showPage('contact')"><i class="fas fa-envelope"></i> تواصل معنا</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h4 class="footer-title">أرقام الطوارئ</h4>
+<ul class="footer-links">
+<li><a href="tel:110"><i class="fas fa-police-box"></i> الشرطة: 110</a></li>
+<li><a href="tel:113"><i class="fas fa-ambulance"></i> الإسعاف: 113</a></li>
+<li><a href="tel:118"><i class="fas fa-fire-extinguisher"></i> الإطفاء: 118</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p>تم تطوير الموقع بواسطة <strong>إيهاب عبدالعال ، عابد إستامبولي</strong> حقوق النشر محفوظة© 2025</p>
+</div>
+</div>
+</footer>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-section">
-                    <div class="footer-logo"><i class="fas fa-map-marker-alt"></i><span>دليل مدينة جبلة</span></div>
-                    <p class="footer-desc">دليلك الشامل لكل الخدمات والأماكن المهمة في مدينة جبلة السورية</p>
-                </div>
-                <div class="footer-section">
-                    <h4 class="footer-title">روابط سريعة</h4>
-                    <ul class="footer-links">
-                        <li><a href="#" onclick="showPage('home')"><i class="fas fa-home"></i> الرئيسية</a></li>
-                        <li><a href="#" onclick="showPage('about')"><i class="fas fa-info-circle"></i> عن الدليل</a></li>
-                        <li><a href="#" onclick="showPage('contact')"><i class="fas fa-envelope"></i> تواصل معنا</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4 class="footer-title">أرقام الطوارئ</h4>
-                    <ul class="footer-links">
-                        <li><a href="tel:110"><i class="fas fa-police-box"></i> الشرطة: 110</a></li>
-                        <li><a href="tel:113"><i class="fas fa-ambulance"></i> الإسعاف: 113</a></li>
-                        <li><a href="tel:118"><i class="fas fa-fire-extinguisher"></i> الإطفاء: 118</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>تم تطوير الموقع بواسطة <strong>إيهاب عبدالعال ، عابد إستامبولي</strong> حقوق النشر محفوظة© 2025</p>
-            </div>
-        </div>
-    </footer>
 
-    <script>
-        // ================================
-        // SUPABASE CONFIGURATION
-        // ================================
-        // استبدل هذه القيم بمعلومات Supabase الخاصة بك
-     // ================================
-// SUPABASE CONFIGURATION
-// ================================
-const SUPABASE_URL = 'https://alolxtzrpobimoxoxuyl.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_aG31JMWlbGrVZLTmUIY65w_akthL2cJ';
-
-// تهيئة Supabase Client (مرة وحدة فقط)
-const supabaseClient = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_ANON_KEY
-);
-        // ================================
-        // DATA
-        // ================================
-        const categories = {
-            hospitals: { 
-                name: 'مشافي وعيادات', 
-                icon: '<i class="fas fa-hospital"></i>', 
-                description: 'مشافي، عيادات، مخابر في مدينة جبلة',
-                image: 'https://images.unsplash.com/photo-1586773860418-dc22f8b874bc?w=800&h=400&fit=crop',
-                color: '#ef4444'
-            },
-            pharmacies: { 
-                name: 'الصيدليات', 
-                icon: '<i class="fas fa-pills"></i>', 
-                description: 'صيدليات ومناوبات ليلية في مدينة جبلة',
-                image: 'https://images.unsplash.com/photo-1586015555751-63bb77f4322a?w=800&h=400&fit=crop',
-                color: '#22c55e'
-            },
-            restaurants: { 
-                name: 'مطاعم ومقاهي', 
-                icon: '<i class="fas fa-utensils"></i>', 
-                description: 'مطاعم، كافيهات، حلويات في مدينة جبلة',
-                image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=400&fit=crop',
-                color: '#166534'
-            },
-            services: { 
-                name: 'خدمات', 
-                icon: '<i class="fas fa-tools"></i>', 
-                description: 'تكاسي، صيانة، توصيل في مدينة جبلة',
-                image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=400&fit=crop',
-                color: '#8b5cf6'
-            },
-            schools: { 
-                name: 'مدارس ومعاهد', 
-                icon: '<i class="fas fa-graduation-cap"></i>', 
-                description: 'مدارس، معاهد، دورات في مدينة جبلة',
-                image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&h=400&fit=crop',
-                color: '#0ea5e9'
-            },
-            emergency: { 
-                name: 'أرقام الطوارئ', 
-                icon: '<i class="fas fa-exclamation-triangle"></i>', 
-                description: 'أرقام الطوارئ المهمة في جبلة',
-                image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&h=400&fit=crop',
-                color: '#b91c1c'
-            }
-        };
-
-        const places = {
-            pharmacies: [
-                { 
-                    id: 1, 
-                    name: 'صيدلية الشفاء', 
-                    neighborhood: 'شارع الثورة، بجانب البريد', 
-                    phone: '041-123456', 
-                    description: 'صيدلية متكاملة تقدم جميع الأدوية والمستلزمات الطبية. تعمل على مدار الساعة في أيام المناوبة.'
-                }
-            ],
-            hospitals: [
-                { 
-                    id: 2, 
-                    name: 'مشفى جبلة الوطني', 
-                    neighborhood: 'المنطقة الصناعية', 
-                    phone: '041-111111', 
-                    description: 'مشفى حكومي يقدم خدمات طبية شاملة. يحتوي على أقسام للطوارئ، الجراحة، الباطنية، والأطفال.'
-                }
-            ],
-            restaurants: [
-                { 
-                    id: 3, 
-                    name: 'مطعم البحر', 
-                    neighborhood: 'الكورنيش', 
-                    phone: '041-333333', 
-                    description: 'أشهى المأكولات البحرية الطازجة. يوفر أجواء مميزة مع إطلالة على البحر.'
-                }
-            ],
-            services: [
-                { 
-                    id: 4, 
-                    name: 'تكسي الأمان', 
-                    neighborhood: 'جميع المناطق', 
-                    phone: '041-555555', 
-                    description: 'خدمة تكسي سريعة وموثوقة. متوفرة على مدار الساعة بأسعار مناسبة.'
-                }
-            ],
-            schools: [
-                { 
-                    id: 5, 
-                    name: 'ثانوية جبلة', 
-                    neighborhood: 'حي المدارس', 
-                    phone: '041-777777', 
-                    description: 'مدرسة ثانوية حكومية معتمدة. تقدم التعليم للصفوف من الأول الثانوي إلى الثالث الثانوي.'
-                }
-            ],
-            emergency: [
-                { 
-                    id: 6, 
-                    name: 'الشرطة', 
-                    neighborhood: 'جبلة', 
-                    phone: '110', 
-                    description: 'رقم الطوارئ للشرطة. للتبليغ عن الحوادث والجرائم والاستفسارات الأمنية.'
-                }
-            ]
-        };
-
-        const nightSchedule = [
-            { day: 'السبت', pharmacy: 'صيدلية الشفاء', address: 'شارع الثورة، بجانب البريد', phone: '041-123456', hours: '24 ساعة', notes: 'توفر أدوية الأطفال' },
-            { day: 'الأحد', pharmacy: 'صيدلية الشفاء', address: 'شارع الثورة، بجانب البريد', phone: '041-123456', hours: '8:00 مساءً - 8:00 صباحاً', notes: '' },
-            { day: 'الإثنين', pharmacy: 'صيدلية الشفاء', address: 'شارع الثورة، بجانب البريد', phone: '041-123456', hours: '24 ساعة', notes: '' },
-            { day: 'الثلاثاء', pharmacy: 'صيدلية الشفاء', address: 'شارع الثورة، بجانب البريد', phone: '041-123456', hours: '9:00 مساءً - 7:00 صباحاً', notes: '' },
-            { day: 'الأربعاء', pharmacy: 'صيدلية الشفاء', address: 'شارع الثورة، بجانب البريد', phone: '041-123456', hours: '24 ساعة', notes: 'توفر أدوية الأطفال' },
-            { day: 'الخميس', pharmacy: 'صيدلية الشفاء', address: 'شارع الثورة، بجانب البريد', phone: '041-123456', hours: '8:00 مساءً - 8:00 صباحاً', notes: '' },
-            { day: 'الجمعة', pharmacy: 'لا توجد مناوبة', address: '', phone: '', hours: '', notes: 'يوم عطلة' }
-        ];
-
-        const daysArabic = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
-        const todayIndex = new Date().getDay();
-        const todayArabic = daysArabic[todayIndex];
-        let currentCategory = 'pharmacies';
-
-        // ================================
-        // FUNCTIONS
-        // ================================
-        function showPage(pageName) {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.getElementById('page-' + pageName).classList.add('active');
-            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-            const navLink = document.getElementById('nav-' + pageName);
-            if (navLink) navLink.classList.add('active');
-            document.getElementById('mobileMenu').classList.remove('active');
-            if (pageName === 'night') renderNightSchedule();
-            if (pageName === 'add-place') resetAddPlaceForm();
-            window.scrollTo(0, 0);
-        }
-
-        function renderNightSchedule() {
-            const scheduleHTML = nightSchedule.map((day, index) => {
-                const isToday = day.day === todayArabic;
-                return `
-                    <div class="day-card ${isToday ? 'today' : ''}">
-                        <div class="day-header">
-                            <span class="day-name">${day.day} ${isToday ? '(اليوم)' : ''}</span>
-                            ${isToday ? '<span class="status-badge">مناوبة حالياً</span>' : ''}
-                        </div>
-                        ${day.pharmacy === 'لا توجد مناوبة' ? 
-                            `<div class="pharmacy-info"><p><i class="fas fa-info-circle"></i> ${day.notes}</p></div>` :
-                            `<div class="pharmacy-info">
-                                <h4>${day.pharmacy}</h4>
-                                <p><i class="fas fa-map-marker-alt"></i> ${day.address}</p>
-                                <p><i class="fas fa-phone"></i> ${day.phone}</p>
-                                <p><i class="fas fa-clock"></i> ${day.hours}</p>
-                                ${day.notes ? `<p><i class="fas fa-sticky-note"></i> ${day.notes}</p>` : ''}
-                            </div>`
-                        }
-                    </div>
-                `;
-            }).join('');
-            document.getElementById('weekSchedule').innerHTML = scheduleHTML;
-        }
-
-        function showCategory(categoryId) {
-            currentCategory = categoryId;
-            const category = categories[categoryId];
-            document.getElementById('categoryBreadcrumb').textContent = category.name;
-            document.getElementById('categoryTitle').innerHTML = category.icon + ' ' + category.name;
-            document.getElementById('categoryDesc').textContent = category.description;
-            
-            const nightBanner = document.getElementById('nightBanner');
-            if (categoryId === 'pharmacies') {
-                nightBanner.classList.add('show');
-            } else {
-                nightBanner.classList.remove('show');
-            }
-            
-            const placesHtml = (places[categoryId] || []).map(place => `
-                <div class="place-card">
-                    <div class="place-header"><span class="place-badge">${category.icon} ${category.name}</span></div>
-                    <h3 class="place-name">${place.name}</h3>
-                 <p class="place-location"><i class="fas fa-map-marker-alt"></i> ${place.neighborhood}</p>
-                    <div class="place-actions">
-                        <a href="tel:${place.phone}" class="btn btn-call"><i class="fas fa-phone-alt"></i> اتصال</a>
-                        <a href="#" onclick="showPlace(${place.id}, '${categoryId}')" class="place-details-link"><i class="fas fa-info-circle"></i> تفاصيل</a>
-                    </div>
-                </div>
-            `).join('');
-            document.getElementById('placesGrid').innerHTML = placesHtml || '<p style="text-align:center;color:var(--text-muted);">لا توجد أماكن في هذا القسم حالياً</p>';
-            showPage('category');
-        }
-
-        function showPlace(placeId, categoryId) {
-            currentCategory = categoryId;
-            const category = categories[categoryId];
-            const place = places[categoryId].find(p => p.id === placeId);
-            if (!place) return;
-            
-            document.getElementById('placeCategoryLink').textContent = category.name;
-            document.getElementById('placeBreadcrumb').textContent = place.name;
-            document.getElementById('placeCategoryBadge').innerHTML = category.icon + ' ' + category.name;
-            document.getElementById('placeTitle').textContent = place.name;
-            document.getElementById('placeAddress').textContent = place.neighborhood;
-            document.getElementById('placePhone').textContent = place.phone;
-            document.getElementById('placePhoneNumber').textContent = place.phone;
-            document.getElementById('placeDesc').textContent = place.description;
-            
-            const placeImage = document.getElementById('placeImage');
-            placeImage.src = category.image;
-            placeImage.alt = `صورة ${category.name}`;
-            
-            const callBtn = document.getElementById('placeCallBtn');
-            callBtn.href = 'tel:' + place.phone;
-            callBtn.style.background = category.color;
-            callBtn.onmouseover = function() {
-                this.style.background = category.color;
-                this.style.opacity = '0.9';
-            };
-            callBtn.onmouseout = function() {
-                this.style.background = category.color;
-                this.style.opacity = '1';
-            };
-            
-            showPage('place');
-        }
-
-        function goBackToCategory() { showCategory(currentCategory); }
-        function toggleMobileMenu() { document.getElementById('mobileMenu').classList.toggle('active'); }
-        function handleSearch() {
-            const query = document.getElementById('searchInput').value.trim();
-            if (query) alert('جاري البحث عن: ' + query + '\n\nهذه نسخة تجريبية، البحث غير مفعّل حالياً');
-        }
-
-        // ================================
-        // ADD PLACE FORM FUNCTIONS
-        // ================================
-        function resetAddPlaceForm() {
-    document.getElementById('addPlaceForm').reset();
-    document.getElementById('addPlaceForm').style.display = 'block';
-    document.getElementById('successMessage').style.display = 'none';
-
-    document.querySelectorAll('.form-error').forEach(error => {
-        error.classList.remove('show');
-    });
-
-    const submitBtn = document.getElementById('submitBtn');
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال البيانات';
-}
-
-        function validateForm() {
-            let isValid = true;
-            
-            // اسم المكان
-            const name = document.getElementById('placeName').value.trim();
-            if (!name) {
-                document.getElementById('nameError').classList.add('show');
-                isValid = false;
-            } else {
-                document.getElementById('nameError').classList.remove('show');
-            }
-            
-            // العنوان
-            const address = document.getElementById('placeAddress').value.trim();
-            if (!address) {
-                document.getElementById('addressError').classList.add('show');
-                isValid = false;
-            } else {
-                document.getElementById('addressError').classList.remove('show');
-            }
-            
-            // الهاتف
-            const phone = document.getElementById('placePhone').value.trim();
-            if (!phone) {
-                document.getElementById('phoneError').classList.add('show');
-                isValid = false;
-            } else {
-                document.getElementById('phoneError').classList.remove('show');
-            }
-            
-            // القسم
-            const category = document.getElementById('placeCategory').value;
-            if (!category) {
-                document.getElementById('categoryError').classList.add('show');
-                isValid = false;
-            } else {
-                document.getElementById('categoryError').classList.remove('show');
-            }
-            
-            return isValid;
-        }
-
-        async function submitPlaceForm(event) {
-            event.preventDefault();
-            
-            if (!validateForm()) {
-                return;
-            }
-            
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
-            
-            try {
-                // جمع البيانات من الفورم
-                const placeData = {
-  name: document.getElementById('placeName').value.trim(),
-  address: document.getElementById('placeAddress').value.trim(),
-  phone: document.getElementById('placePhone').value.trim(),
-  category: document.getElementById('placeCategory').value,
-  description: document.getElementById('placeDescription').value.trim(),
-  status: 'pending'
-};
-
-const { error } = await supabaseClient
-  .from('places')
-  .insert([placeData]);
-                
-                if (error) {
-                    throw error;
-                }
-                
-                // عرض رسالة النجاح
-                document.getElementById('successMessage').style.display = 'block';
-                
-                // إخفاء الفورم
-                document.getElementById('addPlaceForm').style.display = 'none';
-                
-                // الانتقال للصفحة الرئيسية بعد 3 ثواني
-                setTimeout(() => {
-                    showPage('home');
-                }, 3000);
-                
-            } catch (error) {
-                console.error('خطأ في إرسال البيانات:', error);
-                alert('حدث خطأ أثناء إرسال البيانات. يرجى المحاولة مرة أخرى.');
-                
-                // إعادة تفعيل زر الإرسال
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال البيانات';
-            }
-        }
-
-        // ================================
-        // EVENT LISTENERS
-        // ================================
-        document.getElementById('searchInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') handleSearch();
-        });
-
-        document.getElementById('addPlaceForm').addEventListener('submit', submitPlaceForm);
-
-        document.addEventListener('click', function(event) {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const menuBtn = document.querySelector('.mobile-menu-btn');
-            if (mobileMenu.classList.contains('active')) {
-                if (!mobileMenu.contains(event.target) && !menuBtn.contains(event.target)) {
-                    mobileMenu.classList.remove('active');
-                }
-            }
-        });
-
-        // ================================
-        // INITIALIZE
-        // ================================
-        renderNightSchedule();
-        
-        // إضافة حدث لحقول الفورم لإخفاء رسائل الخطأ عند الكتابة
-        const formInputs = document.querySelectorAll('#addPlaceForm input, #addPlaceForm select, #addPlaceForm textarea');
-        formInputs.forEach(input => {
-            input.addEventListener('input', function() {
-                const errorId = this.id + 'Error';
-                const errorElement = document.getElementById(errorId);
-                if (errorElement) {
-                    errorElement.classList.remove('show');
-                }
-            });
-        });
-
-        console.log('%c🏛️ دليل مدينة جبلة', 'font-size: 24px; font-weight: bold; color: #1e40af;');
-        console.log('%cتم تطوير هذا الموقع بحب لخدمة أهل جبلة', 'font-size: 14px; color: #64748b;');
-        console.log('%cنسخة إضافة الأماكن إلى Supabase', 'font-size: 12px; color: #10b981;');
-        
-        // تحذير بشأن إعدادات Supabase
-        console.warn('⚠️ يرجى استبدال قيم SUPABASE_URL و SUPABASE_ANON_KEY بمعلومات مشروعك الحقيقية في Supabase');
-    </script>
-</body>
+<script defer="True" src="assets/app.js"></script></body>
 </html>
