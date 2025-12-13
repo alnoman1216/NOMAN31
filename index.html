@@ -3,613 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معهد النُعمان التعليمي - Al-No'man Educational Institute</title>
-    <meta name="description" content="معهد النعمان التعليمي - تعليم متميز للمنهاج السوري ودورات اللغات">
+    <title>دليل مدينة جبلة - كل الخدمات والأماكن المهمة</title>
+    <meta name="description" content="دليل خدمي شامل لمدينة جبلة السورية - مشافي، صيدليات، مطاعم، خدمات، مدارس وأرقام الطوارئ">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome للأيقونات الاحترافية -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        * {
+        /* ================================
+           Reset & Base
+           ================================ */
+        *, *::before, *::after {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         :root {
-            --background: hsl(0, 0%, 7%);
-            --foreground: hsl(0, 0%, 98%);
-            --primary: hsl(142, 76%, 36%);
-            --card: hsl(0, 0%, 10%);
-            --border: hsl(0, 0%, 20%);
-            --muted: hsl(0, 0%, 65%);
+            /* الألوان الغامقة كما طلبت */
+            --primary: #1e40af;      /* أزرق غامق وقوي */
+            --primary-light: #3b82f6; /* أزرق متوسط */
+            --primary-dark: #1e3a8a;  /* أزرق داكن جداً */
+            
+            --secondary: #166534;     /* أخضر غامق */
+            --secondary-light: #22c55e; /* أخضر فاتح */
+            
+            --accent: #166534;        /* نفس الأخضر الغامق (بدون برتقالي) */
+            
+            --emergency: #b91c1c;     /* أحمر دم الغزال */
+            --emergency-light: #dc2626; /* أحمر فاتح */
+            
+            /* باقي الألوان كما هي */
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --border: #e2e8f0;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --text-light: #94a3b8;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-primary: 0 10px 30px -10px rgba(30, 64, 175, 0.3);
+            --container: 1200px;
+            --radius: 12px;
+            --radius-lg: 20px;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: var(--background);
-            color: var(--foreground);
-            overflow-x: hidden;
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(18, 18, 18, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            animation: slideDown 0.6s ease-out;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .header-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0.8rem 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            cursor: pointer;
-        }
-
-        .logo {
-            height: 60px;
-            width: auto;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .institute-name {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--foreground);
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            font-family: 'Cairo', sans-serif !important;
-        }
-
-        .institute-name span {
-            color: var(--primary);
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-top: 0.2rem;
-            font-family: 'Cairo', sans-serif !important;
-        }
-
-        nav {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        nav button {
-            background: none;
-            border: none;
-            color: var(--foreground);
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            overflow: hidden;
-            font-family: 'Cairo', sans-serif !important;
-            font-weight: 700 !important;
-            letter-spacing: 0 !important;
-        }
-
-        nav button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, var(--primary), transparent);
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: -1;
-            border-radius: 6px;
-        }
-
-        nav button:hover {
-            color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        nav button:hover::before {
-            opacity: 0.1;
-        }
-
-        nav button.active {
-            color: var(--primary);
-            background: rgba(34, 197, 94, 0.1);
-        }
-
-        nav button.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--primary);
-            animation: slideIn 0.3s ease-out;
-            border-radius: 3px 3px 0 0;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--foreground);
-            font-size: 1.5rem;
-            cursor: pointer;
-            font-family: 'Cairo', sans-serif !important;
-        }
-
-        /* الأنماط الأساسية */
-        .section {
-            position: relative;
-            min-height: 100vh;
-            display: none;
-            opacity: 0;
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-
-        .section.active {
-            display: flex;
-        }
-
-        .home-section {
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .home-section::before,
-        .stages-section::before,
-        .grades-section::before,
-        .subjects-section::before,
-        .courses-section::before,
-        .register-section::before,
-        .why-us-home::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: 
-                linear-gradient(135deg, var(--background) 0%, var(--background) 40%, rgba(34, 197, 94, 0.1) 70%),
-                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(34, 197, 94, 0.03) 10px, rgba(34, 197, 94, 0.03) 20px);
-            z-index: -1;
-        }
-
-        .home-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            animation: scaleIn 1s ease-out;
-        }
-
- /* نص الترحيب باللون الأخضر مع تدرج */
-.home-content p {
-    font-size: 1.2rem !important;
-    margin-bottom: 3rem;
-    font-weight: 500;
-    background: linear-gradient(135deg, #22c55e, #16a34a); /* تدرج أخضر */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
-    animation: welcomeGlow 3s infinite alternate;
-}
-
-@keyframes welcomeGlow {
-    from {
-        text-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
-    }
-    to {
-        text-shadow: 0 0 25px rgba(34, 197, 94, 0.5);
-    }
-}
-}
-        .home-divider {
-            width: 128px;
-            height: 4px;
-            background: var(--primary);
-            margin: 3rem auto 0;
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.6);
-            animation: scaleInX 0.6s ease-out 1s both;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary), var(--primary));
-            color: white;
-            padding: 1.2rem 3rem;
-            border-radius: 50px;
-            font-size: 1.3rem;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.4s;
-            box-shadow: 0 0 30px rgba(34, 197, 94, 0.5);
-            border: 2px solid transparent;
-            animation: pulse 2s infinite;
-            margin-top: 3rem;
-            font-family: 'Cairo', sans-serif !important;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 50px rgba(34, 197, 94, 0.8);
-            background: transparent;
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        .decorative-circle {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(34, 197, 94, 0.05);
-            filter: blur(80px);
-        }
-
-        .decorative-circle:first-of-type {
-            top: 5rem;
-            left: 5rem;
-            width: 288px;
-            height: 288px;
-        }
-
-        .decorative-circle:last-of-type {
-            bottom: 5rem;
-            right: 5rem;
-            width: 384px;
-            height: 384px;
-        }
-
-        /* Social Icons */
-        .social-icons-container {
-            position: fixed;
-            bottom: 7px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            padding: 1rem;
-            z-index: 100;
-            animation: fadeIn 0.5s ease-out 0.5s both;
-            pointer-events: none;
-        }
-
-        .social-icon {
-            pointer-events: auto;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.3rem;
-            text-decoration: none;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .social-icon:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(34, 197, 94, 0.3);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        /* إخفاء الأيقونات في الصفحات الأخرى */
-        .social-icons-container.hidden {
-            display: none;
-        }
-
-        /* Social Icon Colors */
-        .social-icon.whatsapp:hover {
-            background: rgba(37, 211, 102, 0.2);
-            text-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
-        }
-
-        .social-icon.telegram:hover {
-            background: rgba(0, 136, 204, 0.2);
-            text-shadow: 0 0 20px rgba(0, 136, 204, 0.6);
-        }
-
-        .social-icon.facebook:hover {
-            background: rgba(24, 119, 242, 0.2);
-            text-shadow: 0 0 20px rgba(24, 119, 242, 0.6);
-        }
-
-        .social-icon.instagram:hover {
-            background: rgba(131, 58, 180, 0.2);
-            text-shadow: 0 0 20px rgba(131, 58, 180, 0.6);
-        }
-
-        /* تأثير تنقيط مائي عند الضغط */
-        .social-icon:active {
-            transform: translateY(-3px) scale(0.95);
-            transition: all 0.1s;
-        }
-
-        .why-us-home {
-            background: var(--card);
-            border-top: 1px solid var(--border);
-            padding: 4rem 1.5rem;
-            text-align: center;
-        }
-
-        .why-us-home .section-title {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin: 6rem 0 3rem 0;
-            color: var(--primary);
-            font-family: 'Cairo', sans-serif !important;
-        }
-
-        .features-grid-home {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .feature-card-home {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: all 0.3s;
-        }
-
-        .feature-card-home:hover {
-            transform: translateY(-8px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 40px rgba(34, 197, 94, 0.2);
-        }
-
-        .feature-icon-home {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .feature-card-home h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            font-family: 'Cairo', sans-serif !important;
-        }
-
-        .feature-card-home p {
-            color: var(--muted);
-            line-height: 1.8;
-            font-size: 1.1rem;
-            font-family: 'Cairo', sans-serif !important;
-        }
-
-        .stages-section {
-            padding: 6rem 1.5rem;
-            align-items: flex-start;
-        }
-
-        .stages-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .section-title {
-            font-size: 3rem;
-            font-weight: 900;
-            text-align: center;
-            margin-bottom: 4rem;
-            font-family: 'Cairo', sans-serif !important;
-            font-weight: 900 !important;
-        }
-
-        .stages-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .stage-card, .grade-card, .subject-card, .course-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 2rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-        }
-
-        .stage-card:hover, .grade-card:hover, .subject-card:hover, .course-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 40px rgba(34, 197, 94, 0.2);
-        }
-
-        .stage-icon {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stage-card h3, .grade-card h3, .subject-card h3, .course-card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            font-family: 'Cairo', sans-serif !important;
-        }
-
-        .stage-card p, .grade-card p, .subject-card p, .course-card p {
-            color: var(--muted);
+            background: var(--background);
+            color: var(--text);
             line-height: 1.6;
-            font-family: 'Cairo', sans-serif !important;
+            min-height: 100vh;
         }
 
-        .grades-section, .subjects-section, .courses-section, .register-section {
-            padding: 6rem 1.5rem;
-            align-items: flex-start;
-            display: none;
-        }
-
-        .grades-container, .subjects-container, .courses-container {
-            max-width: 1280px;
+        .container {
+            max-width: var(--container);
             margin: 0 auto;
-            width: 100%;
+            padding: 0 1rem;
         }
 
-        .grades-grid, .subjects-grid, .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
+        @media (min-width: 768px) {
+            .container { padding: 0 2rem; }
         }
 
-        .course-details {
-            margin-top: 1rem;
-            text-align: right;
-        }
-
-        .course-detail {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
-            color: var(--muted);
-            font-size: 0.9rem;
-            font-family: 'Cairo', sans-serif !important;
-        }
-
-        .course-detail i {
-            margin-left: 0.5rem;
-            color: var(--primary);
-        }
-
-        .breadcrumb {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .breadcrumb-item {
-            color: var(--muted);
-            font-size: 0.9rem;
-            font-family: 'Cairo', sans-serif !important;
-            font-weight: 600 !important;
-        }
-
-        .breadcrumb-item.active {
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        .breadcrumb-separator {
-            margin: 0 0.5rem;
-            color: var(--muted);
-            font-family: 'Cairo', sans-serif !important;
-            font-weight: 600 !important;
-        }
-
-        .breadcrumb-item a {
-            color: var(--muted);
-            text-decoration: none;
-            transition: color 0.3s;
-            font-family: 'Cairo', sans-serif !important;
-        }
-
-        .breadcrumb-item a:hover {
-            color: var(--primary);
-        }
-
-        /* زر العودة الموحد */
-        .back-button-unified {
-            background: linear-gradient(135deg, var(--primary), hsl(142, 76%, 32%));
-            color: white;
-            border: none;
-            padding: 0.8rem 2.5rem;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            margin: 4rem auto 2rem;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            font-family: 'Cairo', sans-serif !important;
-            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3);
-            width: fit-content;
-            text-decoration: none;
-        }
-
-        .back-button-unified:hover {
-            background: linear-gradient(135deg, hsl(142, 76%, 46%), var(--primary));
-            transform: translateY(-4px);
-            box-shadow: 0 12px 35px rgba(34, 197, 94, 0.5);
-        }
-
-        .back-button-unified:active {
-            transform: translateY(-2px);
-            transition: all 0.1s;
-        }
-
-        .back-button-center {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-        }
-
-        .course-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
+        /* ================================
+           Buttons
+           ================================ */
         .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
             padding: 0.75rem 1.5rem;
-            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
             border: none;
-            flex: 1;
-            text-align: center;
-            font-family: 'Cairo', sans-serif !important;
-            font-weight: 600 !important;
+            border-radius: var(--radius);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
         }
 
         .btn-primary {
@@ -618,1495 +99,1497 @@
         }
 
         .btn-primary:hover {
-            background: hsl(142, 76%, 46%);
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-primary);
         }
 
         .btn-secondary {
-            background: transparent;
-            color: var(--muted);
-            border: 1px solid var(--border);
+            background: var(--secondary);
+            color: white;
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--foreground);
+            background: #15803d;
         }
 
-        .register-section {
-            align-items: center;
-            justify-content: center;
-        }
-
-        .register-container {
-            max-width: 600px;
-            width: 100%;
-        }
-
-        .register-form {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 3rem;
-        }
-
-        .register-form h2 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            text-align: center;
-            margin-bottom: 2rem;
-            font-family: 'Cairo', sans-serif !important;
-        }
-
-        .martyr-notice {
-            background: rgba(34, 197, 94, 0.1);
-            border: 1px solid var(--primary);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .martyr-notice h3 {
-            color: var(--primary);
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-            font-family: 'Cairo', sans-serif !important;
-        }
-
-        .martyr-notice p {
-            font-family: 'Cairo', sans-serif !important;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            font-family: 'Cairo', sans-serif !important;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 0.75rem;
-            background: var(--background);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--foreground);
-            font-size: 1rem;
-            font-family: 'Cairo', sans-serif !important;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
-        }
-
-        /* زر التسجيل عبر الواتساب - بلون أخضر موحد */
-        .whatsapp-register-btn {
-            width: 100%;
-            background: linear-gradient(135deg, var(--primary), hsl(142, 76%, 32%));
+        .btn-emergency {
+            background: var(--emergency);
             color: white;
-            border: none;
-            padding: 1.2rem;
-            border-radius: 12px;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+
+        .btn-emergency:hover {
+            background: #b91c1c;
+        }
+
+        .btn-call {
+            background: var(--primary);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-call:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-lg {
+            padding: 1rem 2rem;
+            font-size: 1.125rem;
+        }
+
+        .btn-xl {
+            padding: 1.25rem 2.5rem;
             font-size: 1.25rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 1.5rem;
-            font-family: 'Cairo', sans-serif !important;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .btn-xl .phone-number {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+
+        /* ================================
+           Header
+           ================================ */
+        .header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3);
+            justify-content: space-between;
+            height: 70px;
         }
 
-        .whatsapp-register-btn:hover {
-            background: linear-gradient(135deg, hsl(142, 76%, 46%), var(--primary));
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(34, 197, 94, 0.4);
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: inherit;
         }
 
-        .whatsapp-register-btn:active {
-            transform: translateY(-1px);
+        .logo-img {
+            height: 40px; /* يمكنك تعديل ارتفاع اللوجو هنا */
+            width: auto;
         }
 
-        .whatsapp-register-btn i {
-            font-size: 1.5rem;
+        .logo-text { display: flex; flex-direction: column; }
+
+        .logo-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1.2;
         }
 
-        /* زر العودة للدورات - رمادي */
-        .back-to-courses-btn {
-            background: rgba(255, 255, 255, 0.08) !important;
-            color: var(--muted) !important;
-            border: 1px solid var(--border) !important;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+        .logo-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-muted);
         }
 
-        .back-to-courses-btn:hover {
-            background: rgba(255, 255, 255, 0.12) !important;
-            color: var(--foreground) !important;
-            border-color: var(--muted) !important;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
-        }
-
-        /* رسالة الشكر */
-        .thank-you-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(15px);
+        .nav-desktop {
             display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 3000;
-            animation: fadeIn 0.4s ease-out;
+            gap: 2rem;
         }
 
-        .thank-you-overlay.active {
+        @media (min-width: 768px) {
+            .nav-desktop { display: flex; }
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
             display: flex;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
         }
 
-      .thank-you-card {
-    background: var(--card);
-    border: 2px solid var(--primary);
-    border-radius: 20px;
-    padding: 2rem;           /* ← صغرت من 3rem إلى 2rem */
-    max-width: 400px;        /* ← صغرت من 500px إلى 400px */
-    width: 90%;
-    text-align: center;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    animation: scaleIn 0.5s ease-out 0.2s both;
-    position: relative;
-    overflow: hidden;
-}
-
-        .thank-you-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), transparent);
+        @media (min-width: 768px) {
+            .mobile-menu-btn { display: none; }
         }
 
-        .thank-you-icon {
-            font-size: 4.5rem;
-            color: var(--primary);
+        .mobile-menu-btn span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .nav-mobile {
+            display: none;
+            flex-direction: column;
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .nav-mobile.active { display: flex; }
+
+        .nav-mobile .nav-link {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* ================================
+           Hero Section
+           ================================ */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .hero { padding: 5rem 0; }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
             margin-bottom: 1.5rem;
-            animation: bounce 1s ease-out;
         }
 
-        .thank-you-title {
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: var(--primary);
+        .hero-title {
+            font-size: 2rem;
+            font-weight: 800;
             margin-bottom: 1rem;
-            font-family: 'Cairo', sans-serif !important;
-            text-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+            line-height: 1.3;
         }
 
-        .thank-you-message {
-            font-size: 1.3rem;
-            line-height: 1.8;
-            color: var(--foreground);
-            margin-bottom: 2.5rem;
-            font-family: 'Cairo', sans-serif !important;
+        @media (min-width: 768px) {
+            .hero-title { font-size: 3rem; }
         }
 
-        .thank-you-btn {
-            background: linear-gradient(135deg, var(--primary), hsl(142, 76%, 32%));
+        .hero-title .highlight { color: var(--primary-light); }
+
+        .hero-description {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-box {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            max-width: 500px;
+            margin: 0 auto 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .search-box { flex-direction: row; }
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 1rem 1.25rem;
+            font-size: 1rem;
+            font-family: inherit;
+            border: none;
+            border-radius: var(--radius);
+            background: white;
+            color: var(--text);
+        }
+
+        .search-input::placeholder { color: var(--text-muted); }
+
+        .search-btn {
+            padding: 1rem 2rem;
+            background: var(--accent);
             color: white;
             border: none;
-            padding: 1rem 3rem;
-            border-radius: 50px;
-            font-size: 1.3rem;
-            font-weight: 700;
+            border-radius: var(--radius);
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'Cairo', sans-serif !important;
-            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
-            width: 200px;
-            margin: 0 auto;
+            transition: background 0.2s;
         }
 
-        .thank-you-btn:hover {
-            background: linear-gradient(135deg, hsl(142, 76%, 46%), var(--primary));
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(34, 197, 94, 0.6);
+        .search-btn:hover { background: #15803d; }
+
+        .quick-search {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            align-items: center;
         }
 
-        .thank-you-btn:active {
-            transform: translateY(-1px);
+        .quick-label {
+            font-size: 0.875rem;
+            opacity: 0.8;
         }
 
-        /* قسم تواصل معنا - الأصلي */
-        .contact-section {
-            padding: 6rem 1.5rem;
+        .quick-tag {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.375rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+
+        .quick-tag:hover { background: rgba(255, 255, 255, 0.3); }
+
+        /* ================================
+           Categories Section
+           ================================ */
+        .categories { padding: 3rem 0; }
+
+        @media (min-width: 768px) {
+            .categories { padding: 4rem 0; }
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .section-title { font-size: 2rem; }
+        }
+
+        .section-description {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .categories-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        .category-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .category-card.emergency {
+            border-color: var(--emergency);
+            background: linear-gradient(135deg, #fef2f2, #fff);
+        }
+
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.75rem;
+            margin: 0 auto 1rem;
+            /* يمكنك تعديل لون الأيقونة هنا إذا احتجت */
+            color: white;
         }
 
-        .contact-container {
-            max-width: 1100px;
-            width: 100%;
-            margin: 0 auto;
+        .category-name {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
         }
 
-        /* Contact box */
-        .contact {
-            background: var(--card);
+        @media (min-width: 768px) {
+            .category-name { font-size: 1.125rem; }
+        }
+
+        .category-desc {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .category-count {
+            display: inline-block;
+            background: var(--background);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ================================
+           Quick Access Section
+           ================================ */
+        .quick-access {
+            padding: 2rem 0;
+            background: var(--background);
+        }
+
+        .quick-access-card {
+            background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 1rem;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .quick-access-card {
+                flex-direction: row;
+                text-align: right;
+                justify-content: space-between;
+            }
+        }
+
+        .quick-access-badge {
+            display: inline-block;
+            background: rgba(22, 101, 52, 0.1);
+            color: var(--secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .quick-access-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .quick-access-desc { color: var(--text-muted); }
+
+        /* ================================
+           Stats Section
+           ================================ */
+        .stats { padding: 3rem 0; }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+        }
+
+        @media (min-width: 768px) {
+            .stat-number { font-size: 2.5rem; }
+        }
+
+        .stat-item:nth-child(1) .stat-number { color: var(--primary); }
+        .stat-item:nth-child(2) .stat-number { color: var(--secondary); }
+        .stat-item:nth-child(3) .stat-number { color: var(--accent); }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* ================================
+           Footer
+           ================================ */
+        .footer {
+            background: var(--text);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid { grid-template-columns: 2fr 1fr 1fr; }
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-desc {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .footer-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links { list-style: none; }
+
+        .footer-links li { margin-bottom: 0.5rem; }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: white; }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        /* ================================
+           Category Page Styles
+           ================================ */
+        .category-header {
+            background: var(--background);
+            padding: 2rem 0;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover { color: var(--primary); }
+
+        .page-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .page-title { font-size: 2rem; }
+        }
+
+        .page-description { color: var(--text-muted); }
+
+        .places-section { padding: 2rem 0; }
+
+        .places-grid { display: grid; gap: 1rem; }
+
+        @media (min-width: 768px) {
+            .places-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        }
+
+        @media (min-width: 1024px) {
+            .places-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .place-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .place-card:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .place-header { margin-bottom: 0.75rem; }
+
+        .place-badge {
+            display: inline-block;
+            background: rgba(30, 64, 175, 0.1);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .place-badge.night {
+            background: rgba(22, 101, 52, 0.1);
+            color: var(--accent);
+        }
+
+        .place-name {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .place-location {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .place-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .place-details-link {
+            display: block;
+            text-align: center;
+            color: var(--primary);
+            font-size: 0.875rem;
+            text-decoration: none;
+            padding: 0.5rem;
+            border: 1px solid var(--primary);
+            border-radius: var(--radius);
+            transition: all 0.2s;
+        }
+
+        .place-details-link:hover {
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* ================================
+           Place Details Page
+           ================================ */
+        .place-details-section { padding: 2rem 0; }
+
+        .place-details-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .place-image { height: 200px; overflow: hidden; }
+
+        @media (min-width: 768px) {
+            .place-image { height: 300px; }
+        }
+
+        .place-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .place-info { padding: 1.5rem; }
+
+        @media (min-width: 768px) {
+            .place-info { padding: 2rem; }
+        }
+
+        .place-category-badge {
+            display: inline-block;
+            background: rgba(30, 64, 175, 0.1);
+            color: var(--primary);
+            padding: 0.375rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .place-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .place-title { font-size: 2rem; }
+        }
+
+        .place-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .meta-item { display: flex; gap: 0.75rem; }
+
+        .meta-icon { font-size: 1.25rem; }
+
+        .meta-label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.125rem;
+        }
+
+        .meta-value { font-weight: 500; }
+
+        .place-description { margin-bottom: 2rem; }
+
+        .place-description h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .place-description p {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .place-cta {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .place-cta { flex-direction: row; }
+            .place-cta .btn-xl { flex: 2; }
+            .place-cta .btn-lg { flex: 1; }
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link:hover { text-decoration: underline; }
+
+        /* ================================
+           About Page
+           ================================ */
+        .about-section { padding: 2rem 0; }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .about-content { display: grid; gap: 1.5rem; }
+
+        @media (min-width: 768px) {
+            .about-content { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .about-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+        }
+
+        .about-card.highlight {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+        }
+
+        .about-card.highlight p { color: rgba(255, 255, 255, 0.9); }
+
+        .about-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-card h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .about-card p {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .about-list { list-style: none; }
+
+        .about-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .about-list li:last-child { border-bottom: none; }
+
+        /* ================================
+           Contact Page
+           ================================ */
+        .contact-section { padding: 2rem 0; }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 2rem;
         }
 
         .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: .75rem;
-            margin: .75rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
-        .info {
-            display: flex;
-            gap: .7rem;
-            align-items: center;
-            background: rgba(255, 255, 255, .03);
+        .contact-options { display: grid; gap: 1rem; }
+
+        @media (min-width: 768px) {
+            .contact-options { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .contact-card {
+            background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: .7rem;
-        }
-
-        .bubble {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--primary);
-            color: #000;
-        }
-
-        .map {
-            margin-top: .75rem;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-        }
-
-        .cta-row {
-            display: flex;
-            gap: .5rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: .75rem;
-        }
-
-        .contact-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: .4rem;
-            padding: .7rem 1rem;
-            border-radius: 10px;
-            border: 1px solid var(--primary);
-            font-weight: 800;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s;
             cursor: pointer;
-            text-decoration: none;
-            font-family: 'Cairo', sans-serif !important;
         }
 
-        .btn-main {
-            background: var(--primary);
-            color: #000;
+        .contact-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .btn-ghost {
-            background: transparent;
+        .contact-card.whatsapp:hover { border-color: #25d366; }
+        .contact-card.email:hover { border-color: var(--primary); }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-action {
             color: var(--primary);
-        }
-
-        /* Social bar (fixed bottom center) */
-        .social-bar {
-            position: fixed;
-            left: 50%;
-            bottom: 14px;
-            transform: translateX(-50%);
-            display: flex;
-            gap: .6rem;
-            background: rgba(255, 255, 255, .06);
-            border: 1px solid rgba(255, 255, 255, .18);
-            backdrop-filter: blur(10px);
-            padding: .5rem;
-            border-radius: 999px;
-            z-index: 1200;
-        }
-
-        .sbtn {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, .18);
-        }
-
-        .sbtn:hover {
-            transform: translateY(-2px);
-        }
-
-        .sbtn.whatsapp:hover {
-            background: rgba(37, 211, 102, .2);
-        }
-
-        .sbtn.telegram:hover {
-            background: rgba(0, 136, 204, .2);
-        }
-
-        .sbtn.facebook:hover {
-            background: rgba(24, 119, 242, .2);
-        }
-
-        .sbtn.instagram:hover {
-            background: rgba(131, 58, 180, .2);
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes scaleInX {
-            from {
-                transform: scaleX(0);
-            }
-            to {
-                transform: scaleX(1);
-            }
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: scaleX(0);
-            }
-            to {
-                transform: scaleX(1);
-            }
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 15px rgba(34, 197, 94, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
-            }
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-20px);
-            }
-            60% {
-                transform: translateY(-10px);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header-container {
-                padding: 0.5rem 1rem;
-            }
-            
-            .logo-container {
-                gap: 0.5rem;
-            }
-            
-            .logo {
-                height: 45px;
-            }
-            
-            .institute-name {
-                font-size: 1.1rem;
-            }
-            
-            .institute-name span {
-                font-size: 0.7rem;
-            }
-            
-            nav {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(18, 18, 18, 0.95);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                padding: 1rem;
-                border-top: 1px solid var(--border);
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            }
-            
-            nav.show {
-                display: flex;
-            }
-            
-            nav button {
-                width: 100%;
-                text-align: center;
-                padding: 1rem;
-                border-radius: 8px;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .home-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .home-content p {
-                font-size: 1.25rem;
-            }
-
-            .cta-button {
-                padding: 1rem 2rem;
-                font-size: 1.1rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .why-us-home .section-title {
-                font-size: 2rem;
-                margin: 4rem 0 2rem 0;
-            }
-
-            .stages-grid, .grades-grid, .subjects-grid, .courses-grid, .features-grid-home {
-                grid-template-columns: 1fr;
-            }
-
-            .register-form, .contact {
-                padding: 2rem;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .social-icons-container {
-                bottom: 20px;
-                gap: 1rem;
-            }
-
-            .social-icon {
-                width: 45px;
-                height: 45px;
-                font-size: 1.2rem;
-            }
-
-            .back-button-unified {
-                padding: 0.7rem 2rem;
-                font-size: 1rem;
-            }
-
-            .whatsapp-register-btn {
-                padding: 1rem;
-                font-size: 1.1rem;
-            }
-
-            .thank-you-card {
-                padding: 2rem;
-                width: 95%;
-            }
-
-            .thank-you-icon {
-                font-size: 3.5rem;
-            }
-
-            .thank-you-title {
-                font-size: 1.8rem;
-            }
-
-            .thank-you-message {
-                font-size: 1.1rem;
-            }
-
-            .thank-you-btn {
-                padding: 0.8rem 2rem;
-                font-size: 1.1rem;
-                width: 180px;
-            }
-        }
-
-        .toast {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: var(--card);
-            border: 1px solid var(--primary);
-            border-radius: 12px;
-            padding: 1rem 1.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            display: none;
-            animation: slideInUp 0.3s ease-out;
-            z-index: 2000;
-        }
-
-        .toast.show {
-            display: block;
-        }
-
-        .toast div {
-            font-family: 'Cairo', sans-serif !important;
             font-weight: 600;
         }
 
-        @keyframes slideInUp {
-            from {
-                transform: translateY(100px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* إصلاح إضافي للخطوط في النصوص الصغيرة */
-        .course-detail span, 
-        .feature-card-home p,
-        .stage-card p,
-        .grade-card p,
-        .subject-card p,
-        .course-card p {
-            font-family: 'Cairo', sans-serif !important;
-            font-weight: 400 !important;
-        }
-
-        /* إصلاح خط أزرار التسجيل */
-        .btn-primary,
-        .btn-secondary {
-            font-family: 'Cairo', sans-serif !important;
-            font-weight: 700 !important;
-            letter-spacing: 0 !important;
-        }
-
-        /* عرض كود الدورة */
-        .course-code-display {
-            background: rgba(34, 197, 94, 0.1);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            border-radius: 8px;
-            padding: 0.8rem 1.2rem;
-            margin-top: 0.5rem;
-            font-family: 'Cairo', sans-serif !important;
-            font-weight: 700;
-            color: var(--primary);
+        .add-place-card {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
             text-align: center;
-            display: inline-block;
         }
+
+        .add-place-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .add-place-card h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .add-place-card p {
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .add-place-card .btn {
+            background: white;
+            color: var(--primary);
+        }
+
+        .add-place-card .btn:hover { background: var(--background); }
+
+        .faq-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+        }
+
+        .faq-section h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .faq-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .faq-item h4 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-item p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Page visibility */
+        .page { display: none; }
+        .page.active { display: block; }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header>
-        <div class="header-container">
-            <div class="logo-container" onclick="showSection('home')">
-                <img src="https://i.ibb.co/b5GVLHVV/IMG-0621.png" alt="معهد النُعمان التعليمي" class="logo" style="height: 60px; width: auto; border-radius: 8px;">
-                
-                <div class="institute-name">
-                    معهد النُعمان التعليمي
-                    <span>Al-No'man Educational Institute</span>
+    <header class="header">
+        <div class="container header-content">
+            <a href="#" class="logo" onclick="showPage('home')">
+                <!-- اللوجو المضاف برابطك -->
+<img src="https://i.ibb.co/zHX2kdTp/IMG-0880.png" alt="شعار دليل جبلة" class="logo-img">
+                <div class="logo-text">
+                    <span class="logo-title">دليل مدينة جبلة</span>
+                    <span class="logo-subtitle"> </span>
                 </div>
-            </div>
-            
-            <nav id="main-nav">
-                <button onclick="showSection('home')" class="nav-btn active" data-section="home">الصفحة الرئيسية</button>
-                <button onclick="showSection('stages')" class="nav-btn" data-section="stages">الدورات المتاحة</button>
-                <button onclick="showSection('why-us')" class="nav-btn" data-section="why-us">خدماتنا</button>
-                <button onclick="showSection('contact')" class="nav-btn" data-section="contact">تواصل </button>
+            </a>
+            <nav class="nav-desktop">
+                <a href="#" class="nav-link active" onclick="showPage('home')" id="nav-home">الرئيسية</a>
+                <a href="#" class="nav-link" onclick="showPage('about')" id="nav-about">عن الدليل</a>
+                <a href="#" class="nav-link" onclick="showPage('contact')" id="nav-contact">تواصل معنا</a>
             </nav>
-            
+            <a href="tel:110" class="btn btn-emergency">
+                <i class="fas fa-exclamation-triangle"></i>
+                طوارئ
+            </a>
             <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
-                <i class="fas fa-bars"></i>
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
         </div>
+        <nav class="nav-mobile" id="mobileMenu">
+            <a href="#" class="nav-link active" onclick="showPage('home')">الرئيسية</a>
+            <a href="#" class="nav-link" onclick="showPage('about')">عن الدليل</a>
+            <a href="#" class="nav-link" onclick="showPage('contact')">تواصل معنا</a>
+        </nav>
     </header>
 
-    <!-- أيقونات وسائل التواصل الاجتماعي -->
-    <div class="social-icons-container" id="social-icons">
-        <a href="https://wa.me/1234567890" class="social-icon whatsapp" target="_blank">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-        <a href="https://t.me/username" class="social-icon telegram" target="_blank">
-            <i class="fab fa-telegram"></i>
-        </a>
-        <a href="https://facebook.com/username" class="social-icon facebook" target="_blank">
-            <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="https://instagram.com/username" class="social-icon instagram" target="_blank">
-            <i class="fab fa-instagram"></i>
-        </a>
-    </div>
-
-    <!-- رسالة الشكر -->
-    <div id="thankYouOverlay" class="thank-you-overlay">
-        <div class="thank-you-card">
-            <div class="thank-you-icon">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <h2 class="thank-you-title">شكراً لك!</h2>
-            <p class="thank-you-message">
-                هام : يرجى إرسال الرسالة عبر واتساب لتأكيد تسجيلك   <br>
-                شكراً لاختيارك معهد النُعمان التعليمي.<br>
-                سنتواصل معك قريباً
-								لتأكيد الحجز.<br>
-               
-            </p>
-            <button class="thank-you-btn" onclick="closeThankYou()">تم</button>
-        </div>
-    </div>
-
-    <!-- الصفحة الرئيسية -->
-    <section id="home" class="section home-section active">
-        <div class="home-content">
-            <h1> معهد النُعمان التعليمي</h1>
-<p>أهلاً وسهلاً بكم في بيت العلم ...</p>
-            
-            <div style="
-                width: 200px;
-                height: 2px;
-                background: linear-gradient(90deg, 
-                    transparent, 
-                    rgba(34, 197, 94, 0.3), 
-                    var(--primary), 
-                    rgba(34, 197, 94, 0.3), 
-                    transparent);
-                margin: 2.5rem auto;
-                border-radius: 1px;
-                box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
-            "></div>
-            
-            <a href="javascript:void(0)" onclick="showSection('stages')" class="cta-button">
-                سجل الآن عبر الموقع
-            </a>
-        </div>
-        <div class="decorative-circle"></div>
-        <div class="decorative-circle"></div>
-    </section>
-
-    <!-- باقي الأقسام -->
-    <section id="stages" class="section stages-section">
-        <div class="stages-container">
-            <h2 class="section-title">الدورات المتاحة</h2>
-            
-            <div class="stages-grid">
-                <div class="stage-card" onclick="showGrades('ابتدائي')">
-                    <div class="stage-icon">
-                        <i class="fas fa-pencil-alt"></i>
-                    </div>
-                    <h3>المرحلة الابتدائية</h3>
-                    <p>من الصف الأول إلى الصف السادس</p>
-                </div>
-                <div class="stage-card" onclick="showGrades('اعدادي')">
-                    <div class="stage-icon">
-                        <i class="fas fa-book-open"></i>
-                    </div>
-                    <h3>المرحلة الإعدادية</h3>
-                    <p>من الصف السابع إلى الصف التاسع</p>
-                </div>
-                <div class="stage-card" onclick="showGrades('ثانوي')">
-                    <div class="stage-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3>المرحلة الثانوية</h3>
-                    <p>الصف العاشر، الحادي عشر والبكلوريا</p>
-                </div>
-                <div class="stage-card" onclick="showGrades('لغات')">
-                    <div class="stage-icon">
-                        <i class="fas fa-globe"></i>
-                    </div>
-                    <h3>قسم اللغات</h3>
-                    <p>تعلم اللغات الإنجليزية، الفرنسية والألمانية</p>
-                </div>
-            </div>
-            
-            <!-- زر العودة الموحد -->
-            <div class="back-button-center">
-                <button class="back-button-unified" onclick="showSection('home')">
-                    <i class="fas fa-home"></i> العودة للصفحة الرئيسية
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <section id="grades" class="section grades-section">
-        <div class="grades-container">
-            <div class="breadcrumb" id="grades-breadcrumb"></div>
-            <h2 class="section-title" id="grades-title">الصفوف المتاحة</h2>
-            
-            <div class="grades-grid" id="grades-container"></div>
-            
-            <!-- زر العودة الموحد -->
-            <div class="back-button-center">
-                <button class="back-button-unified" onclick="backToStages()">
-                    <i class="fas fa-arrow-right"></i> العودة لاختيار المرحلة
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <section id="subjects" class="section subjects-section">
-        <div class="subjects-container">
-            <div class="breadcrumb" id="subjects-breadcrumb"></div>
-            <h2 class="section-title" id="subjects-title">المواد الدراسية</h2>
-            
-            <div class="subjects-grid" id="subjects-container"></div>
-            
-            <!-- زر العودة الموحد -->
-            <div class="back-button-center">
-                <button class="back-button-unified" onclick="backToGrades()">
-                    <i class="fas fa-arrow-right"></i> العودة لاختيار الصف
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <section id="courses" class="section courses-section">
-        <div class="courses-container">
-            <div class="breadcrumb" id="courses-breadcrumb"></div>
-            <h2 class="section-title" id="courses-title">الدورات المتاحة</h2>
-            
-            <div class="courses-grid" id="courses-container"></div>
-            
-            <!-- زر العودة الموحد -->
-            <div class="back-button-center">
-                <button class="back-button-unified" onclick="backToSubjects()">
-                    <i class="fas fa-arrow-right"></i> العودة لاختيار المادة
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <section id="register" class="section register-section">
-        <div class="register-container">
-            <form class="register-form">
-                <h2>نموذج تسجيل</h2>
+    <!-- ================================
+         HOME PAGE
+         ================================ -->
+    <div id="page-home" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-badge"><i class="fas fa-city"></i> دليلك الشامل لمدينة جبلة</div>
+                <h1 class="hero-title">كل ما تحتاجه في <span class="highlight">جبلة</span></h1>
+                <p class="hero-description">ابحث عن المشافي، الصيدليات، المطاعم، وكل الخدمات المهمة في مدينتك</p>
                 
-               
-
-                <div class="form-group">
-                    <label for="fullName">الاسم الثلاثي للطالب</label>
-                    <input type="text" id="fullName" name="fullName" required>
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="ابحث عن مكان أو خدمة..." id="searchInput">
+                    <button class="search-btn" onclick="handleSearch()"><i class="fas fa-search"></i> بحث</button>
                 </div>
-
-                <div class="form-group">
-                    <label for="phoneNumber">رقم الهاتف للتواصل</label>
-                    <input type="tel" id="phoneNumber" name="phoneNumber" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="selectedCourse">الدورة المختارة</label>
-                    <input type="text" id="selectedCourse" name="selectedCourse" readonly>
-                </div>
-
-                <div class="form-group">
-                    <label for="courseCode">كود الدورة</label>
-                    <div class="course-code-display" id="courseCodeDisplay">-</div>
-                    <input type="hidden" id="courseCode" name="courseCode">
-                </div>
-
-                <!-- زر التسجيل عبر الواتساب - بلون أخضر موحد -->
-                <button type="button" class="whatsapp-register-btn" onclick="registerViaWhatsApp()">
-                    <i class="fab fa-whatsapp"></i> التسجيل عبر الواتساب
-                </button>
                 
-                <!-- زر العودة للدورات - رمادي -->
-                <div class="back-button-center" style="margin-top: 1.5rem;">
-                    <button type="button" class="back-button-unified back-to-courses-btn" onclick="backToCourses()">
-                        <i class="fas fa-arrow-right"></i> العودة للدورات
+                <div class="quick-search">
+                    <span class="quick-label">بحث سريع:</span>
+                    <span class="quick-tag" onclick="showCategory('pharmacies')"><i class="fas fa-moon"></i> صيدلية مناوبة</span>
+                    <span class="quick-tag" onclick="showCategory('hospitals')"><i class="fas fa-hospital"></i> مشفى</span>
+                    <span class="quick-tag" onclick="showCategory('restaurants')"><i class="fas fa-utensils"></i> مطعم</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="categories">
+            <div class="container">
+                <h2 class="section-title">الأقسام الرئيسية</h2>
+                <p class="section-description">اختر القسم المناسب للوصول السريع</p>
+                
+                <div class="categories-grid">
+                    <div class="category-card" onclick="showCategory('hospitals')">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                            <i class="fas fa-hospital"></i>
+                        </div>
+                        <h3 class="category-name">مشافي وعيادات</h3>
+                        <p class="category-desc">مشافي، عيادات، مخابر</p>
+                        <span class="category-count">12 مكان</span>
+                    </div>
+                    
+                    <div class="category-card" onclick="showCategory('pharmacies')">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                        <h3 class="category-name">صيدليات</h3>
+                        <p class="category-desc">صيدليات ومناوبات</p>
+                        <span class="category-count">18 مكان</span>
+                    </div>
+                    
+                    <div class="category-card" onclick="showCategory('restaurants')">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #166534, #15803d);">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="category-name">مطاعم ومقاهي</h3>
+                        <p class="category-desc">مطاعم، كافيهات، حلويات</p>
+                        <span class="category-count">25 مكان</span>
+                    </div>
+                    
+                    <div class="category-card" onclick="showCategory('services')">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3 class="category-name">خدمات</h3>
+                        <p class="category-desc">تكاسي، صيانة، توصيل</p>
+                        <span class="category-count">15 مكان</span>
+                    </div>
+                    
+                    <div class="category-card" onclick="showCategory('schools')">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="category-name">مدارس ومعاهد</h3>
+                        <p class="category-desc">مدارس، معاهد، دورات</p>
+                        <span class="category-count">10 مكان</span>
+                    </div>
+                    
+                    <div class="category-card emergency" onclick="showCategory('emergency')">
+                        <div class="category-icon" style="background: linear-gradient(135deg, #ef4444, #b91c1c);">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <h3 class="category-name">أرقام الطوارئ</h3>
+                        <p class="category-desc">إسعاف، إطفاء، شرطة</p>
+                        <span class="category-count">أرقام مهمة</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Access Section -->
+        <section class="quick-access">
+            <div class="container">
+                <div class="quick-access-card">
+                    <div class="quick-access-content">
+                        <div class="quick-access-badge"><i class="fas fa-clock"></i> متاح الآن</div>
+                        <h3 class="quick-access-title">تحتاج صيدلية مناوبة؟</h3>
+                        <p class="quick-access-desc">اعرف الصيدليات المناوبة الليلة في جبلة</p>
+                    </div>
+                    <button class="btn btn-secondary btn-lg" onclick="showCategory('pharmacies')">
+                        <i class="fas fa-phone-alt"></i> صيدليات مناوبة
                     </button>
                 </div>
-            </form>
-        </div>
-    </section>
+            </div>
+        </section>
 
-    <!-- قسم لماذا نعمان -->
-    <section id="why-us" class="section why-us-home">
-        <div class="stages-container">
-            <h2 class="section-title">لماذا تختار معهد النُعمان؟</h2>
-            
-            <div class="features-grid-home">
-                <div class="feature-card-home">
-                    <div class="feature-icon-home">
-                        <i class="fas fa-user-graduate"></i>
+        <!-- Stats Section -->
+        <section class="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">+100</div>
+                        <div class="stat-label">مكان مسجل</div>
                     </div>
-                    <h3>كادر تدريسي متميز</h3>
-                    <p>نخبة من المعلمين والمعلمات المؤهلين تأهيلاً عالياً وذوي خبرة طويلة في مجال التعليم</p>
-                </div>
-                
-                <div class="feature-card-home">
-                    <div class="feature-icon-home">
-                        <i class="fas fa-book"></i>
+                    <div class="stat-item">
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">أقسام رئيسية</div>
                     </div>
-                    <h3>مناهج متكاملة</h3>
-                    <p>نغطي جميع المناهج الدراسية السورية مع مواد إثرائية لضمان الفهم الشامل</p>
-                </div>
-                
-                <div class="feature-card-home">
-                    <div class="feature-icon-home">
-                        <i class="fas fa-chart-line"></i>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">خدمة مستمرة</div>
                     </div>
-                    <h3>متابعة مستمرة</h3>
-                    <p>نظام متابعة وتقييم مستمر لقياس تطور الطلاب وتقديم التقارير الدورية لأولياء الأمور</p>
-                </div>
-                
-                <div class="feature-card-home">
-                    <div class="feature-icon-home">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <h3>بيئة محفزة</h3>
-                    <p>فصول دراسية مريحة ومجهزة بوسائل تعليمية حديثة تشجع على الإبداع والتميز</p>
-                </div>
-                
-                <div class="feature-card-home">
-                    <div class="feature-icon-home">
-                        <i class="fas fa-hand-holding-usd"></i>
-                    </div>
-                    <h3>أسعار مناسبة</h3>
-                    <p>أسعارنا مدروسة تناسب مختلف طبقات المجتمع أهدافنا تنموية وليست مادية</p>
-                </div>
-                
-                <div class="feature-card-home">
-                    <div class="feature-icon-home">
-                        <i class="fas fa-globe"></i>
-                    </div>
-                    <h3>لغات متعددة</h3>
-                    <p>دورات متخصصة في اللغات الإنجليزية والفرنسية والألمانية بمستويات مختلفة</p>
                 </div>
             </div>
-            
-            <!-- زر العودة الموحد -->
-            <div class="back-button-center">
-                <button class="back-button-unified" onclick="showSection('home')">
-                    <i class="fas fa-home"></i> العودة للصفحة الرئيسية
-                </button>
+        </section>
+    </div>
+
+    <!-- ================================
+         CATEGORY PAGE
+         ================================ -->
+    <div id="page-category" class="page">
+        <section class="category-header">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="#" onclick="showPage('home')">الرئيسية</a>
+                    <span>←</span>
+                    <span id="categoryBreadcrumb">الصيدليات</span>
+                </div>
+                <h1 class="page-title" id="categoryTitle"><i class="fas fa-pills"></i> الصيدليات</h1>
+                <p class="page-description" id="categoryDesc">صيدليات ومناوبات ليلية في مدينة جبلة</p>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- قسم تواصل معنا -->
-    <section id="contact" class="section contact-section">
-        <div class="contact-container">
-            <h2 class="section-title">تواصل معنا</h2>
-            <div class="subtitle" style="color: var(--primary); text-align: center; font-weight: 800; margin-top: -0.25rem; font-family: 'Cairo', sans-serif !important;">
-                يسرّنا خدمتك والإجابة عن استفساراتك
+        <section class="places-section">
+            <div class="container">
+                <div class="places-grid" id="placesGrid">
+                    <!-- Places will be injected here by JavaScript -->
+                </div>
             </div>
+        </section>
+    </div>
 
-            <section class="contact" aria-labelledby="contact-title">
-                <h3 id="contact-title" class="section-title" style="margin-bottom:.25rem; font-size: 1.8rem;">معلومات التواصل والموقع</h3>
+    <!-- ================================
+         PLACE DETAILS PAGE
+         ================================ -->
+    <div id="page-place" class="page">
+        <section class="category-header">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="#" onclick="showPage('home')">الرئيسية</a>
+                    <span>←</span>
+                    <a href="#" onclick="goBackToCategory()" id="placeCategoryLink">الصيدليات</a>
+                    <span>←</span>
+                    <span id="placeBreadcrumb">صيدلية الشفاء</span>
+                </div>
+            </div>
+        </section>
 
+        <section class="place-details-section">
+            <div class="container">
+                <div class="place-details-card">
+                    <div class="place-image">
+                        <img src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?w=800&h=400&fit=crop" alt="صورة المكان" id="placeImage">
+                    </div>
+                    <div class="place-info">
+                        <span class="place-category-badge" id="placeCategoryBadge"><i class="fas fa-pills"></i> صيدلية</span>
+                        <h1 class="place-title" id="placeTitle">صيدلية الشفاء</h1>
+                        
+                        <div class="place-meta">
+                            <div class="meta-item">
+                                <span class="meta-icon"><i class="fas fa-map-marker-alt"></i></span>
+                                <div>
+                                    <span class="meta-label">العنوان</span>
+                                    <span class="meta-value" id="placeAddress">شارع الثورة، بجانب البريد</span>
+                                </div>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon"><i class="fas fa-phone"></i></span>
+                                <div>
+                                    <span class="meta-label">رقم الهاتف</span>
+                                    <span class="meta-value" id="placePhone">041-123456</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="place-description">
+                            <h3>عن المكان</h3>
+                            <p id="placeDesc">صيدلية متكاملة تقدم جميع الأدوية والمستلزمات الطبية. مناوبة ليلية متاحة.</p>
+                        </div>
+                        
+                        <div class="place-cta">
+                            <a href="tel:041-123456" class="btn btn-primary btn-xl" id="placeCallBtn">
+                                <i class="fas fa-phone-alt"></i> اتصل الآن
+                                <span class="phone-number">041-123456</span>
+                            </a>
+                            <!-- تمت إزالة زر الواتساب كما طلبت -->
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="#" onclick="goBackToCategory()" class="back-link"><i class="fas fa-arrow-right"></i> العودة للقائمة</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- ================================
+         ABOUT PAGE
+         ================================ -->
+    <div id="page-about" class="page">
+        <section class="category-header">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="#" onclick="showPage('home')">الرئيسية</a>
+                    <span>←</span>
+                    <span>عن الدليل</span>
+                </div>
+                <h1 class="page-title">عن دليل جبلة</h1>
+                <p class="page-description">تعرف على قصتنا وهدفنا</p>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-card">
+                        <div class="about-icon"><i class="fas fa-city"></i></div>
+                        <h2>ما هو دليل جبلة؟</h2>
+                        <p>دليل جبلة هو منصة خدمية محلية تهدف لتسهيل وصول سكان وزوار مدينة جبلة السورية إلى جميع الخدمات والأماكن المهمة في المدينة بسرعة وسهولة.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="about-icon"><i class="fas fa-bullseye"></i></div>
+                        <h2>هدفنا</h2>
+                        <p>تمكين أي شخص من الوصول إلى المعلومة التي يحتاجها خلال أقل من 30 ثانية، بدون الحاجة للسؤال على فيسبوك أو واتساب.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="about-icon"><i class="fas fa-users"></i></div>
+                        <h2>للجميع</h2>
+                        <p>صممنا الدليل ليكون سهل الاستخدام للجميع - كبار السن، الشباب، الزوار، والمقيمين على حد سواء.</p>
+                    </div>
+
+                    <div class="about-card highlight">
+                        <div class="about-icon"><i class="fas fa-heart"></i></div>
+                        <h2>مجاني بالكامل</h2>
+                        <p>دليل جبلة خدمة مجانية بالكامل، بدون إعلانات مزعجة، هدفنا الوحيد خدمة أهل جبلة.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ================================
+         CONTACT PAGE
+         ================================ -->
+    <div id="page-contact" class="page">
+        <section class="category-header">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="#" onclick="showPage('home')">الرئيسية</a>
+                    <span>←</span>
+                    <span>تواصل معنا</span>
+                </div>
+                <h1 class="page-title">تواصل معنا</h1>
+                <p class="page-description">نسعد بتواصلكم واقتراحاتكم</p>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <div class="container">
                 <div class="contact-grid">
-                    <div class="info">
-                        <div class="bubble"><i class="fas fa-map-marker-alt"></i></div>
-                        <div>
-                            <strong>العنوان</strong>
-                            <div>جبلة، العمارة فوق صيدلية بشر مثبوت، الطابق الأول</div>
-                        </div>
+                    <div class="contact-options">
+                        <!-- تم الاحتفاظ بواتساب صفحة التواصل فقط كما طلبت -->
+                        <a href="https://wa.me/963912345678" class="contact-card whatsapp" target="_blank">
+                            <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+                            <h3>واتساب</h3>
+                            <p>تواصل معنا مباشرة عبر واتساب</p>
+                            <span class="contact-action">راسلنا الآن</span>
+                        </a>
+                        
+                        <a href="mailto:info@jableh-guide.com" class="contact-card email">
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <h3>البريد الإلكتروني</h3>
+                            <p>أرسل لنا رسالة بالبريد</p>
+                            <span class="contact-action">info@jableh-guide.com</span>
+                        </a>
                     </div>
 
-                    <div class="info">
-                        <div class="bubble"><i class="fas fa-phone"></i></div>
-                        <div>
-                            <strong>الهاتف</strong>
-                            <div><a href="tel:0999999999" style="color:inherit;text-decoration:none">0999-999999</a></div>
-                        </div>
+                    <div class="add-place-card">
+                        <div class="add-place-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <h2>أضف مكانك للدليل</h2>
+                        <p>لديك محل أو خدمة في جبلة؟ أضفها مجاناً للدليل</p>
+                        <a href="https://wa.me/963912345678?text=أريد%20إضافة%20مكان%20جديد" class="btn" target="_blank">
+                            <i class="fas fa-plus"></i> أضف مكان جديد
+                        </a>
                     </div>
 
-                    <div class="info">
-                        <div class="bubble"><i class="fas fa-envelope"></i></div>
-                        <div>
-                            <strong>البريد</strong>
-                            <div><a href="mailto:info@al-numan.edu" style="color:inherit;text-decoration:none">info@al-numan.edu</a></div>
+                    <div class="faq-section">
+                        <h2>أسئلة شائعة</h2>
+                        <div class="faq-item">
+                            <h4>هل الخدمة مجانية؟</h4>
+                            <p>نعم، دليل جبلة مجاني بالكامل للمستخدمين وأصحاب الأماكن.</p>
                         </div>
-                    </div>
-
-                    <div class="info">
-                        <div class="bubble"><i class="fas fa-clock"></i></div>
-                        <div>
-                            <strong>ساعات العمل</strong>
-                            <div>السبت - الخميس: 8:00 ص - 6:00 م</div>
+                        <div class="faq-item">
+                            <h4>كيف أضيف مكاني؟</h4>
+                            <p>تواصل معنا عبر واتساب وأرسل لنا معلومات المكان.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h4>كيف أبلغ عن خطأ؟</h4>
+                            <p>إذا وجدت معلومة خاطئة، راسلنا وسنصححها فوراً.</p>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+    </div>
 
-                <!-- خريطة: الإحداثيات من رابطك -->
-                <div class="map">
-                    <iframe id="map-embed"
-                            src="https://www.google.com/maps?q=35.362099,35.9270515&z=18&output=embed"
-                            width="100%" height="420" style="border:0" allowfullscreen loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>دليل جبلة</span>
+                    </div>
+                    <p class="footer-desc">دليلك الشامل لكل الخدمات والأماكن المهمة في مدينة جبلة السورية</p>
                 </div>
-
-                <div class="cta-row">
-                    <a class="contact-btn btn-main" target="_blank" rel="noopener"
-                       href="https://maps.app.goo.gl/HdYHyCMy6Sfmf13n9?g_st=ipc">
-                        <i class="fas fa-location-arrow"></i> فتح الموقع الدقيق
-                    </a>
-                    <a class="contact-btn btn-ghost" href="tel:0999999999">
-                        <i class="fas fa-phone"></i> اتصال الآن
-                    </a>
-                    <button class="contact-btn btn-ghost" type="button" onclick="sharePlace()">
-                        <i class="fas fa-share-alt"></i> مشاركة الموقع
-                    </button>
+                
+                <div class="footer-section">
+                    <h4 class="footer-title">روابط سريعة</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="showPage('home')"><i class="fas fa-home"></i> الرئيسية</a></li>
+                        <li><a href="#" onclick="showPage('about')"><i class="fas fa-info-circle"></i> عن الدليل</a></li>
+                        <li><a href="#" onclick="showPage('contact')"><i class="fas fa-envelope"></i> تواصل معنا</a></li>
+                    </ul>
                 </div>
-
-                <div style="text-align:center;color:#9aa0a6;margin-top:1rem; font-family: 'Cairo', sans-serif !important;">
-                     جميع الحقوق محفوظة © 2025 معهد النُعمان التعليميي 
-									
+                
+                <div class="footer-section">
+                    <h4 class="footer-title">أرقام الطوارئ</h4>
+                    <ul class="footer-links">
+                        <li><a href="tel:110"><i class="fas fa-police-box"></i> الشرطة: 110</a></li>
+                        <li><a href="tel:113"><i class="fas fa-ambulance"></i> الإسعاف: 113</a></li>
+                        <li><a href="tel:118"><i class="fas fa-fire-extinguisher"></i> الإطفاء: 118</a></li>
+                    </ul>
                 </div>
-            </section>
+            </div>
             
-            <!-- زر العودة الموحد -->
-            <div class="back-button-center" style="margin-top: 3rem;">
-                <button class="back-button-unified" onclick="showSection('home')">
-                    <i class="fas fa-home"></i> العودة للصفحة الرئيسية
-                </button>
+            <div class="footer-bottom">
+                <p>تم تطوير الموقع بواسطة <strong>إيهاب عبدالعال ، عابد إستامبولي</strong> حقوق النشر محفوظة© 2025</p>
             </div>
         </div>
-    </section>
-
-    <div id="toast" class="toast">
-        <div id="toast-message"></div>
-    </div>
+    </footer>
 
     <script>
-        // بيانات الموقع مع الأكواد الجديدة
-        const stagesData = {
-            "ابتدائي": {
-                grades: ["الصف الأول", "الصف الثاني", "الصف الثالث", "الصف الرابع", "الصف الخامس", "الصف السادس"],
-                subjects: {
-                    "الصف الأول": ["اللغة العربية", "الرياضيات", "التربية الدينية", "التربية الوطنية"],
-                    "الصف الثاني": ["اللغة العربية", "الرياضيات", "التربية الدينية", "التربية الوطنية", "العلوم"],
-                    "الصف الثالث": ["اللغة العربية", "الرياضيات", "التربية الدينية", "التربية الوطنية", "العلوم", "اللغة الإنجليزية"],
-                    "الصف الرابع": ["اللغة العربية", "الرياضيات", "التربية الدينية", "التربية الوطنية", "العلوم", "اللغة الإنجليزية", "التربية الفنية"],
-                    "الصف الخامس": ["اللغة العربية", "الرياضيات", "التربية الدينية", "التربية الوطنية", "العلوم", "اللغة الإنجليزية", "التربية الفنية", "الاجتماعيات"],
-                    "الصف السادس": ["اللغة العربية", "الرياضيات", "التربية الدينية", "التربية الوطنية", "العلوم", "اللغة الإنجليزية", "التربية الفنية", "الاجتماعيات"]
-                }
+        // ================================
+        // Data
+        // ================================
+        const categories = {
+            hospitals: {
+                name: 'مشافي وعيادات',
+                icon: '<i class="fas fa-hospital"></i>',
+                description: 'مشافي، عيادات، مخابر في مدينة جبلة'
             },
-            "اعدادي": {
-                grades: ["الصف السابع", "الصف الثامن", "الصف التاسع"],
-                subjects: {
-                    "الصف السابع": ["اللغة العربية", "الرياضيات", "الفيزياء", "الكيمياء", "الأحياء", "اللغة الإنجليزية", "التربية الوطنية", "التربية الدينية", "الاجتماعيات"],
-                    "الصف الثامن": ["اللغة العربية", "الرياضيات", "الفيزياء", "الكيمياء", "الأحياء", "اللغة الإنجليزية", "التربية الوطنية", "التربية الدينية", "الاجتماعيات"],
-                    "الصف التاسع": ["اللغة العربية", "الرياضيات", "الفيزياء", "الكيمياء", "الأحياء", "اللغة الإنجليزية", "التربية الوطنية", "التربية الدينية", "الاجتماعيات"]
-                }
+            pharmacies: {
+                name: 'الصيدليات',
+                icon: '<i class="fas fa-pills"></i>',
+                description: 'صيدليات ومناوبات ليلية في مدينة جبلة'
             },
-            "ثانوي": {
-                grades: ["الصف العاشر", "الصف الحادي عشر", "البكلوريا علمي", "البكلوريا أدبي"],
-                subjects: {
-                    "الصف العاشر": ["اللغة العربية", "الرياضيات", "الفيزياء", "الكيمياء", "الأحياء", "اللغة الإنجليزية", "التربية الوطنية", "التربية الدينية", "التاريخ", "الجغرافيا"],
-                    "الصف الحادي عشر": ["اللغة العربية", "الرياضيات", "الفيزياء", "الكيمياء", "الأحياء", "اللغة الإنجليزية", "التربية الوطنية", "التربية الدينية", "التاريخ", "الجغرافيا"],
-                    "البكلوريا علمي": ["اللغة العربية", "الرياضيات", "الفيزياء", "الكيمياء", "الأحياء", "اللغة الإنجليزية", "التربية الوطنية", "التربية الدينية"],
-                    "البكلوريا أدبي": ["اللغة العربية", "التاريخ", "الجغرافيا", "الفلسفة", "علم النفس", "اللغة الإنجليزية", "التربية الوطنية", "التربية الدينية"]
-                }
+            restaurants: {
+                name: 'مطاعم ومقاهي',
+                icon: '<i class="fas fa-utensils"></i>',
+                description: 'مطاعم، كافيهات، حلويات في مدينة جبلة'
             },
-            "لغات": {
-                grades: ["الإنجليزية", "الفرنسية", "الألمانية"],
-                subjects: {
-                    "الإنجليزية": ["الإنجليزية للمبتدئين", "الإنجليزية للمتوسطين", "الإنجليزية للمتقدمين", "الإنجليزية للأطفال", "الإنجليزية للمحادثة"],
-                    "الفرنسية": ["الفرنسية للمبتدئين", "الفرنسية للمتوسطين", "الفرنسية للمتقدمين", "الفرنسية للأطفال", "الفرنسية للمحادثة"],
-                    "الألمانية": ["الألمانية للمبتدئين", "الألمانية للمتوسطين", "الألمانية للمتقدمين", "الألمانية للأطفال", "الألمانية للمحادثة"]
-                }
+            services: {
+                name: 'خدمات',
+                icon: '<i class="fas fa-tools"></i>',
+                description: 'تكاسي، صيانة، توصيل في مدينة جبلة'
+            },
+            schools: {
+                name: 'مدارس ومعاهد',
+                icon: '<i class="fas fa-graduation-cap"></i>',
+                description: 'مدارس، معاهد، دورات في مدينة جبلة'
+            },
+            emergency: {
+                name: 'أرقام الطوارئ',
+                icon: '<i class="fas fa-exclamation-triangle"></i>',
+                description: 'أرقام الطوارئ المهمة في جبلة'
             }
         };
 
-        const coursesData = {
-            "ابتدائي": {
-                "الصف الأول": {
-                    "اللغة العربية": [
-                        {name: "دورة اللغة العربية - الصف الأول", price: "15000 ل.س", code: "N-101", start: "1/12/2025", end: "31/3/2026", seats: 15, description: "دورة شاملة لتعليم القراءة والكتابة ومهارات اللغة العربية الأساسية"},
-                        {name: "دورة القراءة والكتابة", price: "12000 ل.س", code: "N-102", start: "1/12/2025", end: "28/2/2026", seats: 12, description: "تركيز على مهارات القراءة والكتابة الأساسية"}
-                    ],
-                    "الرياضيات": [
-                        {name: "دورة الرياضيات - الصف الأول", price: "15000 ل.س", code: "N-111", start: "1/12/2025", end: "31/3/2026", seats: 15, description: "تعليم أساسيات الرياضيات والأعداد والعمليات الحسابية البسيطة"}
-                    ]
-                },
-                "الصف الثاني": {
-                    "اللغة العربية": [
-                        {name: "دورة اللغة العربية - الصف الثاني", price: "16000 ل.س", code: "N-103", start: "1/12/2025", end: "31/3/2026", seats: 15, description: "تطوير مهارات القراءة والكتابة والقواعد الأساسية"}
-                    ],
-                    "الرياضيات": [
-                        {name: "دورة الرياضيات - الصف الثاني", price: "16000 ل.س", code: "N-112", start: "1/12/2025", end: "31/3/2026", seats: 15, description: "تعلم العمليات الحسابية والمسائل الرياضية"}
-                    ]
-                }
-            },
-            "اعدادي": {
-                "الصف السابع": {
-                    "الرياضيات": [
-                        {name: "دورة الرياضيات - الصف السابع", price: "20000 ل.س", code: "N-211", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "شاملة لجميع مواضيع منهاج الصف السابع في الرياضيات"}
-                    ],
-                    "الفيزياء": [
-                        {name: "دورة الفيزياء - الصف السابع", price: "20000 ل.س", code: "N-221", start: "1/12/2025", end: "31/3/2026", seats: 8, description: "شرح مفاهيم الفيزياء الأساسية وتطبيقاتها"}
-                    ],
-                    "الكيمياء": [
-                        {name: "دورة الكيمياء - الصف السابع", price: "20000 ل.س", code: "N-231", start: "1/12/2025", end: "31/3/2026", seats: 8, description: "تعلم أساسيات الكيمياء والمختبرات البسيطة"}
-                    ]
-                },
-                "الصف الثامن": {
-                    "الرياضيات": [
-                        {name: "دورة الرياضيات - الصف الثامن", price: "22000 ل.س", code: "N-212", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "متقدمة في مواضيع الرياضيات للصف الثامن"}
-                    ]
-                }
-            },
-            "ثانوي": {
-                "البكلوريا علمي": {
-                    "الرياضيات": [
-                        {name: "دورة الرياضيات - البكلوريا علمي", price: "25000 ل.س", code: "N-311", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تحضير شامل لامتحان البكلوريا في مادة الرياضيات"}
-                    ],
-                    "الفيزياء": [
-                        {name: "دورة الفيزياء - البكلوريا علمي", price: "25000 ل.س", code: "N-321", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "مراجعة شاملة وتدريبات على امتحانات البكلوريا"}
-                    ],
-                    "الكيمياء": [
-                        {name: "دورة الكيمياء - البكلوريا علمي", price: "25000 ل.س", code: "N-331", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تركيز على التجارب والمسائل الكيميائية"}
-                    ]
-                },
-                "البكلوريا أدبي": {
-                    "التاريخ": [
-                        {name: "دورة التاريخ - البكلوريا أدبي", price: "25000 ل.س", code: "N-341", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تحليل الأحداث التاريخية ومراجعة شاملة للمنهاج"}
-                    ],
-                    "الجغرافيا": [
-                        {name: "دورة الجغرافيا - البكلوريا أدبي", price: "25000 ل.س", code: "N-351", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "دراسة شاملة للمفاهيم الجغرافية والخرائط"}
-                    ],
-                    "الفلسفة": [
-                        {name: "دورة الفلسفة - البكلوريا أدبي", price: "25000 ل.س", code: "N-361", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تحليل النصوص الفلسفية وتطوير مهارات التفكير النقدي"}
-                    ]
-                }
-            },
-            "لغات": {
-                "الإنجليزية": {
-                    "الإنجليزية للمبتدئين": [
-                        {name: "دورة الإنجليزية للمبتدئين", price: "18000 ل.س", code: "N-401", start: "1/12/2025", end: "31/3/2026", seats: 12, description: "تعلم الأساسيات من الصفر مع التركيز على المحادثة اليومية"}
-                    ],
-                    "الإنجليزية للمحادثة": [
-                        {name: "دورة الإنجليزية للمحادثة", price: "20000 ل.س", code: "N-402", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "تحسين الطلاقة والتحدث بثقة في مختلف المواقف"}
-                    ],
-                    "الإنجليزية للأطفال": [
-                        {name: "دورة الإنجليزية للأطفال", price: "15000 ل.س", code: "N-403", start: "1/12/2025", end: "31/3/2026", seats: 8, description: "تعلم ممتع عبر الألعاب والأنشطة التفاعلية"}
-                    ]
-                },
-                "الفرنسية": {
-                    "الفرنسية للمبتدئين": [
-                        {name: "دورة الفرنسية للمبتدئين", price: "18000 ل.س", code: "N-411", start: "1/12/2025", end: "31/3/2026", seats: 10, description: "بداية رحلة تعلم الفرنسية من الأساسيات"}
-                    ]
-                },
-                "الألمانية": {
-                    "الألمانية للمبتدئين": [
-                        {name: "دورة الألمانية للمبتدئين", price: "20000 ل.س", code: "N-421", start: "1/12/2025", end: "31/3/2026", seats: 8, description: "تعلم اللغة الألمانية من الصفر مع مدرسين متخصصين"}
-                    ]
-                }
-            }
+        const places = {
+            pharmacies: [
+                { id: 1, name: 'صيدلية الشفاء', neighborhood: 'شارع الثورة', phone: '041-123456', isNight: true, description: 'صيدلية متكاملة تقدم جميع الأدوية والمستلزمات الطبية. مناوبة ليلية متاحة.' },
+                { id: 2, name: 'صيدلية النور', neighborhood: 'حي الزهراء', phone: '041-234567', isNight: false, description: 'صيدلية حديثة بأسعار مناسبة وخدمة ممتازة.' },
+                { id: 3, name: 'صيدلية الأمل', neighborhood: 'الشارع العام', phone: '041-345678', isNight: true, description: 'صيدلية مناوبة توفر الأدوية على مدار الساعة.' },
+            ],
+            hospitals: [
+                { id: 4, name: 'مشفى جبلة الوطني', neighborhood: 'المنطقة الصناعية', phone: '041-111111', description: 'مشفى حكومي يقدم خدمات طبية شاملة.' },
+                { id: 5, name: 'عيادة الدكتور أحمد', neighborhood: 'شارع الثورة', phone: '041-222222', description: 'عيادة طب عام وباطنية.' },
+            ],
+            restaurants: [
+                { id: 6, name: 'مطعم البحر', neighborhood: 'الكورنيش', phone: '041-333333', description: 'أشهى المأكولات البحرية الطازجة.' },
+                { id: 7, name: 'كافيه الصباح', neighborhood: 'وسط المدينة', phone: '041-444444', description: 'قهوة مميزة وأجواء هادئة.' },
+            ],
+            services: [
+                { id: 8, name: 'تكسي الأمان', neighborhood: 'جميع المناطق', phone: '041-555555', description: 'خدمة تكسي سريعة وموثوقة.' },
+                { id: 9, name: 'صيانة الإخوان', neighborhood: 'حي النصر', phone: '041-666666', description: 'صيانة أجهزة كهربائية ومنزلية.' },
+            ],
+            schools: [
+                { id: 10, name: 'ثانوية جبلة', neighborhood: 'حي المدارس', phone: '041-777777', description: 'مدرسة ثانوية حكومية.' },
+                { id: 11, name: 'معهد اللغات', neighborhood: 'شارع الجامعة', phone: '041-888888', description: 'دورات لغة إنكليزية وفرنسية.' },
+            ],
+            emergency: [
+                { id: 12, name: 'الشرطة', neighborhood: 'جبلة', phone: '110', description: 'رقم الطوارئ للشرطة.' },
+                { id: 13, name: 'الإسعاف', neighborhood: 'جبلة', phone: '113', description: 'رقم الطوارئ للإسعاف.' },
+                { id: 14, name: 'الإطفاء', neighborhood: 'جبلة', phone: '118', description: 'رقم الطوارئ للإطفاء.' },
+            ]
         };
 
-        // المتغيرات لتتبع المسار
-        let currentStage = '';
-        let currentGrade = '';
-        let currentSubject = '';
-        let currentCourseCode = '';
+        let currentCategory = 'pharmacies';
 
-        // رقم الواتساب الخاص بالمعهد
-        const WHATSAPP_NUMBER = '+4917616624880'; // الرقم الذي أعطيتني إياه
-
-        // Navigation
-        function showSection(sectionId) {
-            // Hide all sections
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-
-            // Show selected section
-            document.getElementById(sectionId).classList.add('active');
-
-            // Update active nav button
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
+        // ================================
+        // Navigation Functions
+        // ================================
+        function showPage(pageName) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             
-            const navBtn = document.querySelector(`[data-section="${sectionId}"]`);
-            if (navBtn) {
-                navBtn.classList.add('active');
-            }
-
-            // التحكم في إظهار وإخفاء أيقونات التواصل الاجتماعي
-            const socialIcons = document.getElementById('social-icons');
-            if (sectionId === 'home') {
-                socialIcons.classList.remove('hidden');
-            } else {
-                socialIcons.classList.add('hidden');
-            }
-
-            // إغلاق القائمة المتنقلة إذا كانت مفتوحة
-            document.getElementById('main-nav').classList.remove('show');
-
-            // Reset to top
+            // Show selected page
+            document.getElementById('page-' + pageName).classList.add('active');
+            
+            // Update navigation
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            const navLink = document.getElementById('nav-' + pageName);
+            if (navLink) navLink.classList.add('active');
+            
+            // Close mobile menu
+            document.getElementById('mobileMenu').classList.remove('active');
+            
+            // Scroll to top
             window.scrollTo(0, 0);
         }
 
-        function toggleMobileMenu() {
-            document.getElementById('main-nav').classList.toggle('show');
-        }
-
-        function showGrades(stage) {
-            currentStage = stage;
-            showSection('grades');
+        function showCategory(categoryId) {
+            currentCategory = categoryId;
+            const category = categories[categoryId];
             
-            document.getElementById('grades-title').textContent = `الصفوف المتاحة لمرحلة ${stage}`;
+            // Update category header
+            document.getElementById('categoryBreadcrumb').textContent = category.name;
+            document.getElementById('categoryTitle').innerHTML = category.icon + ' ' + category.name;
+            document.getElementById('categoryDesc').textContent = category.description;
             
-            // تحديث breadcrumb
-            updateBreadcrumb('grades-breadcrumb', [
-                {text: 'المراحل', action: 'backToStages()'},
-                {text: stage, action: ''}
-            ]);
-            
-            const gradesContainer = document.getElementById('grades-container');
-            gradesContainer.innerHTML = '';
-            
-            stagesData[stage].grades.forEach(grade => {
-                const card = document.createElement('div');
-                card.className = 'grade-card';
-                card.innerHTML = `
-                    <div class="stage-icon">
-                        <i class="fas fa-book"></i>
+            // Generate places HTML
+            const placesHtml = (places[categoryId] || []).map(place => `
+                <div class="place-card">
+                    <div class="place-header">
+                        <span class="place-badge ${place.isNight ? 'night' : ''}">${place.isNight ? '<i class="fas fa-moon"></i> مناوبة ليلية' : category.icon + ' ' + category.name}</span>
                     </div>
-                    <h3>${grade}</h3>
-                    <p>انقر للاطلاع على المواد الدراسية</p>
-                `;
-                card.addEventListener('click', () => showSubjects(grade));
-                gradesContainer.appendChild(card);
-            });
+                    <h3 class="place-name">${place.name}</h3>
+                    <p class="place-location"><i class="fas fa-map-marker-alt"></i> ${place.neighborhood}</p>
+                    <div class="place-actions">
+                        <a href="tel:${place.phone}" class="btn btn-call"><i class="fas fa-phone-alt"></i> اتصال</a>
+                        <a href="#" onclick="showPlace(${place.id}, '${categoryId}')" class="place-details-link"><i class="fas fa-info-circle"></i> تفاصيل</a>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('placesGrid').innerHTML = placesHtml || '<p style="text-align:center;color:var(--text-muted);">لا توجد أماكن في هذا القسم حالياً</p>';
+            
+            showPage('category');
         }
 
-        function showSubjects(grade) {
-            currentGrade = grade;
-            showSection('subjects');
+        function showPlace(placeId, categoryId) {
+            currentCategory = categoryId;
+            const category = categories[categoryId];
+            const place = places[categoryId].find(p => p.id === placeId);
             
-            document.getElementById('subjects-title').textContent = `المواد الدراسية للصف ${grade}`;
+            if (!place) return;
             
-            // تحديث breadcrumb
-            updateBreadcrumb('subjects-breadcrumb', [
-                {text: 'المراحل', action: 'backToStages()'},
-                {text: currentStage, action: 'backToGrades()'},
-                {text: grade, action: ''}
-            ]);
+            // Update place details
+            document.getElementById('placeCategoryLink').textContent = category.name;
+            document.getElementById('placeBreadcrumb').textContent = place.name;
+            document.getElementById('placeCategoryBadge').innerHTML = category.icon + ' ' + category.name;
+            document.getElementById('placeTitle').textContent = place.name;
+            document.getElementById('placeAddress').textContent = place.neighborhood;
+            document.getElementById('placePhone').textContent = place.phone;
+            document.getElementById('placeDesc').textContent = place.description;
             
-            const subjectsContainer = document.getElementById('subjects-container');
-            subjectsContainer.innerHTML = '';
+            // Update call button
+            document.getElementById('placeCallBtn').href = 'tel:' + place.phone;
+            document.getElementById('placeCallBtn').querySelector('.phone-number').textContent = place.phone;
             
-            if (stagesData[currentStage].subjects[grade]) {
-                stagesData[currentStage].subjects[grade].forEach(subject => {
-                    const card = document.createElement('div');
-                    card.className = 'subject-card';
-                    card.innerHTML = `
-                        <div class="stage-icon">
-                            <i class="fas fa-book-open"></i>
-                        </div>
-                        <h3>${subject}</h3>
-                        <p>انقر للاطلاع على الدورات المتاحة</p>
-                    `;
-                    card.addEventListener('click', () => showCourses(subject));
-                    subjectsContainer.appendChild(card);
-                });
+            showPage('place');
+        }
+
+        function goBackToCategory() {
+            showCategory(currentCategory);
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (query) {
+                alert('جاري البحث عن: ' + query + '\n\nهذه نسخة تجريبية، البحث غير مفعّل حالياً');
             }
         }
 
-        function showCourses(subject) {
-            currentSubject = subject;
-            showSection('courses');
-            
-            document.getElementById('courses-title').textContent = `الدورات المتاحة لمادة ${subject}`;
-            // تحديث breadcrumb
-            updateBreadcrumb('courses-breadcrumb', [
-                {text: 'المراحل', action: 'backToStages()'},
-                {text: currentStage, action: 'backToGrades()'},
-                {text: currentGrade, action: 'backToSubjects()'},
-                {text: subject, action: ''}
-            ]);
-            
-            const coursesContainer = document.getElementById('courses-container');
-            coursesContainer.innerHTML = '';
-            
-            if (coursesData[currentStage] && coursesData[currentStage][currentGrade] && coursesData[currentStage][currentGrade][subject]) {
-                coursesData[currentStage][currentGrade][subject].forEach(course => {
-                    const card = document.createElement('div');
-                    card.className = 'course-card';
-                    card.innerHTML = `
-                        <h3>${course.name}</h3>
-                        <p>${course.description}</p>
-                        <div class="course-details">
-                            <div class="course-detail">
-                                <i class="fas fa-hashtag"></i>
-                                <span>كود الدورة: <strong>${course.code}</strong></span>
-                            </div>
-                            <div class="course-detail">
-                                <i class="fas fa-money-bill-wave"></i>
-                                <span>السعر: ${course.price}</span>
-                            </div>
-                            <div class="course-detail">
-                                <i class="far fa-calendar-alt"></i>
-                                <span>تاريخ البداية: ${course.start}</span>
-                            </div>
-                            <div class="course-detail">
-                                <i class="far fa-calendar-check"></i>
-                                <span>تاريخ النهاية: ${course.end}</span>
-                            </div>
-                            <div class="course-detail">
-                                <i class="fas fa-users"></i>
-                                <span>المقاعد المتاحة: ${course.seats}</span>
-                            </div>
-                        </div>
-                        <div class="course-actions">
-                            <button class="btn btn-primary" onclick="showRegister('${course.name.replace(/'/g, "\\'")}', '${course.code}')">سجل الآن</button>
-                            <button class="btn btn-secondary" onclick="backToSubjects()">إلغاء</button>
-                        </div>
-                    `;
-                    coursesContainer.appendChild(card);
-                });
-            } else {
-                coursesContainer.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: var(--muted); font-family: \'Cairo\', sans-serif !important;">لا توجد دورات متاحة حالياً لهذه المادة</p>';
-            }
-        }
-
-        function showRegister(courseName, courseCode) {
-            showSection('register');
-            document.getElementById('selectedCourse').value = courseName;
-            document.getElementById('courseCode').value = courseCode;
-            document.getElementById('courseCodeDisplay').textContent = courseCode;
-            currentCourseCode = courseCode;
-        }
-
-        // وظيفة التسجيل عبر الواتساب - الجديدة
-        function registerViaWhatsApp() {
-            const fullName = document.getElementById('fullName').value;
-            const phoneNumber = document.getElementById('phoneNumber').value;
-            const selectedCourse = document.getElementById('selectedCourse').value;
-            const courseCode = document.getElementById('courseCode').value;
-            
-            // التحقق من ملء جميع الحقول
-            if (!fullName || !phoneNumber || !selectedCourse) {
-                showToast('⚠️ الرجاء ملء جميع الحقول المطلوبة');
-                return;
-            }
-            
-            // تاريخ اليوم
-            const today = new Date();
-            const formattedDate = `${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
-            
-            // رسالة الواتساب المعدة
-            const message = `📚 *تسجيل جديد في معهد النعمان التعليمي*
-            
-👤 *اسم الطالب:* ${fullName}
-📞 *رقم الهاتف:* ${phoneNumber}
-📖 *الدورة المختارة:* ${selectedCourse}
-🔢 *كود الدورة:* ${courseCode}
-📅 *تاريخ التسجيل:* ${formattedDate}
-
-📍 *الموقع:* جبلة، العمارة فوق صيدلية بشر مثبوت، الطابق الأول
-
-✅ يرجى تأكيد استلام طلب التسجيل.`;
-            
-            // ترميز الرسالة للرابط
-            const encodedMessage = encodeURIComponent(message);
-            
-            // فتح الواتساب مع الرسالة المعدة
-            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
-            window.open(whatsappUrl, '_blank');
-            
-            // إظهار رسالة الشكر بعد فتح الواتساب
-            setTimeout(showThankYouMessage, 1000);
-            
-            // إعادة تعيين الحقول بعد إرسال الطلب
-            setTimeout(() => {
-                document.getElementById('fullName').value = '';
-                document.getElementById('phoneNumber').value = '';
-            }, 2000);
-        }
-
-        // وظيفة إظهار رسالة الشكر
-        function showThankYouMessage() {
-            const overlay = document.getElementById('thankYouOverlay');
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden'; // منع التمرير عند ظهور الرسالة
-        }
-
-        // وظيفة إغلاق رسالة الشكر والعودة للصفحة الرئيسية
-        function closeThankYou() {
-            const overlay = document.getElementById('thankYouOverlay');
-            overlay.classList.remove('active');
-            document.body.style.overflow = 'auto'; // إعادة التمرير
-            
-            // العودة للصفحة الرئيسية
-            showSection('home');
-        }
-
-        // وظائف العودة
-        function backToStages() {
-            showSection('stages');
-        }
-
-        function backToGrades() {
-            showSection('grades');
-        }
-
-        function backToSubjects() {
-            showSection('subjects');
-        }
-
-        function backToCourses() {
-            showSection('courses');
-        }
-
-        // وظيفة تحديث breadcrumb
-        function updateBreadcrumb(containerId, items) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = '';
-            
-            items.forEach((item, index) => {
-                const itemElement = document.createElement('span');
-                itemElement.className = `breadcrumb-item ${index === items.length - 1 ? 'active' : ''}`;
-                
-                if (item.action && index < items.length - 1) {
-                    itemElement.innerHTML = `<a href="javascript:${item.action}" style="color: inherit; text-decoration: none; font-family: 'Cairo', sans-serif !important;">${item.text}</a>`;
-                } else {
-                    itemElement.textContent = item.text;
-                }
-                
-                container.appendChild(itemElement);
-                
-                if (index < items.length - 1) {
-                    const separator = document.createElement('span');
-                    separator.className = 'breadcrumb-separator';
-                    separator.innerHTML = ' / ';
-                    container.appendChild(separator);
-                }
-            });
-        }
-
-        // Toast Notification
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toast-message');
-            
-            toastMessage.textContent = message;
-            toast.classList.add('show');
-
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-
-        // وظائف قسم التواصل
-        const MAP_COORDS = { lat: 35.362099, lng: 35.9270515 };
-
-        (function initMapEmbed(){
-            const iframe = document.getElementById('map-embed');
-            if(iframe && MAP_COORDS){
-                iframe.src = `https://www.google.com/maps?q=${MAP_COORDS.lat},${MAP_COORDS.lng}&z=18&output=embed`;
-            }
-        })();
-
-        async function sharePlace(){
-            const url = 'https://maps.app.goo.gl/HdYHyCMy6Sfmf13n9?g_st=ipc';
-            const title = 'موقع معهد نعمان التعليمي';
-            const text = 'العنوان: جبلة، العمارة فوق صيدلية بشر مثبوت، الطابق الأول';
-            if(navigator.share){
-                try{ 
-                    await navigator.share({title, text, url}); 
-                } catch(e){}
-            } else {
-                navigator.clipboard.writeText(url).then(() => {
-                    showToast('تم نسخ رابط الموقع');
-                });
-            }
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add initial breadcrumb for stages
-            updateBreadcrumb('grades-breadcrumb', [
-                {text: 'المراحل', action: 'backToStages()'},
-                {text: 'اختر المرحلة', action: ''}
-            ]);
-            
-            // إخفاء أيقونات التواصل الاجتماعي عند التحميل
-            const socialIcons = document.getElementById('social-icons');
-            socialIcons.classList.add('hidden');
-            
-            // إظهارها فقط عند فتح الصفحة الرئيسية
-            setTimeout(() => {
-                if (window.location.hash === '' || window.location.hash === '#home') {
-                    socialIcons.classList.remove('hidden');
-                }
-            }, 100);
+        // Handle Enter key in search
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') handleSearch();
         });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (mobileMenu.classList.contains('active')) {
+                if (!mobileMenu.contains(event.target) && !menuBtn.contains(event.target)) {
+                    mobileMenu.classList.remove('active');
+                }
+            }
+        });
+
+        // Console welcome
+        console.log('%c🏛️ دليل مدينة جبلة', 'font-size: 24px; font-weight: bold; color: #1e40af;');
+        console.log('%cتم تطوير هذا الموقع بحب لخدمة أهل جبلة', 'font-size: 14px; color: #64748b;');
     </script>
 </body>
 </html>
