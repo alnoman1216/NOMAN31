@@ -1,0 +1,3200 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل مدينة جبلة - كل الخدمات والأماكن المهمة</title>
+    <meta name="description" content="دليل خدمي شامل لمدينة جبلة السورية - مشافي، صيدليات، مطاعم، خدمات، مدارس وأرقام الطوارئ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    
+    <style>
+        /* ================================
+           RESET & BASE
+           ================================ */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --primary-dark: #1e3a8a;
+            --primary-soft: rgba(30, 64, 175, 0.08);
+            --secondary: #166534;
+            --secondary-light: #22c55e;
+            --secondary-soft: rgba(22, 101, 52, 0.08);
+            --accent: #166534;
+            --emergency: #dc2626;
+            --emergency-light: #ef4444;
+            --emergency-dark: #b91c1c;
+            --emergency-soft: rgba(220, 38, 38, 0.08);
+            --today-bg: #f0f9ff;
+            --today-border: #3b82f6;
+            --today-text: #1e40af;
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --border: #e5e7eb;
+            --border-light: #f1f5f9;
+            --text: #1f2937;
+            --text-muted: #6b7280;
+            --text-light: #9ca3af;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.03);
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
+            --shadow-primary: 0 6px 20px rgba(30, 64, 175, 0.12);
+            --container: 1200px;
+            --radius: 12px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 24px;
+            --success: #10b981;
+            --error: #ef4444;
+            --gold: #d97706;
+            --featured: #7c3aed;
+        }
+
+        html {
+            font-size: 15px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .container { 
+                padding: 0 1.5rem; 
+            }
+        }
+
+        /* ================================
+           BUTTONS
+           ================================ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            background: var(--primary);
+            color: white;
+            border: 1px solid transparent;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            box-shadow: var(--shadow-primary);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+        }
+
+        .btn-secondary:hover { 
+            background: #15803d; 
+        }
+        
+        .btn-success {
+            background: var(--success);
+        }
+        
+        .btn-success:hover { 
+            background: #059669; 
+        }
+        
+        .btn-emergency {
+            background: var(--emergency);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        
+        .btn-emergency:hover { 
+            background: var(--emergency-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
+        }
+        
+        .btn-call {
+            background: var(--primary);
+            color: white;
+            flex: 1;
+            padding: 0.75rem;
+            font-size: 0.9rem;
+        }
+        
+        .btn-call:hover { 
+            background: var(--primary-dark); 
+        }
+        
+        .btn-lg { 
+            padding: 1rem 2rem; 
+            font-size: 1.05rem; 
+        }
+        
+        .btn-xl {
+            padding: 1.25rem 2.5rem;
+            font-size: 1.15rem;
+        }
+
+        /* ================================
+           HEADER - FIXED
+           ================================ */
+        .header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 85px;
+            padding: 0.5rem 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            text-decoration: none;
+            color: inherit;
+            transition: opacity 0.2s;
+            margin-right: 1rem;
+        }
+        
+        .logo:hover { 
+            opacity: 0.85; 
+        }
+        
+        .logo-img { 
+            height: 65px;
+            width: auto; 
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            object-fit: contain;
+        }
+        
+        .logo-text { 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center;
+            text-align: right;
+        }
+        
+        .logo-title {
+            font-size: 1.35rem;
+            font-weight: 900;
+            color: var(--primary);
+            line-height: 1.1;
+            letter-spacing: -0.3px;
+            margin-bottom: 0.15rem;
+        }
+        
+        .logo-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            letter-spacing: -0.2px;
+        }
+        
+        .nav-desktop { 
+            display: none; 
+            gap: 2.5rem;
+            margin-left: auto;
+            margin-right: 2rem;
+        }
+        
+        @media (min-width: 768px) { 
+            .nav-desktop { 
+                display: flex; 
+            } 
+        }
+        
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+            position: relative;
+            padding: 0.5rem 0;
+            font-size: 1.05rem;
+        }
+        
+        .nav-link:hover { 
+            color: var(--primary); 
+        }
+        
+        .nav-link.active { 
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* ================================
+           MOBILE MENU - FIXED
+           ================================ */
+        .mobile-menu-btn {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.75rem;
+            border-radius: var(--radius);
+            transition: background 0.2s;
+            margin-left: 1rem;
+            z-index: 1001;
+        }
+        
+        .mobile-menu-btn:hover { 
+            background: var(--background); 
+        }
+        
+        @media (min-width: 768px) { 
+            .mobile-menu-btn { 
+                display: none; 
+            } 
+        }
+        
+        .mobile-menu-btn span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--text);
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+
+        /* Mobile Menu Animation */
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+        
+        .nav-mobile {
+            display: none;
+            flex-direction: column;
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-light);
+            background: var(--surface);
+            position: absolute;
+            top: 85px;
+            right: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from { 
+                opacity: 0; 
+                transform: translateY(-20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        .nav-mobile.active { 
+            display: flex; 
+        }
+        
+        .nav-mobile .nav-link {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            text-align: right;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .nav-mobile .nav-link:hover { 
+            background: var(--background);
+            color: var(--primary);
+        }
+        
+        .nav-mobile .nav-link:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        /* ================================
+           HERO SECTION
+           ================================ */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 2.5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 60%);
+        }
+        
+        @media (min-width: 768px) { 
+            .hero { 
+                padding: 4rem 0; 
+            } 
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 500;
+        }
+        
+        .hero-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        
+        @media (min-width: 768px) { 
+            .hero-title { 
+                font-size: 2.5rem; 
+            } 
+        }
+        
+        .hero-title .highlight { 
+            color: rgba(255, 255, 255, 0.95); 
+        }
+        
+        .hero-description {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        /* Search Box */
+        .search-box {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+        }
+        
+        @media (min-width: 768px) { 
+            .search-box { 
+                flex-direction: row; 
+            } 
+        }
+        
+        .search-input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 1.1rem 1.5rem;
+            padding-left: 1،8rem;
+            font-size: 1.15rem;
+            font-family: inherit;
+            border: none;
+            border-radius: var(--radius);
+            background: white;
+            color: var(--text);
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.4), 0 8px 24px rgba(0, 0, 0, 0.15);
+            transform: translateY(-1px);
+        }
+        
+        .search-input::placeholder { 
+            color: var(--text-muted); 
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 400;
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            z-index: 1;
+            font-size: 1.3rem;
+        }
+        
+        .search-btn {
+            padding: 1.1rem 2.2rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-family: inherit;
+            font-size: 1.15rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-lg);
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .search-btn:hover { 
+            background: #15803d;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.2);
+        }
+        
+        /* Autocomplete Dropdown */
+        .autocomplete-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            left: 0;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            margin-top: 0.5rem;
+            max-height: 320px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            border: 1px solid var(--border);
+        }
+        
+        .autocomplete-dropdown.active {
+            display: block;
+        }
+        
+        .autocomplete-item {
+            padding: 1.1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .autocomplete-item:last-child {
+            border-bottom: none;
+        }
+        
+        .autocomplete-item:hover {
+            background: var(--background);
+        }
+        
+        .autocomplete-item .icon {
+            color: var(--primary);
+            font-size: 1.3rem;
+            width: 28px;
+        }
+        
+        .autocomplete-item .content {
+            flex: 1;
+        }
+        
+        .autocomplete-item .name {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.3rem;
+            font-size: 1.05rem;
+        }
+        
+        .autocomplete-item .category {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        .no-results {
+            padding: 1.8rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+        
+        .quick-search {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        
+        .quick-label { 
+            font-size: 0.9rem;
+            opacity: 0.8; 
+            font-weight: 500;
+        }
+        
+        .quick-tag {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 500;
+        }
+        
+        .quick-tag:hover { 
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* ================================
+           CATEGORIES
+           ================================ */
+        .categories { 
+            padding: 2.5rem 0; 
+            background: var(--surface);
+        }
+        
+        @media (min-width: 768px) { 
+            .categories { 
+                padding: 3.5rem 0; 
+            } 
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+        
+        @media (min-width: 768px) { 
+            .section-title { 
+                font-size: 1.75rem; 
+            } 
+        }
+        
+        .section-description {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* GRID 2x2 ON MOBILE */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .categories-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.25rem;
+            }
+        }
+        
+        .category-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+        
+        .category-card.emergency {
+            border-color: var(--emergency);
+            background: linear-gradient(135deg, #fef2f2, #fff);
+        }
+        
+        .category-card.emergency:hover {
+            border-color: var(--emergency);
+            box-shadow: 0 8px 24px rgba(220, 38, 38, 0.12);
+        }
+        
+        .category-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin: 0 auto 1rem;
+            color: white;
+            box-shadow: var(--shadow);
+        }
+        
+        .category-name {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+        
+        .category-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            flex: 1;
+        }
+        
+        .category-count {
+            display: inline-block;
+            background: var(--background);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            border: 1px solid var(--border-light);
+        }
+
+        /* ================================
+           PLACES GRID WITH CLICKABLE ADDRESS
+           ================================ */
+        .places-section {
+            padding: 2rem 0 4rem;
+            background: var(--background);
+        }
+        
+        .places-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .places-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .places-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .place-card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .place-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+        
+        .place-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+        }
+        
+        .place-badge {
+            background: var(--primary-soft);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .place-status {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+        
+        .place-status.open {
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--secondary);
+        }
+        
+        .place-status.closed {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--emergency);
+        }
+        
+        .place-status.24h {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+        }
+        
+        .place-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+            line-height: 1.3;
+        }
+        
+        /* Clickable Address - FIXED */
+        .place-location {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 0.5rem;
+            border-radius: var(--radius);
+            position: relative;
+        }
+        
+        .place-location:hover {
+            background-color: var(--primary-soft);
+            color: var(--primary);
+        }
+        
+        .place-location i {
+            color: var(--primary);
+            margin-top: 0.2rem;
+            transition: all 0.2s ease;
+        }
+        
+        .place-location:hover i {
+            transform: scale(1.1);
+        }
+        
+        .place-location .map-hint {
+            color: var(--text-light);
+            font-size: 0.75rem;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            position: absolute;
+            left: 0.5rem;
+            bottom: -0.75rem;
+        }
+        
+        .place-location:hover .map-hint {
+            opacity: 1;
+        }
+        
+        .place-description {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+        
+        .place-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 0.75rem;
+            background: var(--background);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-light);
+        }
+        
+        .place-phone {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+        
+        .place-phone i {
+            color: var(--success);
+        }
+        
+        .place-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: auto;
+        }
+        
+        .place-details-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: var(--background);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+            flex: 1;
+        }
+        
+        .place-details-link:hover {
+            background: var(--border-light);
+        }
+        
+        .btn-call {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+            flex: 1;
+        }
+        
+        .btn-call:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        /* ================================
+           PAGE HEADER STYLES
+           ================================ */
+        .category-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        
+        .breadcrumb a:hover {
+            opacity: 0.8;
+        }
+        
+        .breadcrumb span {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .page-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        @media (min-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+        }
+        
+        .page-description {
+            font-size: 1rem;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+        
+        /* Night Banner */
+        .night-banner {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .banner-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        @media (min-width: 768px) {
+            .banner-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+        
+        .banner-content h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .banner-content p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        /* ================================
+           QUICK ACCESS
+           ================================ */
+        .quick-access { 
+            padding: 2.5rem 0; 
+            background: var(--background); 
+        }
+        
+        .quick-access-card {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            text-align: center;
+            color: white;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (min-width: 768px) {
+            .quick-access-card {
+                flex-direction: row;
+                text-align: right;
+                justify-content: space-between;
+                padding: 2rem 2.5rem;
+            }
+        }
+        
+        .quick-access-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .quick-access-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .quick-access-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quick-access-desc { 
+            opacity: 0.9; 
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .quick-access-card .btn-secondary {
+            background: white;
+            color: var(--primary);
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .quick-access-card .btn-secondary:hover {
+            background: var(--background);
+            color: var(--primary);
+        }
+
+        /* ================================
+           LANDMARKS SECTION
+           ================================ */
+        .landmarks-section {
+            padding: 3rem 0;
+            background: var(--surface);
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .landmarks-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        
+        .landmarks-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+        
+        @media (min-width: 768px) { 
+            .landmarks-title { 
+                font-size: 1.75rem; 
+            } 
+        }
+        
+        .landmarks-subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Landmarks Grid */
+        .landmarks-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .landmarks-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .landmarks-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .landmark-card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        
+        .landmark-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .landmark-image {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .landmark-info {
+            padding: 1.5rem;
+        }
+        
+        .landmark-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+        }
+        
+        .landmark-description {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+        }
+        
+        .landmark-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+        
+        .landmark-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .btn-details {
+            flex: 1;
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-details:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-location {
+            background: var(--background);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        
+        .btn-location:hover {
+            background: var(--border-light);
+        }
+
+        /* ================================
+           STATS
+           ================================ */
+        .stats { 
+            padding: 2.5rem 0; 
+            background: var(--background);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            text-align: center;
+        }
+        
+        .stat-item {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem 0.5rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary-light);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+        
+        @media (min-width: 768px) { 
+            .stat-number { 
+                font-size: 2.25rem; 
+            } 
+        }
+        
+        .stat-item:nth-child(1) .stat-number { 
+            color: var(--primary); 
+        }
+        
+        .stat-item:nth-child(2) .stat-number { 
+            color: var(--secondary); 
+        }
+        
+        .stat-item:nth-child(3) .stat-number { 
+            color: var(--accent); 
+        }
+        
+        .stat-label { 
+            font-size: 0.85rem; 
+            color: var(--text-muted); 
+            font-weight: 500;
+        }
+
+        /* ================================
+           FORM STYLES
+           ================================ */
+        .form-section {
+            padding: 2rem 0 4rem;
+            background: var(--background);
+        }
+        
+        .form-card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-success {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(22, 163, 74, 0.05));
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--secondary);
+        }
+        
+        .form-success h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            font-family: inherit;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--background);
+            color: var(--text);
+            transition: all 0.2s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-soft);
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            font-family: inherit;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--background);
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-soft);
+        }
+        
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-help {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* ================================
+           ABOUT PAGE STYLES
+           ================================ */
+        .about-section {
+            padding: 2.5rem 0 4rem;
+            background: linear-gradient(to bottom, var(--background), #f0f7ff);
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        @media (min-width: 768px) {
+            .about-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+        
+        .about-card {
+            background: var(--surface);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+        }
+        
+        .about-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-primary);
+            border-color: var(--primary-light);
+        }
+        
+        .about-card.highlight {
+            background: linear-gradient(135deg, var(--primary-soft), rgba(255, 255, 255, 0.9));
+            border: 2px solid var(--primary);
+        }
+        
+        .about-card.highlight .about-icon {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        }
+        
+        .about-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+            color: white;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            box-shadow: var(--shadow-md);
+        }
+        
+        .about-card h2 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text);
+            line-height: 1.3;
+        }
+        
+        .about-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+        
+        .about-story {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-radius: var(--radius-xl);
+            padding: 2.5rem;
+            margin-top: 1rem;
+            text-align: center;
+            box-shadow: var(--shadow-primary);
+        }
+        
+        .about-story h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .about-story p {
+            font-size: 1.05rem;
+            opacity: 0.95;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* ================================
+           CONTACT PAGE STYLES
+           ================================ */
+        .contact-section {
+            padding: 2.5rem 0 4rem;
+            background: var(--background);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        @media (min-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 2fr 1fr;
+                gap: 3rem;
+            }
+        }
+        
+        .contact-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .contact-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .contact-card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .contact-card.whatsapp {
+            border-top: 4px solid #25D366;
+        }
+        
+        .contact-card.whatsapp:hover {
+            border-color: #128C7E;
+            background: rgba(37, 211, 102, 0.03);
+        }
+        
+        .contact-card.email {
+            border-top: 4px solid var(--primary);
+        }
+        
+        .contact-card.email:hover {
+            background: rgba(30, 64, 175, 0.03);
+        }
+        
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .contact-card.whatsapp .contact-icon {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+        }
+        
+        .contact-card.email .contact-icon {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        }
+        
+        .contact-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+        }
+        
+        .contact-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+        
+        .contact-action {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: var(--background);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+        
+        .contact-card:hover .contact-action {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .add-place-card {
+            background: linear-gradient(135deg, var(--secondary-soft), rgba(255, 255, 255, 0.9));
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            border: 2px solid var(--secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .add-place-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(22, 163, 74, 0.05));
+        }
+        
+        .add-place-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            box-shadow: var(--shadow-md);
+        }
+        
+        .add-place-card h2 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            color: var(--secondary);
+        }
+        
+        .add-place-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        
+        .add-place-card .btn {
+            background: var(--secondary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .add-place-card:hover .btn {
+            background: #15803d;
+            transform: translateY(-2px);
+        }
+        
+        .faq-section {
+            grid-column: 1 / -1;
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            margin-top: 1rem;
+        }
+        
+        .faq-section h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            text-align: center;
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .faq-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .faq-item h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .faq-item h4::before {
+            content: '•';
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .faq-item p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-right: 1.5rem;
+        }
+
+        /* ================================
+           FOOTER
+           ================================ */
+        .footer {
+            background: #1e293b;
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .footer-grid { 
+            display: grid; 
+            gap: 2rem; 
+            margin-bottom: 2rem; 
+        }
+        
+        @media (min-width: 768px) { 
+            .footer-grid { 
+                grid-template-columns: 2fr 1fr 1fr; 
+                gap: 3rem;
+            } 
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-desc { 
+            color: #cbd5e1; 
+            font-size: 0.85rem; 
+            line-height: 1.6;
+        }
+        
+        .footer-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            color: white;
+        }
+        
+        .footer-links { 
+            list-style: none; 
+        }
+        
+        .footer-links li { 
+            margin-bottom: 0.75rem; 
+        }
+        
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-links a:hover { 
+            color: white; 
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 1.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+        
+        .footer-bottom strong {
+            color: white;
+            font-weight: 700;
+        }
+
+        /* ================================
+           OTHER STYLES
+           ================================ */
+        .page { display: none; }
+        .page.active { display: block; }
+        
+        /* Loading */
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            color: var(--text-muted);
+        }
+        
+        .loading-spinner {
+            border: 3px solid var(--border);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.25rem;
+            }
+            
+            .landmarks-title {
+                font-size: 1.25rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            
+            .place-actions {
+                flex-direction: column;
+            }
+            
+            .about-card {
+                padding: 1.5rem;
+            }
+            
+            .contact-card {
+                padding: 1.5rem;
+            }
+            
+            .faq-section {
+                padding: 1.5rem;
+            }
+            
+            .logo-img {
+                height: 50px;
+            }
+            
+            .logo-title {
+                font-size: 1.15rem;
+            }
+            
+            .logo-subtitle {
+                font-size: 0.8rem;
+            }
+            
+            .header-content {
+                height: 75px;
+            }
+            
+            .search-box {
+                max-width: 100%;
+            }
+            
+            .search-input {
+                font-size: 1.05rem;
+                padding: 1rem 1.2rem;
+                padding-left: 3.2rem;
+            }
+            
+            .search-input::placeholder {
+                font-size: 1rem;
+            }
+            
+            .search-btn {
+                font-size: 1.05rem;
+                padding: 1rem 1.5rem;
+            }
+            
+            .logo {
+                margin-right: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+<header class="header">
+    <div class="container header-content">
+        <a href="#" class="logo" onclick="showPage('home')">
+            <img src="https://i.ibb.co/5WY5c0ZW/jableh-logo.png" alt="شعار دليل جبلة" class="logo-img">
+            <div class="logo-text">
+                <span class="logo-title">دليل مدينة جبلة</span>
+                <span class="logo-subtitle">Jableh City Guide</span>
+            </div>
+        </a>
+        <nav class="nav-desktop">
+            <a href="#" class="nav-link active" onclick="showPage('home')" id="nav-home">الرئيسية</a>
+            <a href="#" class="nav-link" onclick="showPage('about')" id="nav-about">عن الدليل</a>
+            <a href="#" class="nav-link" onclick="showPage('contact')" id="nav-contact">تواصل معنا</a>
+        </nav>
+        <a href="tel:110" class="btn btn-emergency">
+            <i class="fas fa-exclamation-triangle"></i> طوارئ
+        </a>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+    <nav class="nav-mobile" id="mobileMenu">
+        <a href="#" class="nav-link active" onclick="showPage('home')">الرئيسية</a>
+        <a href="#" class="nav-link" onclick="showPage('about')">عن الدليل</a>
+        <a href="#" class="nav-link" onclick="showPage('contact')">تواصل معنا</a>
+    </nav>
+</header>
+
+<!-- HOME PAGE -->
+<div id="page-home" class="page active">
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge"><i class="fas fa-city"></i> دليلك الشامل لمدينة جبلة</div>
+            <h1 class="hero-title">كل ما تحتاجه في <span class="highlight">جبلة</span></h1>
+            <p class="hero-description">ابحث عن المشافي، الصيدليات، المطاعم، وكل الخدمات المهمة في مدينتك</p>
+            
+            <!-- Search Box -->
+            <div class="search-box">
+                <div class="search-input-wrapper">
+                    <input type="text" class="search-input" placeholder="ابحث عن مكان أو خدمة ..." id="searchInput" autocomplete="off">
+                    <div class="autocomplete-dropdown" id="autocompleteDropdown"></div>
+                </div>
+                <button class="search-btn" onclick="performSearch()"><i class="fas fa-search"></i> بحث</button>
+            </div>
+            
+            <div class="quick-search">
+                <span class="quick-label">بحث سريع:</span>
+                <span class="quick-tag" onclick="showPage('night')"><i class="fas fa-moon"></i> صيدلية مناوبة</span>
+                <span class="quick-tag" onclick="showCategory('hospitals')"><i class="fas fa-hospital"></i> مشفى</span>
+                <span class="quick-tag" onclick="showCategory('restaurants')"><i class="fas fa-utensils"></i> مطعم</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">الأقسام الرئيسية</h2>
+            <p class="section-description">اختر القسم المناسب للوصول السريع</p>
+            <div class="categories-grid">
+                <div class="category-card" onclick="showCategory('hospitals')">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                        <i class="fas fa-hospital"></i>
+                    </div>
+                    <h3 class="category-name">مشافي وعيادات</h3>
+                    <p class="category-desc">مشافي، عيادات، مخابر</p>
+                    <span class="category-count" id="count-hospitals">0 مكان</span>
+                </div>
+                <div class="category-card" onclick="showCategory('pharmacies')">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <h3 class="category-name">صيدليات</h3>
+                    <p class="category-desc">صيدليات ومناوبات</p>
+                    <span class="category-count" id="count-pharmacies">0 مكان</span>
+                </div>
+                <div class="category-card" onclick="showCategory('restaurants')">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #166534, #15803d);">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3 class="category-name">مطاعم ومقاهي</h3>
+                    <p class="category-desc">مطاعم، كافيهات، حلويات</p>
+                    <span class="category-count" id="count-restaurants">0 مكان</span>
+                </div>
+                <div class="category-card" onclick="showCategory('services')">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="category-name">خدمات</h3>
+                    <p class="category-desc">تكاسي، صيانة، توصيل</p>
+                    <span class="category-count" id="count-services">0 مكان</span>
+                </div>
+                <div class="category-card" onclick="showCategory('schools')">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="category-name">مدارس ومعاهد</h3>
+                    <p class="category-desc">مدارس، معاهد، دورات</p>
+                    <span class="category-count" id="count-schools">0 مكان</span>
+                </div>
+                <div class="category-card emergency" onclick="showCategory('emergency')">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #ef4444, #b91c1c);">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3 class="category-name">أرقام الطوارئ</h3>
+                    <p class="category-desc">إسعاف، إطفاء، شرطة</p>
+                    <span class="category-count">أرقام مهمة</span>
+                </div>
+                <div class="category-card" onclick="showCategory('mosques')">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
+                        <i class="fas fa-mosque"></i>
+                    </div>
+                    <h3 class="category-name">المساجد</h3>
+                    <p class="category-desc">مساجد، جوامع، مراكز دينية</p>
+                    <span class="category-count" id="count-mosques">0 مكان</span>
+                </div>
+                <div class="category-card" onclick="showCategory('sports')">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3 class="category-name">النوادي الرياضية</h3>
+                    <p class="category-desc">نوادي، صالات رياضة، مراكز</p>
+                    <span class="category-count" id="count-sports">0 مكان</span>
+                </div>
+                <div class="category-card" onclick="showCategory('highlights')">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <h3 class="category-name">أبرز الأماكن</h3>
+                    <p class="category-desc">منتزهات، مطاعم، أماكن سياحية</p>
+                    <span class="category-count" id="count-highlights">0 مكان</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Landmarks Section -->
+    <section class="landmarks-section">
+        <div class="container">
+            <div class="landmarks-header">
+                <h2 class="landmarks-title">معالم مدينة جبلة</h2>
+                <p class="landmarks-subtitle">اكتشف أهم المعالم التاريخية والثقافية في مدينة جبلة السورية</p>
+            </div>
+            
+            <div class="landmarks-grid">
+                <!-- Landmark 1 -->
+                <div class="landmark-card">
+                    <img src="roman_theatre.jpg" alt="المسرح الروماني" class="landmark-image">
+                    <div class="landmark-info">
+                        <h3 class="landmark-name">المدرج الروماني</h3>
+                        <p class="landmark-description">
+                            مسرح روماني عظيم يعود للقرن الأول الميلادي، يعتبر الخامس عالمياً ومن أجمل المعالم على الساحل.
+                        </p>
+                        <div class="landmark-meta">
+                            <i class="fas fa-history"></i>
+                            <span>معلم روماني أثري</span>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>وسط المدينة القديمة</span>
+                        </div>
+                        <div class="landmark-actions">
+                            <button class="btn btn-details" onclick="showLandmarkDetails('المدرج الروماني', 'مسرح روماني عظيم يعود للقرن الأول الميلادي. يعتبر الخامس عالمياً ومن أجمل المعالم الأثرية على ساحل البحر الأبيض المتوسط. يتسع لثمانية آلاف متفرج ويشهد على مهارة المهندسين الرومان.')">
+                                <i class="fas fa-info-circle"></i> تفاصيل
+                            </button>
+                            <button class="btn btn-location" onclick="searchAddressOnMaps('المدرج الروماني جبلة')">
+                                <i class="fas fa-map-marker-alt"></i> موقع
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Landmark 2 -->
+                <div class="landmark-card">
+                    <img src="bani_qahtan_castle.jpg" alt="قلعة الزوزو" class="landmark-image">
+                    <div class="landmark-info">
+                        <h3 class="landmark-name">قلعة الزوزو</h3>
+                        <p class="landmark-description">
+                            قلعة تاريخية تقع على تلة مرتفعة تطل على مدينة جبلة، وتعود لفترات زنكية وأيوبية ومملوكية.
+                        </p>
+                        <div class="landmark-meta">
+                            <i class="fas fa-history"></i>
+                            <span>قلعة إسلامية عريقة</span>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>تلة مرتفعة شمال المدينة</span>
+                        </div>
+                        <div class="landmark-actions">
+                            <button class="btn btn-details" onclick="showLandmarkDetails('قلعة الزوزو', 'قلعة تاريخية تقع على تلة مرتفعة تطل على مدينة جبلة، وتعود لفترات زنكية وأيوبية ومملوكية. تتميز بإطلالة بانورامية رائعة على المدينة والبحر.')">
+                                <i class="fas fa-info-circle"></i> تفاصيل
+                            </button>
+                            <button class="btn btn-location" onclick="searchAddressOnMaps('قلعة الزوزو جبلة')">
+                                <i class="fas fa-map-marker-alt"></i> موقع
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Landmark 3 -->
+                <div class="landmark-card">
+                    <img src="sultan_ibrahim_mosque.jpg" alt="جامع السلطان إبراهيم الأدهم" class="landmark-image">
+                    <div class="landmark-info">
+                        <h3 class="landmark-name">جامع السلطان إبراهيم الأدهم</h3>
+                        <p class="landmark-description">
+                            أحد أهم الجوامع التاريخية في مدينة جبلة، يتميز بتصميمه المعماري الفريد الذي يجمع بين الطراز الإسلامي والعثماني.
+                        </p>
+                        <div class="landmark-meta">
+                            <i class="fas fa-history"></i>
+                            <span>معلم إسلامي تاريخي</span>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>وسط مدينة جبلة</span>
+                        </div>
+                        <div class="landmark-actions">
+                            <button class="btn btn-details" onclick="showLandmarkDetails('جامع السلطان إبراهيم الأدهم', 'أحد أهم الجوامع التاريخية في مدينة جبلة، يتميز بتصميمه المعماري الفريد الذي يجمع بين الطراز الإسلامي والعثماني. يعود تاريخ بناء الجامع إلى فترة العصور الإسلامية ويعد مركزاً دينياً وثقافياً مهماً في المدينة.')">
+                                <i class="fas fa-info-circle"></i> تفاصيل
+                            </button>
+                            <button class="btn btn-location" onclick="searchAddressOnMaps('جامع السلطان إبراهيم الأدهم جبلة')">
+                                <i class="fas fa-map-marker-alt"></i> موقع
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Access Section -->
+    <section class="quick-access">
+        <div class="container">
+            <div class="quick-access-card">
+                <div class="quick-access-content">
+                    <div class="quick-access-badge"><i class="fas fa-clock"></i> متاح الآن</div>
+                    <h3 class="quick-access-title">تحتاج صيدلية مناوبة؟</h3>
+                    <p class="quick-access-desc">شاهد جدول المناوبات الأسبوعي الكامل</p>
+                </div>
+                <button class="btn btn-secondary btn-lg" onclick="showPage('night')">
+                    <i class="fas fa-calendar-alt"></i> جدول المناوبات
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item"><div class="stat-number" id="total-places">0</div><div class="stat-label">مكان مسجل</div></div>
+                <div class="stat-item"><div class="stat-number">9</div><div class="stat-label">أقسام رئيسية</div></div>
+                <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">خدمة مستمرة</div></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- CATEGORY PAGE -->
+<div id="page-category" class="page">
+    <section class="category-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="#" onclick="showPage('home')">الرئيسية</a><span>←</span>
+                <span id="categoryBreadcrumb">الصيدليات</span>
+            </div>
+            <h1 class="page-title" id="categoryTitle"><i class="fas fa-pills"></i> الصيدليات</h1>
+            <p class="page-description" id="categoryDesc">صيدليات ومناوبات ليلية في مدينة جبلة</p>
+        </div>
+    </section>
+    <section class="container">
+        <div class="night-banner" id="nightBanner">
+            <div class="banner-content">
+                <div>
+                    <h4><i class="fas fa-moon"></i> تبحث عن صيدلية مناوبة؟</h4>
+                    <p>شاهد جدول المناوبات لأسبوع كامل مع العناوين والأرقام</p>
+                </div>
+                <a href="#" onclick="showPage('night')" class="btn btn-primary">
+                    <i class="fas fa-calendar"></i> عرض جدول المناوبات
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="places-section">
+        <div class="container">
+            <div class="places-grid" id="placesGrid">
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>جاري تحميل الأماكن...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ADD PLACE PAGE -->
+<div id="page-add-place" class="page">
+    <section class="category-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="#" onclick="showPage('home')">الرئيسية</a><span>←</span>
+                <span>إضافة مكان جديد</span>
+            </div>
+            <h1 class="page-title"><i class="fas fa-map-marker-alt"></i> إضافة مكان جديد</h1>
+            <p class="page-description">أضف مكانك إلى دليل مدينة جبلة</p>
+        </div>
+    </section>
+    <section class="form-section">
+        <div class="container">
+            <div class="form-card">
+                <div id="successMessage" class="form-success" style="display: none;">
+                    <h3><i class="fas fa-check-circle"></i> تم الإرسال بنجاح</h3>
+                    <p>تم إرسال بيانات المكان بنجاح وبانتظار الموافقة ✅</p>
+                </div>
+                
+                <form id="addPlaceForm">
+                    <div class="form-group">
+                        <label for="placeName" class="form-label">اسم المكان *</label>
+                        <input type="text" id="placeName" class="form-control" placeholder="مثال: صيدلية الشفاء">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="placeAddress" class="form-label">العنوان *</label>
+                        <input type="text" id="placeAddress" class="form-control" placeholder="مثال: شارع الثورة، بجانب البريد">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="placePhone" class="form-label">رقم الهاتف *</label>
+                        <input type="tel" id="placePhone" class="form-control" placeholder="مثال: 041-123456">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="placeCategory" class="form-label">القسم *</label>
+                        <select id="placeCategory" class="form-select">
+                            <option value="">اختر القسم المناسب</option>
+                            <option value="hospitals">مشافي وعيادات</option>
+                            <option value="pharmacies">صيدليات</option>
+                            <option value="restaurants">مطاعم ومقاهي</option>
+                            <option value="services">خدمات</option>
+                            <option value="schools">مدارس ومعاهد</option>
+                            <option value="emergency">أرقام الطوارئ</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="placeDescription" class="form-label">الوصف (اختياري)</label>
+                        <textarea id="placeDescription" class="form-control form-textarea" placeholder="وصف مختصر للمكان والخدمات المقدمة..."></textarea>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 2rem;">
+                        <button type="button" class="btn btn-primary btn-lg" style="width: 100%;" id="submitBtn" onclick="handleFormSubmit()">
+                            <i class="fas fa-paper-plane"></i> إرسال البيانات
+                        </button>
+                        <p class="form-help" style="text-align: center; margin-top: 1rem;">
+                            سيتم مراجعة البيانات من قبل الإدارة قبل النشر
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ABOUT PAGE -->
+<div id="page-about" class="page">
+    <section class="category-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="#" onclick="showPage('home')">الرئيسية</a><span>←</span>
+                <span>عن الدليل</span>
+            </div>
+            <h1 class="page-title"><i class="fas fa-info-circle"></i> عن دليل جبلة</h1>
+            <p class="page-description">تعرف على قصتنا وهدفنا</p>
+        </div>
+    </section>
+    <section class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-card">
+                    <div class="about-icon"><i class="fas fa-city"></i></div>
+                    <h2>ما هو دليل جبلة؟</h2>
+                    <p>دليل جبلة هو منصة خدمية محلية تهدف لتسهيل وصول سكان وزوار مدينة جبلة السورية إلى جميع الخدمات والأماكن المهمة في المدينة بسرعة وسهولة.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon"><i class="fas fa-bullseye"></i></div>
+                    <h2>هدفنا</h2>
+                    <p>تمكين أي شخص من الوصول إلى المعلومة التي يحتاجها خلال أقل من 30 ثانية، بدون الحاجة للسؤال على فيسبوك أو واتساب.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon"><i class="fas fa-users"></i></div>
+                    <h2>للجميع</h2>
+                    <p>صممنا الدليل ليكون سهل الاستخدام للجميع - كبار السن، الشباب، الزوار، والمقيمين على حد سواء.</p>
+                </div>
+                <div class="about-card highlight">
+                    <div class="about-icon"><i class="fas fa-heart"></i></div>
+                    <h2>مجاني بالكامل</h2>
+                    <p>دليل جبلة خدمة مجانية بالكامل، بدون إعلانات مزعجة، هدفنا الوحيد خدمة أهل جبلة.</p>
+                </div>
+                
+                <div class="about-story">
+                    <h2><i class="fas fa-star"></i> قصتنا</h2>
+                    <p>انطلق دليل جبلة من فكرة بسيطة: لماذا يجب أن يصرف الناس وقتاً وجهداً للبحث عن خدمة أساسية يحتاجونها؟ قررنا جمع كل المعلومات المهمة في مكان واحد سهل الوصول، محدث باستمرار، ومتوافق مع جميع الأجهزة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- CONTACT PAGE -->
+<div id="page-contact" class="page">
+    <section class="category-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="#" onclick="showPage('home')">الرئيسية</a><span>←</span>
+                <span>تواصل معنا</span>
+            </div>
+            <h1 class="page-title"><i class="fas fa-envelope"></i> تواصل معنا</h1>
+            <p class="page-description">نسعد بتواصلكم واقتراحاتكم</p>
+        </div>
+    </section>
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-options">
+                    <a href="https://wa.me/963912345678" class="contact-card whatsapp" target="_blank">
+                        <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+                        <h3>واتساب</h3>
+                        <p>تواصل معنا مباشرة عبر واتساب</p>
+                        <span class="contact-action">راسلنا الآن</span>
+                    </a>
+                    <a href="mailto:info@jableh-guide.com" class="contact-card email">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <h3>البريد الإلكتروني</h3>
+                        <p>أرسل لنا رسالة بالبريد</p>
+                        <span class="contact-action">info@jableh-guide.com</span>
+                    </a>
+                </div>
+                
+                <div class="add-place-card" onclick="showPage('add-place')">
+                    <div class="add-place-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <h2>أضف مكانك للدليل</h2>
+                    <p>لديك محل أو خدمة في جبلة؟ أضفها مجاناً للدليل</p>
+                    <span class="btn">
+                        <i class="fas fa-plus"></i> أضف مكان جديد
+                    </span>
+                </div>
+                
+                <div class="faq-section">
+                    <h2>أسئلة شائعة</h2>
+                    <div class="faq-item">
+                        <h4>هل الخدمة مجانية؟</h4>
+                        <p>نعم، دليل جبلة مجاني بالكامل للمستخدمين وأصحاب الأماكن.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>كيف أضيف مكاني؟</h4>
+                        <p>يمكنك إضافة مكانك عبر صفحة "إضافة مكان جديد" أو التواصل معنا عبر واتساب.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>كيف أبلغ عن خطأ؟</h4>
+                        <p>إذا وجدت معلومة خاطئة، راسلنا وسنصححها فوراً.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-section">
+                <div class="footer-logo"><i class="fas fa-map-marker-alt"></i><span>دليل مدينة جبلة</span></div>
+                <p class="footer-desc">دليلك الشامل لكل الخدمات والأماكن المهمة في مدينة جبلة السورية</p>
+            </div>
+            <div class="footer-section">
+                <h4 class="footer-title">روابط سريعة</h4>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="showPage('home')"><i class="fas fa-home"></i> الرئيسية</a></li>
+                    <li><a href="#" onclick="showPage('about')"><i class="fas fa-info-circle"></i> عن الدليل</a></li>
+                    <li><a href="#" onclick="showPage('contact')"><i class="fas fa-envelope"></i> تواصل معنا</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4 class="footer-title">أرقام الطوارئ</h4>
+                <ul class="footer-links">
+                    <li><a href="tel:110"><i class="fas fa-police-box"></i> الشرطة: 110</a></li>
+                    <li><a href="tel:113"><i class="fas fa-ambulance"></i> الإسعاف: 113</a></li>
+                    <li><a href="tel:118"><i class="fas fa-fire-extinguisher"></i> الإطفاء: 118</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>تم تطوير الموقع بواسطة <strong>إيهاب عبدالعال ، عابد إستامبولي</strong> حقوق النشر محفوظة© 2025</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // ================================
+    // SUPABASE CONFIGURATION
+    // ================================
+    const SUPABASE_URL = 'https://alolxtzrpobimoxoxuyl.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFsb2x4dHpycG9iaW1veG94dXlsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU2Mzc2ODAsImV4cCI6MjA4MTIxMzY4MH0.7GLxjyjPYhyAs80wY_RGL4tNzpozlkDlBFpZOpEsekM';
+
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // ================================
+    // GLOBAL VARIABLES
+    // ================================
+    const categories = {
+        hospitals: { 
+            name: 'مشافي وعيادات', 
+            icon: '<i class="fas fa-hospital"></i>', 
+            description: 'مشافي، عيادات، مخابر في مدينة جبلة',
+            color: '#ef4444'
+        },
+        pharmacies: { 
+            name: 'الصيدليات', 
+            icon: '<i class="fas fa-pills"></i>', 
+            description: 'صيدليات ومناوبات ليلية في مدينة جبلة',
+            color: '#22c55e'
+        },
+        restaurants: { 
+            name: 'مطاعم ومقاهي', 
+            icon: '<i class="fas fa-utensils"></i>', 
+            description: 'مطاعم، كافيهات، حلويات في مدينة جبلة',
+            color: '#166534'
+        },
+        services: { 
+            name: 'خدمات', 
+            icon: '<i class="fas fa-tools"></i>', 
+            description: 'تكاسي، صيانة، توصيل في مدينة جبلة',
+            color: '#8b5cf6'
+        },
+        schools: { 
+            name: 'مدارس ومعاهد', 
+            icon: '<i class="fas fa-graduation-cap"></i>', 
+            description: 'مدارس، معاهد، دورات في مدينة جبلة',
+            color: '#0ea5e9'
+        },
+        emergency: { 
+            name: 'أرقام الطوارئ', 
+            icon: '<i class="fas fa-exclamation-triangle"></i>', 
+            description: 'أرقام الطوارئ المهمة في جبلة',
+            color: '#b91c1c'
+        },
+        mosques: { 
+            name: 'المساجد', 
+            icon: '<i class="fas fa-mosque"></i>', 
+            description: 'مساجد، جوامع، مراكز دينية',
+            color: '#10b981'
+        },
+        sports: { 
+            name: 'النوادي الرياضية', 
+            icon: '<i class="fas fa-dumbbell"></i>', 
+            description: 'نوادي، صالات رياضة، مراكز',
+            color: '#f59e0b'
+        },
+        highlights: { 
+            name: 'أبرز الأماكن', 
+            icon: '<i class="fas fa-mountain"></i>', 
+            description: 'منتزهات، مطاعم، أماكن سياحية',
+            color: '#8b5cf6'
+        }
+    };
+
+    let currentCategory = 'pharmacies';
+    let allApprovedPlaces = [];
+    let searchTimeout = null;
+
+    // ================================
+    // MOBILE MENU FUNCTIONS - FIXED
+    // ================================
+    function toggleMobileMenu() {
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        
+        if (mobileMenu && menuBtn) {
+            mobileMenu.classList.toggle('active');
+            menuBtn.classList.toggle('active');
+            
+            if (mobileMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        }
+    }
+
+    // إغلاق القائمة عند النقر خارجها
+    document.addEventListener('click', function(event) {
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        
+        if (mobileMenu && menuBtn && mobileMenu.classList.contains('active')) {
+            if (!mobileMenu.contains(event.target) && !menuBtn.contains(event.target)) {
+                mobileMenu.classList.remove('active');
+                menuBtn.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+    });
+
+    // ================================
+    // SEARCH ADDRESS ON GOOGLE MAPS - FIXED
+    // ================================
+    function searchAddressOnMaps(address) {
+        if (!address || address.trim() === '') {
+            alert('⚠️ لا يوجد عنوان متاح');
+            return;
+        }
+        
+        let searchQuery = address.trim();
+        
+        if (!searchQuery.includes('جبلة') && !searchQuery.includes('jableh') && !searchQuery.includes('Jableh')) {
+            searchQuery += ' جبلة سوريا';
+        }
+        
+        const encodedQuery = encodeURIComponent(searchQuery);
+        const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedQuery}`;
+        
+        window.open(googleMapsUrl, '_blank');
+        console.log(`🔍 بحث على الخرائط عن: ${searchQuery}`);
+    }
+
+    // ================================
+    // SEARCH FUNCTIONALITY
+    // ================================
+    function performSearch() {
+        const query = document.getElementById('searchInput').value.trim();
+        if (!query) {
+            alert('⚠️ يرجى إدخال كلمة للبحث');
+            document.getElementById('searchInput').focus();
+            return;
+        }
+        
+        searchPlaces(query);
+    }
+
+    async function searchPlaces(query) {
+        try {
+            console.log(`🔍 البحث عن: "${query}"`);
+            
+            const results = allApprovedPlaces.filter(place => {
+                return place.name.toLowerCase().includes(query.toLowerCase()) ||
+                       place.address.toLowerCase().includes(query.toLowerCase()) ||
+                       place.description?.toLowerCase().includes(query.toLowerCase()) ||
+                       place.category.toLowerCase().includes(query.toLowerCase());
+            });
+            
+            if (results.length === 0) {
+                showSearchResults(query, []);
+                alert(`❌ لم يتم العثور على نتائج لـ "${query}"`);
+                return;
+            }
+            
+            showSearchResults(query, results);
+            
+        } catch (error) {
+            console.error('❌ خطأ في البحث:', error);
+            alert('حدث خطأ أثناء البحث');
+        }
+    }
+
+    function showSearchResults(query, results) {
+        const placesGrid = document.getElementById('placesGrid');
+        
+        if (results.length === 0) {
+            placesGrid.innerHTML = `
+                <div style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                    <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+                    <h3 style="margin-bottom: 0.5rem;">لا توجد نتائج لـ "${query}"</h3>
+                    <p>حاول البحث بكلمات أخرى أو تصفح الأقسام الرئيسية</p>
+                </div>
+            `;
+            return;
+        }
+        
+        let placesHtml = '';
+        
+        results.forEach(place => {
+            const category = categories[place.category] || categories['services'];
+            let statusClass = 'open';
+            let statusText = 'مفتوح';
+            
+            if (place.category === 'pharmacies') {
+                statusClass = '24h';
+                statusText = '24 ساعة';
+            }
+            
+            // تنظيف العنوان من الاقتباسات
+            const safeAddress = place.address.replace(/'/g, "\\'").replace(/"/g, '\\"');
+            
+            placesHtml += `
+                <div class="place-card">
+                    <div class="place-header">
+                        <span class="place-badge">${category.icon} ${category.name}</span>
+                        <span class="place-status ${statusClass}">${statusText}</span>
+                    </div>
+                    
+                    <h3 class="place-name">${place.name}</h3>
+                    
+                    <div class="place-location" onclick="searchAddressOnMaps('${safeAddress}')">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>${place.address}</span>
+                        <span class="map-hint">انقر للبحث على الخريطة</span>
+                    </div>
+                    
+                    ${place.description ? `
+                    <p class="place-description">${place.description}</p>
+                    ` : ''}
+                    
+                    <div class="place-meta">
+                        <div class="place-phone">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>${place.phone}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="place-actions">
+                        <a href="tel:${place.phone}" class="btn-call">
+                            <i class="fas fa-phone-alt"></i> اتصال
+                        </a>
+                        <button onclick="showPlaceDetails('${place.id}')" class="place-details-link">
+                            <i class="fas fa-info-circle"></i> تفاصيل
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+        
+        placesGrid.innerHTML = placesHtml;
+        
+        document.getElementById('categoryBreadcrumb').textContent = 'نتائج البحث';
+        document.getElementById('categoryTitle').innerHTML = `<i class="fas fa-search"></i> نتائج البحث لـ "${query}"`;
+        document.getElementById('categoryDesc').textContent = `عرض ${results.length} نتيجة للبحث`;
+        
+        const nightBanner = document.getElementById('nightBanner');
+        if (nightBanner) nightBanner.style.display = 'none';
+        
+        showPage('category');
+    }
+
+    // ================================
+    // AUTOCOMPLETE FUNCTIONALITY
+    // ================================
+    function setupAutocomplete() {
+        const searchInput = document.getElementById('searchInput');
+        const dropdown = document.getElementById('autocompleteDropdown');
+        
+        if (!searchInput || !dropdown) return;
+        
+        document.addEventListener('click', (e) => {
+            if (!searchInput.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+        
+        searchInput.addEventListener('input', function() {
+            const query = this.value.trim();
+            
+            if (searchTimeout) {
+                clearTimeout(searchTimeout);
+            }
+            
+            if (!query) {
+                dropdown.classList.remove('active');
+                return;
+            }
+            
+            searchTimeout = setTimeout(() => {
+                showAutocomplete(query);
+            }, 300);
+        });
+        
+        searchInput.addEventListener('keydown', function(e) {
+            const items = dropdown.querySelectorAll('.autocomplete-item');
+            let activeItem = dropdown.querySelector('.autocomplete-item.active');
+            
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (!activeItem) {
+                    items[0]?.classList.add('active');
+                } else {
+                    activeItem.classList.remove('active');
+                    const next = activeItem.nextElementSibling;
+                    if (next) next.classList.add('active');
+                }
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (!activeItem) {
+                    items[items.length - 1]?.classList.add('active');
+                } else {
+                    activeItem.classList.remove('active');
+                    const prev = activeItem.previousElementSibling;
+                    if (prev) prev.classList.add('active');
+                }
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (activeItem) {
+                    activeItem.click();
+                } else {
+                    performSearch();
+                }
+            }
+        });
+    }
+
+    function showAutocomplete(query) {
+        if (!query || query.length < 2) {
+            document.getElementById('autocompleteDropdown').classList.remove('active');
+            return;
+        }
+        
+        const results = allApprovedPlaces.filter(place => {
+            return place.name.toLowerCase().includes(query.toLowerCase()) ||
+                   place.address.toLowerCase().includes(query.toLowerCase());
+        }).slice(0, 5);
+        
+        const dropdown = document.getElementById('autocompleteDropdown');
+        
+        if (results.length === 0) {
+            dropdown.innerHTML = `<div class="no-results">لا توجد نتائج لـ "${query}"</div>`;
+            dropdown.classList.add('active');
+            return;
+        }
+        
+        let html = '';
+        results.forEach((place, index) => {
+            const category = categories[place.category] || categories['services'];
+            html += `
+                <div class="autocomplete-item ${index === 0 ? 'active' : ''}" 
+                     onclick="selectAutocompleteItem('${place.id}', '${place.name}')">
+                    <div class="icon">${category.icon}</div>
+                    <div class="content">
+                        <div class="name">${place.name}</div>
+                        <div class="category">${category.name}</div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        dropdown.innerHTML = html;
+        dropdown.classList.add('active');
+    }
+
+    function selectAutocompleteItem(placeId, placeName) {
+        document.getElementById('searchInput').value = placeName;
+        document.getElementById('autocompleteDropdown').classList.remove('active');
+        searchPlaces(placeName);
+    }
+
+    // ================================
+    // FORM FUNCTIONS
+    // ================================
+    async function handleFormSubmit() {
+        console.log('🟢 بدء عملية الإرسال...');
+        
+        const name = document.getElementById('placeName').value;
+        const address = document.getElementById('placeAddress').value;
+        const phone = document.getElementById('placePhone').value;
+        const category = document.getElementById('placeCategory').value;
+        const description = document.getElementById('placeDescription').value;
+        
+        if (!name || name.length === 0) {
+            alert('⚠️ يرجى إدخال اسم المكان');
+            document.getElementById('placeName').focus();
+            return;
+        }
+        
+        if (!address || address.length === 0) {
+            alert('⚠️ يرجى إدخال عنوان المكان');
+            document.getElementById('placeAddress').focus();
+            return;
+        }
+        
+        if (!phone || phone.length < 3) {
+            alert('⚠️ يرجى إدخال رقم هاتف صحيح');
+            document.getElementById('placePhone').focus();
+            return;
+        }
+        
+        if (!category) {
+            alert('⚠️ يرجى اختيار القسم');
+            document.getElementById('placeCategory').focus();
+            return;
+        }
+        
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+        
+        try {
+            const placeData = {
+                name: name,
+                address: address,
+                phone: phone,
+                category: category,
+                description: description || '',
+                status: 'pending',
+                created_at: new Date().toISOString()
+            };
+            
+            const { data, error } = await supabaseClient
+                .from('places')
+                .insert([placeData]);
+            
+            if (error) {
+                console.error('❌ خطأ من Supabase:', error);
+                alert('❌ خطأ: ' + error.message);
+                throw error;
+            }
+            
+            document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('addPlaceForm').style.display = 'none';
+            
+            setTimeout(() => {
+                showPage('home');
+                resetForm();
+            }, 3000);
+            
+        } catch (error) {
+            console.error('❌ فشل الإرسال:', error);
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال البيانات';
+        }
+    }
+
+    function resetForm() {
+        document.getElementById('addPlaceForm').reset();
+        document.getElementById('successMessage').style.display = 'none';
+        document.getElementById('addPlaceForm').style.display = 'block';
+        
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال البيانات';
+    }
+
+    // ================================
+    // LOAD PLACES FUNCTIONS
+    // ================================
+    async function loadApprovedPlaces() {
+        try {
+            console.log('📥 جاري تحميل الأماكن الموافق عليها من Supabase...');
+            
+            const { data, error } = await supabaseClient
+                .from('places')
+                .select('*')
+                .eq('status', 'approved')
+                .order('created_at', { ascending: false });
+            
+            if (error) {
+                console.error('❌ خطأ في تحميل البيانات:', error);
+                return [];
+            }
+            
+            console.log(`✅ تم تحميل ${data.length} مكان موافق عليه`);
+            allApprovedPlaces = data || [];
+            
+            updateStatistics();
+            
+            return allApprovedPlaces;
+            
+        } catch (error) {
+            console.error('❌ خطأ في تحميل الأماكن:', error);
+            return [];
+        }
+    }
+
+    async function showCategory(categoryId) {
+        currentCategory = categoryId;
+        const category = categories[categoryId];
+        
+        if (!category) {
+            console.error('القسم غير موجود:', categoryId);
+            return;
+        }
+        
+        document.getElementById('categoryBreadcrumb').textContent = category.name;
+        document.getElementById('categoryTitle').innerHTML = category.icon + ' ' + category.name;
+        document.getElementById('categoryDesc').textContent = category.description;
+        
+        const nightBanner = document.getElementById('nightBanner');
+        if (categoryId === 'pharmacies') {
+            if (nightBanner) nightBanner.style.display = 'block';
+        } else {
+            if (nightBanner) nightBanner.style.display = 'none';
+        }
+        
+        document.getElementById('placesGrid').innerHTML = `
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <p>جاري تحميل الأماكن...</p>
+            </div>
+        `;
+        
+        showPage('category');
+        
+        try {
+            const { data, error } = await supabaseClient
+                .from('places')
+                .select('*')
+                .eq('category', categoryId)
+                .eq('status', 'approved')
+                .order('created_at', { ascending: false });
+            
+            let placesHtml = '';
+            
+            if (error) {
+                console.error('❌ خطأ في تحميل الأماكن:', error);
+                placesHtml = '<p style="text-align:center; color:var(--text-muted); padding: 2rem;">حدث خطأ في تحميل البيانات</p>';
+            } else if (!data || data.length === 0) {
+                placesHtml = `
+                    <div style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                        <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+                        <h3 style="margin-bottom: 0.5rem;">لا توجد أماكن في هذا القسم حالياً</h3>
+                        <p>يمكنك إضافة مكان جديد عبر صفحة "إضافة مكان جديد"</p>
+                    </div>
+                `;
+            } else {
+                console.log(`✅ تم تحميل ${data.length} مكان للقسم ${categoryId}`);
+                
+                data.forEach(place => {
+                    let statusClass = 'open';
+                    let statusText = 'مفتوح';
+                    
+                    if (categoryId === 'pharmacies') {
+                        statusClass = '24h';
+                        statusText = '24 ساعة';
+                    }
+                    
+                    // تنظيف العنوان من الاقتباسات
+                    const safeAddress = place.address.replace(/'/g, "\\'").replace(/"/g, '\\"');
+                    
+                    placesHtml += `
+                        <div class="place-card">
+                            <div class="place-header">
+                                <span class="place-badge">${category.icon} ${category.name}</span>
+                                <span class="place-status ${statusClass}">${statusText}</span>
+                            </div>
+                            
+                            <h3 class="place-name">${place.name}</h3>
+                            
+                            <div class="place-location" onclick="searchAddressOnMaps('${safeAddress}')">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>${place.address}</span>
+                                <span class="map-hint">انقر للبحث على الخريطة</span>
+                            </div>
+                            
+                            ${place.description ? `
+                            <p class="place-description">${place.description}</p>
+                            ` : ''}
+                            
+                            <div class="place-meta">
+                                <div class="place-phone">
+                                    <i class="fas fa-phone-alt"></i>
+                                    <span>${place.phone}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="place-actions">
+                                <a href="tel:${place.phone}" class="btn-call">
+                                    <i class="fas fa-phone-alt"></i> اتصال
+                                </a>
+                                <button onclick="showPlaceDetails('${place.id}')" class="place-details-link">
+                                    <i class="fas fa-info-circle"></i> تفاصيل
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            
+            document.getElementById('placesGrid').innerHTML = placesHtml;
+            
+        } catch (error) {
+            console.error('❌ خطأ في عرض الأماكن:', error);
+            document.getElementById('placesGrid').innerHTML = 
+                '<p style="text-align:center; color:var(--text-muted); padding: 2rem;">حدث خطأ في تحميل البيانات</p>';
+        }
+    }
+
+    async function showPlaceDetails(placeId) {
+        try {
+            const { data, error } = await supabaseClient
+                .from('places')
+                .select('*')
+                .eq('id', placeId)
+                .single();
+            
+            if (error || !data) {
+                console.error('❌ خطأ في تحميل تفاصيل المكان:', error);
+                alert('حدث خطأ في تحميل تفاصيل المكان');
+                return;
+            }
+            
+            const category = categories[data.category] || categories['services'];
+            
+            alert(`تفاصيل المكان:\n\nالاسم: ${data.name}\nالعنوان: ${data.address}\nالهاتف: ${data.phone}\nالوصف: ${data.description || 'لا يوجد وصف'}`);
+            
+        } catch (error) {
+            console.error('❌ خطأ:', error);
+            alert('حدث خطأ في تحميل التفاصيل');
+        }
+    }
+
+    async function updateStatistics() {
+        try {
+            const totalCount = allApprovedPlaces.length;
+            document.getElementById('total-places').textContent = totalCount;
+            
+            const categoryCounts = {
+                hospitals: 0,
+                pharmacies: 0,
+                restaurants: 0,
+                services: 0,
+                schools: 0,
+                mosques: 0,
+                sports: 0,
+                highlights: 0
+            };
+            
+            allApprovedPlaces.forEach(place => {
+                if (categoryCounts[place.category] !== undefined) {
+                    categoryCounts[place.category]++;
+                }
+            });
+            
+            document.getElementById('count-hospitals').textContent = `${categoryCounts.hospitals} مكان`;
+            document.getElementById('count-pharmacies').textContent = `${categoryCounts.pharmacies} مكان`;
+            document.getElementById('count-restaurants').textContent = `${categoryCounts.restaurants} مكان`;
+            document.getElementById('count-services').textContent = `${categoryCounts.services} مكان`;
+            document.getElementById('count-schools').textContent = `${categoryCounts.schools} مكان`;
+            document.getElementById('count-mosques').textContent = `${categoryCounts.mosques} مكان`;
+            document.getElementById('count-sports').textContent = `${categoryCounts.sports} مكان`;
+            document.getElementById('count-highlights').textContent = `${categoryCounts.highlights} مكان`;
+            
+        } catch (error) {
+            console.error('❌ خطأ في تحديث الإحصائيات:', error);
+        }
+    }
+
+    // ================================
+    // PAGE NAVIGATION
+    // ================================
+    function showPage(pageName) {
+        document.querySelectorAll('.page').forEach(page => {
+            page.classList.remove('active');
+        });
+        
+        const pageElement = document.getElementById('page-' + pageName);
+        if (pageElement) {
+            pageElement.classList.add('active');
+        }
+        
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        const navLink = document.getElementById('nav-' + pageName);
+        if (navLink) navLink.classList.add('active');
+        
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        if (mobileMenu && menuBtn) {
+            mobileMenu.classList.remove('active');
+            menuBtn.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        if (pageName === 'home') {
+            loadApprovedPlaces();
+        }
+    }
+
+    // ================================
+    // LANDMARKS FUNCTIONS
+    // ================================
+    function showLandmarkDetails(title, description) {
+        alert(`🔍 ${title}\n\n${description}`);
+    }
+
+    // ================================
+    // INITIALIZATION
+    // ================================
+    document.addEventListener('DOMContentLoaded', async function() {
+        console.log('✅ موقع دليل جبلة جاهز للعمل!');
+        console.log('🔧 تم إصلاح القائمة الجانبية والبحث على الخريطة');
+        
+        // إغلاق القائمة عند تحميل الصفحة
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        if (mobileMenu && menuBtn) {
+            mobileMenu.classList.remove('active');
+            menuBtn.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // تحميل الأماكن
+        await loadApprovedPlaces();
+        
+        // إعداد البحث التلقائي
+        setupAutocomplete();
+        
+        // إعداد مستمعات البحث
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>
