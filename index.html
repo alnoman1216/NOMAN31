@@ -144,48 +144,52 @@
 			opacity: 0.9;
 		}
 
-		.logo-img {
-			height: 70px;
+		..logo-img {
+			height: 60px !important;
 			width: auto;
 			border-radius: 0;
 			box-shadow: none;
 			object-fit: contain;
 			border: none;
 			background: none;
-			/* إزالة الصندوق الشفاف، الشعار واضح */
+			margin-top: -8px;
+			/* 👈 هذا السطر يرفع اللوغو لفوق */
 		}
+
 
 		.logo-text {
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
 			text-align: right;
-			margin-right: 0.6rem;
-			/* smaller gap to balance */
+			margin-right: 0.3rem;
+			/* 👈 غيرت من 0.6rem إلى 0.3rem لتقريب النص */
 		}
 
-		/* Ensure Arabic title stays on a single line and English subtitle appears below */
 		.logo-title {
 			white-space: nowrap;
 			display: block;
 			font-size: 1.25rem;
 			line-height: 1.05;
+			margin-bottom: 0.1rem;
+			/* 👈 قللت المسافة بين العنوان والفرعي */
 		}
 
 		.logo-subtitle {
 			display: block;
 			font-size: 0.78rem;
-			margin-top: 2px;
+			margin-top: 1px;
+			/* 👈 قللت من 2px إلى 1px */
 			color: rgba(255, 255, 255, 0.9);
 		}
 
+		/* نسخة إضافية للتأكد */
 		.logo-title {
 			font-size: 1.25rem;
 			font-weight: 900;
 			color: white;
 			line-height: 1.1;
 			letter-spacing: -0.3px;
-			margin-bottom: 0.15rem;
 			text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 		}
 
@@ -194,17 +198,6 @@
 			color: rgba(255, 255, 255, 0.9);
 			font-weight: 500;
 			letter-spacing: -0.2px;
-		}
-
-		.nav-desktop {
-			display: none;
-			gap: 2rem;
-		}
-
-		@media (min-width: 768px) {
-			.nav-desktop {
-				display: flex;
-			}
 		}
 
 		/* Header regions for balanced layout */
@@ -539,8 +532,8 @@
            HERO SECTION - FLOATING HEADER INTEGRATION
            ================================ */
 		.hero {
-			background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)),
-				url('https://i.postimg.cc/x8FB9fwY/060F8FBB-3043-4D7A-81EB-50C0FB4BFA69.jpg');
+			background:
+				url('https://images.unsplash.com/photo-1614850523011-8f49ffc73908?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
 			background-size: cover;
 			background-position: center;
 			background-repeat: no-repeat;
@@ -894,10 +887,38 @@
 		/* ================================
            CATEGORIES - REMOVED 24H BADGE
            ================================ */
-		.categories {
-			padding: 2.5rem 0;
-			background: var(--surface);
-		}
+.categories {
+    position: relative;
+    padding: 5rem 0 2.5rem;
+    background: var(--surface);
+    overflow: hidden;
+}
+
+.categories::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 20px;
+    background: 
+        linear-gradient(90deg, 
+            transparent 0%, 
+            var(--primary-light) 15%,
+            var(--primary) 30%,
+            var(--secondary) 50%,
+            var(--primary) 70%,
+            var(--primary-light) 85%,
+            transparent 100%);
+    mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25"/></svg>');
+    mask-size: 300% 100%;
+    animation: wave 10s linear infinite;
+}
+
+@keyframes wave {
+    0% { mask-position: 0% 0%; }
+    100% { mask-position: 300% 0%; }
+}
 
 		@media (min-width: 768px) {
 			.categories {
@@ -2295,12 +2316,13 @@
 		/* ================================
            FOOTER
            ================================ */
-		.footer {
-			background: var(--primary-dark);
-			color: white;
-			padding: 3rem 0 1.5rem;
-			margin-top: 2rem;
-		}
+.footer {
+    background: 
+                url('https://images.unsplash.com/photo-1614850523011-8f49ffc73908?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover no-repeat;
+    color: white;
+    padding: 3rem 0 1.5rem;
+    margin-top: 2rem;
+}
 
 		.footer-grid {
 			display: grid;
@@ -2728,7 +2750,7 @@
 		<div class="container header-content">
 			<div class="header-left">
 				<a href="#" class="logo" onclick="showPage('home')">
-					<img src="https://i.ibb.co/SXjDJhtX/5-EE94-A52-7453-41-B4-8-D12-55-EF1-DCF0151.png" alt="شعار دليل جبلة" class="logo-img">
+					<img src="https://i.ibb.co/W4tn81rk/IMG-1205.png" alt="شعار دليل جبلة" class="logo-img">
 					<div class="logo-text">
 						<span class="logo-title">دليل مدينة جبلة</span>
 						<span class="logo-subtitle">Jableh City Guide</span>
@@ -2758,14 +2780,12 @@
 		</nav>
 	</header>
 
-	<!-- HOME PAGE -->
-	<div id="page-home" class="page active">
-		<section class="hero" style="background-image: url('https://i.postimg.cc/Ss7gnmJL/Design-Image.jpg');">
+	<!-- HOME PAGE --><div id="page-home" class="page active">
+		<section class="hero">
 			<div class="container">
 				<div class="hero-badge"><i class="fas fa-city"></i> دليلك الشامل لمدينة جبلة</div>
 				<h1 class="hero-title">كل ما تحتاجه في <span class="highlight">جبلة</span></h1>
 				<p class="hero-description">ابحث عن المشافي، الصيدليات، المطاعم، وكل الخدمات المهمة في مدينتك</p>
-
 				<!-- Search Box -->
 				<div class="search-section">
 					<div class="search-box">
@@ -4685,6 +4705,194 @@
 				initLandmarksSlider();
 			}, 500);
 		});
+// ================================
+// APPLY CLEAR BACKGROUND TO ALL PAGES - NO SHADOWS
+// ================================
+
+function applyClearBackgroundToAllPages() {
+    const clearBackground = 'url("https://images.unsplash.com/photo-1614850523011-8f49ffc73908?q=80&w=1470&auto=format&fit=crop")';
+    
+    // 1. الصفحة الرئيسية - بدون أي تظليل
+    const homeHero = document.querySelector('#page-home .hero');
+    if (homeHero) {
+        homeHero.style.cssText = `
+            background: ${clearBackground} !important;
+            background-size: cover !important;
+            background-position: center center !important;
+            background-repeat: no-repeat !important;
+            background-attachment: scroll !important;
+            background-color: transparent !important;
+            min-height: 600px !important;
+            display: flex !important;
+            align-items: center !important;
+            padding-top: 100px !important;
+            position: relative !important;
+            color: #ffffff !important;
+        `;
+        
+        // إزالة أي طبقات تظليل
+        homeHero.querySelectorAll('::before, ::after').forEach(el => {
+            if (el) el.style.display = 'none';
+        });
+    }
+    
+    // 2. صفحات القوائم - نفس الخلفية بدون تظليل
+    const categoryHeaders = document.querySelectorAll('.category-header');
+    categoryHeaders.forEach(header => {
+        header.style.cssText = `
+            background: ${clearBackground} !important;
+            background-size: cover !important;
+            background-position: center center !important;
+            background-repeat: no-repeat !important;
+            padding: 3rem 0 !important;
+            margin-bottom: 2rem !important;
+            min-height: 250px !important;
+            display: flex !important;
+            align-items: center !important;
+            color: #ffffff !important;
+            position: relative !important;
+        `;
+        
+        // إزالة التدرجات والطبقات الشفافة
+        header.style.backgroundImage = clearBackground + ' !important';
+        header.style.backgroundColor = 'transparent !important';
+        
+        // إزالة أي عناصر تظليل داخلية
+        const overlays = header.querySelectorAll('.bg-overlay, [class*="overlay"], [class*="gradient"]');
+        overlays.forEach(overlay => {
+            overlay.style.display = 'none';
+        });
+    });
+    
+    // 3. تحسين النصوص لتكون واضحة على الخلفية
+    document.querySelectorAll('.category-header .breadcrumb a, .category-header .breadcrumb span').forEach(text => {
+        text.style.cssText = `
+            color: #ffffff !important;
+            font-weight: 600 !important;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9) !important;
+        `;
+    });
+    
+    document.querySelectorAll('.page-title').forEach(title => {
+        title.style.cssText = `
+            color: #ffffff !important;
+            font-weight: 900 !important;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9) !important;
+            font-size: 2rem !important;
+        `;
+    });
+    
+    document.querySelectorAll('.page-description').forEach(desc => {
+        desc.style.cssText = `
+            color: rgba(255, 255, 255, 0.95) !important;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8) !important;
+            font-weight: 500 !important;
+        `;
+    });
+    
+    // 4. أيقونات العناوين
+    document.querySelectorAll('.page-title i').forEach(icon => {
+        icon.style.cssText = `
+            background: rgba(255, 255, 255, 0.1) !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        `;
+    });
+    
+    console.log('✅ تم تطبيق الخلفية الواضحة بدون تظليل');
+}
+
+// ================================
+// OVERRIDE CSS GRADIENTS AND SHADOWS
+// ================================
+
+function removeAllShadowsAndGradients() {
+    // إزالة التدرجات من CSS
+    const styleSheets = document.styleSheets;
+    for (let i = 0; i < styleSheets.length; i++) {
+        try {
+            const rules = styleSheets[i].cssRules || styleSheets[i].rules;
+            for (let j = 0; j < rules.length; j++) {
+                const rule = rules[j];
+                if (rule.style) {
+                    // إزالة التدرجات
+                    if (rule.style.background && rule.style.background.includes('gradient')) {
+                        rule.style.background = 'transparent !important';
+                    }
+                    if (rule.style.backgroundImage && rule.style.backgroundImage.includes('gradient')) {
+                        rule.style.backgroundImage = 'none !important';
+                    }
+                    // إزالة الظلال
+                    if (rule.style.textShadow) {
+                        rule.style.textShadow = '0 1px 3px rgba(0, 0, 0, 0.9) !important';
+                    }
+                }
+            }
+        } catch (e) {
+            // تجاهل الأخطاء في stylesheets من نطاقات مختلفة
+        }
+    }
+    
+    // إزالة الطبقات الزائفة
+    document.querySelectorAll('*').forEach(element => {
+        const before = getComputedStyle(element, '::before');
+        const after = getComputedStyle(element, '::after');
+        
+        if (before.backgroundImage && before.backgroundImage.includes('gradient')) {
+            element.style.setProperty('--before-bg', 'none', 'important');
+        }
+        if (after.backgroundImage && after.backgroundImage.includes('gradient')) {
+            element.style.setProperty('--after-bg', 'none', 'important');
+        }
+    });
+}
+
+// ================================
+// INITIALIZATION
+// ================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    // تطبيق بعد تحميل الصفحة
+    setTimeout(() => {
+        // 1. إزالة جميع التظليلات والتدرجات
+        removeAllShadowsAndGradients();
+        
+        // 2. تطبيق الخلفية الواضحة
+        applyClearBackgroundToAllPages();
+        
+        // 3. إضافة listener لتغيير الصفحات
+        const originalShowPage = window.showPage;
+        window.showPage = function(pageName) {
+            originalShowPage(pageName);
+            setTimeout(() => {
+                removeAllShadowsAndGradients();
+                applyClearBackgroundToAllPages();
+            }, 150);
+        };
+        
+        console.log('🚀 جاهز! خلفية واحدة بدون تظليل لجميع الصفحات');
+    }, 500);
+});
+
+// ================================
+// UTILITY FUNCTION TO CHANGE BACKGROUND
+// ================================
+
+function changeGlobalBackground(newImageUrl) {
+    const newBg = `url("${newImageUrl}")`;
+    
+    // تغيير جميع الخلفيات مرة واحدة
+    document.querySelectorAll('.hero, .category-header').forEach(element => {
+        element.style.backgroundImage = newBg + ' !important';
+        element.style.background = `${newBg} !important`;
+    });
+    
+    console.log(`🖼️ تم تغيير الخلفية العالمية إلى: ${newImageUrl}`);
+}
+
+// مثال لاستخدام دالة تغيير الخلفية:
+// changeGlobalBackground('https://example.com/new-image.jpg');
+
 	</script>
 </body>
 
