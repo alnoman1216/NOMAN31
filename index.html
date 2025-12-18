@@ -533,7 +533,7 @@
            ================================ */
 		.hero {
 			background:
-				url('https://images.unsplash.com/photo-1614850523011-8f49ffc73908?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+				url(https://i.postimg.cc/R0Gsny55/FE963E9E-CCB0-4420-B5FD-5BC1A2073663.jpg);
 			background-size: cover;
 			background-position: center;
 			background-repeat: no-repeat;
@@ -2313,9 +2313,92 @@
 			margin-right: 1.5rem;
 		}
 
-		/* ================================
-           FOOTER
-           ================================ */
+/* ================================
+   MODAL STYLES FOR MAP WARNING
+   ================================ */
+.map-warning-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    direction: rtl;
+}
+
+.modal-content {
+    background-color: var(--surface);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    max-width: 450px;
+    width: 90%;
+    box-shadow: var(--shadow-lg);
+    text-align: right;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-content h3 {
+    color: var(--primary-dark);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.modal-content p {
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.modal-btn {
+    padding: 0.7rem 1.5rem;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Cairo', sans-serif;
+}
+
+.modal-btn-primary {
+    background-color: var(--primary);
+    color: white;
+}
+
+.modal-btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+.modal-btn-secondary {
+    background-color: var(--border);
+    color: var(--text-muted);
+}
+
+.modal-btn-secondary:hover {
+    background-color: var(--text-light);
+    color: white;
+}
+
+/* ================================
+   FOOTER
+   ================================ */
 .footer {
     background: 
                 url('https://images.unsplash.com/photo-1614850523011-8f49ffc73908?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover no-repeat;
@@ -2741,7 +2824,23 @@
 				margin: 0 auto;
 			}
 		}
-	</style>
+	
+/* === Fix: form primary button visible; breadcrumb removed === */
+.form-card .btn-primary { 
+    background: var(--primary); 
+    color: #fff; 
+    border: 1px solid var(--primary);
+}
+.form-card .btn-primary:hover { 
+    background: var(--primary-dark); 
+    border-color: var(--primary-dark); 
+    transform: translateY(-1px);
+}
+.breadcrumb { 
+    display: none !important; 
+}
+
+</style>
 </head>
 
 <body>
@@ -3242,7 +3341,7 @@
 						</div>
 
 						<div class="form-group" style="margin-top: 2rem;">
-							<button type="button" class="btn btn-primary btn-lg" style="width: 100%;" id="submitBtn" onclick="handleFormSubmit()">
+							<button type="submit" class="btn btn-primary btn-lg" style="width: 100%;" id="submitBtn" aria-label="إرسال البيانات" onclick="handleFormSubmit()">
 								<i class="fas fa-paper-plane"></i> إرسال البيانات
 							</button>
 							<p class="form-help" style="text-align: center; margin-top: 1rem;">
@@ -3779,27 +3878,62 @@
 			window.open('https://www.facebook.com/share/1NbtM4RukZ/?mibextid=wwXIfr', '_blank');
 		}
 
-		// ================================
-		// SEARCH ADDRESS ON GOOGLE MAPS
-		// ================================
-		function searchAddressOnMaps(address) {
-			if (!address || address.trim() === '') {
-				alert('⚠️ لا يوجد عنوان متاح');
-				return;
-			}
-
-			let searchQuery = address.trim();
-
-			if (!searchQuery.includes('جبلة') && !searchQuery.includes('jableh') && !searchQuery.includes('Jableh')) {
-				searchQuery += ' جبلة سوريا';
-			}
-
-			const encodedQuery = encodeURIComponent(searchQuery);
-			const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedQuery}`;
-
-			window.open(googleMapsUrl, '_blank');
-			console.log(`🔍 بحث على الخرائط عن: ${searchQuery}`);
+// ================================
+	// MODAL FUNCTIONS
+	// ================================
+	let currentMapUrl = '';
+	
+	function openModal(url) {
+		currentMapUrl = url;
+		document.getElementById('mapWarningModal').style.display = 'flex';
+	}
+	
+	function closeModal(event) {
+		// إغلاق المودال عند الضغط على زر الإلغاء أو خارج محتوى المودال
+		if (!event || event.target.id === 'mapWarningModal' || event.target.tagName === 'BUTTON') {
+			document.getElementById('mapWarningModal').style.display = 'none';
 		}
+	}
+	
+	// ================================
+	// SEARCH ADDRESS ON GOOGLE MAPS (WITH MODAL WARNING)
+	// ================================
+	function searchAddressOnMaps(address) {
+		if (!address || address.trim() === '') {
+			alert('⚠️ لا يوجد عنوان متاح');
+			return;
+		}
+	
+		let searchQuery = address.trim();
+	
+		if (!searchQuery.includes('جبلة') && !searchQuery.includes('jableh') && !searchQuery.includes('Jableh')) {
+			searchQuery += ' جبلة سوريا';
+		}
+	
+		const encodedQuery = encodeURIComponent(searchQuery);
+		const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedQuery}`;
+		
+		// 1. لا يتم التحويل مباشرة، بل يتم فتح التنويه
+		openModal(googleMapsUrl);
+		
+		console.log(`🔍 تم تجهيز رابط الخرائط: ${googleMapsUrl}`);
+	}
+	
+	// ================================
+	// MODAL CONTINUE BUTTON HANDLER
+	// ================================
+	document.addEventListener('DOMContentLoaded', () => {
+		const continueBtn = document.getElementById('modalContinueBtn');
+		if (continueBtn) {
+			continueBtn.addEventListener('click', () => {
+				if (currentMapUrl) {
+					// فتح رابط Google Maps الخاص بالكرت
+					window.open(currentMapUrl, '_blank');
+					closeModal();
+				}
+			});
+		}
+	});
 
 		// ================================
 		// SEARCH FUNCTIONALITY
@@ -4028,7 +4162,9 @@
 		// ================================
 		// FORM FUNCTIONS
 		// ================================
-		async function handleFormSubmit() {
+		async function handleFormSubmit(event) {
+			if (event) event.preventDefault();
+
 			console.log('🟢 بدء عملية الإرسال...');
 
 			const name = document.getElementById('placeName').value;
@@ -4710,7 +4846,7 @@
 // ================================
 
 function applyClearBackgroundToAllPages() {
-    const clearBackground = 'url("https://images.unsplash.com/photo-1614850523011-8f49ffc73908?q=80&w=1470&auto=format&fit=crop")';
+    const clearBackground = 'https://i.postimg.cc/R0Gsny55/FE963E9E-CCB0-4420-B5FD-5BC1A2073663.jpg")';
     
     // 1. الصفحة الرئيسية - بدون أي تظليل
     const homeHero = document.querySelector('#page-home .hero');
@@ -4894,6 +5030,30 @@ function changeGlobalBackground(newImageUrl) {
 // changeGlobalBackground('https://example.com/new-image.jpg');
 
 	</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var form = document.getElementById('addPlaceForm');
+    if (form) {
+        form.addEventListener('submit', handleFormSubmit);
+    }
+});
+</script>
+
+<!-- ================================
+   MAP WARNING MODAL
+   ================================ -->
+<div id="mapWarningModal" class="map-warning-modal" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <h3 style="color: var(--emergency);">تنبيه هام بخصوص الموقع</h3>
+        <p>قد يكون الموقع المرفق غير دقيق او مضاف بشكل خاطئ من قبل المستخدم الرجاء الإتصال إن وجد الرقم والتأكد قبل الذهاب</p>
+        <div class="modal-actions">
+            <button id="modalContinueBtn" class="modal-btn modal-btn-primary">متابعة <i class="fas fa-arrow-left"></i></button>
+            <button onclick="closeModal()" class="modal-btn modal-btn-secondary">إلغاء</button>
+        </div>
+    </div>
+</div>
+
 </body>
 
 </html>
