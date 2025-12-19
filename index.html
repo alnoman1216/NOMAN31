@@ -5248,61 +5248,128 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 
-<!-- === FIX: photos/details modals re-open + de-duplicate (Code Copilot) === -->
+<!-- === FINAL FIX: Stable modals (details/photos/map) + details fallback — Code Copilot === -->
 <script>
 (function(){
-  // Utility
-  function openOverlay(id){
+  // ---- Core helpers (WHY: بعض الدوال القديمة تتصادم بالأسماء) ----
+  var IDS = {
+    photos: 'photosModal',
+    details: 'detailsModal',
+    map: 'mapWarningModal'
+  };
+
+  function show(id){
     var el = document.getElementById(id);
-    if (!el) return;
-    el.style.display = 'flex';            // important: undo any inline 'display:none'
+    if (!el) return false;
+    el.style.display = 'flex';                 // enforce visible
     el.classList.add('active');
+    el.setAttribute('aria-hidden','false');
     document.body.style.overflow = 'hidden';
+    return true;
   }
-  function closeOverlay(id){
+  function hide(id){
     var el = document.getElementById(id);
-    if (!el) return;
+    if (!el) return false;
     el.classList.remove('active');
-    el.style.display = 'none';            // important: keep in sync with openOverlay
+    el.style.display = 'none';
+    el.setAttribute('aria-hidden','true');
     document.body.style.overflow = 'auto';
+    return true;
   }
 
-  // Remove duplicates with same IDs to avoid conflicts
-  ['photosModal','detailsModal'].forEach(function(id){
-    var list = Array.prototype.slice.call(document.querySelectorAll('#'+id));
-    if (list.length > 1) {
-      list.slice(1).forEach(function(n){ n.parentNode && n.parentNode.removeChild(n); });
-    }
+  // Remove duplicate overlays with same ID (defensive)
+  ['photosModal','detailsModal','mapWarningModal'].forEach(function(id){
+    var list = document.querySelectorAll('#'+id);
+    if (list.length > 1) list.forEach(function(n,i){ if (i>0 && n.parentNode) n.parentNode.removeChild(n); });
   });
 
-  // Override open/close for photos modal (works even after the "X" patch that sets display:none)
-  window.showPhotosModal = function(){ openOverlay('photosModal'); };
-  window.closePhotosModal = function(){ closeOverlay('photosModal'); };
+  // ---- Public API (统一) ----
+  window.showPhotosModal   = function(){ hide(IDS.details); show(IDS.photos); };
+  window.closePhotosModal  = function(){ hide(IDS.photos); };
+  window.showDetailsModal  = function(){ hide(IDS.photos); show(IDS.details); };
+  window.closeDetailsModal = function(){ hide(IDS.details); };
 
-  // Safe handlers for details modal without clashing with mapWarning closeModal()
-  window.showDetailsModal = function(){ openOverlay('detailsModal'); };
-  window.closeDetailsModal = function(){ closeOverlay('detailsModal'); };
+  // Legacy alias used in HTML
+  window.showModal = window.showDetailsModal;
 
-  // If someone calls legacy names, try to do the right thing
-  var _legacyShow = window.showModal;
-  window.showModal = function(){ openOverlay('detailsModal'); };
+  // Keep map warning separate and unambiguous
+  window.openModal = function(url){
+    try { window.currentMapUrl = url; } catch(_) {}
+    show(IDS.map);
+  };
+  window.closeMapWarningModal = function(){ hide(IDS.map); };
 
-  // Intercept clicks on the blue "إغلاق" button inside details/photos modals
+  // Backdrop click closes the respective modal
   document.addEventListener('click', function(e){
-    if (e.target.closest('#detailsModal .modal-footer .btn')) { e.preventDefault(); closeOverlay('detailsModal'); }
-    if (e.target.closest('#photosModal .modal-footer .btn'))  { e.preventDefault(); closeOverlay('photosModal'); }
+    var ov = e.target.classList && e.target.classList.contains('modal-overlay') ? e.target : null;
+    if (!ov) return;
+    if (ov.id === IDS.photos) hide(IDS.photos);
+    else if (ov.id === IDS.details) hide(IDS.details);
+    else if (ov.id === IDS.map) hide(IDS.map);
   });
 
-  // ESC closes any active modal
+  // ESC closes the topmost open modal
   document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape') {
-      var open = document.querySelector('.modal-overlay.active');
-      if (open) { open.classList.remove('active'); open.style.display = 'none'; document.body.style.overflow = 'auto'; }
-    }
+    if (e.key !== 'Escape') return;
+    var open = document.querySelectorAll('.modal-overlay.active');
+    if (!open.length) return;
+    hide(open[open.length - 1].id);
   });
+
+  // ---- PHOTO MODAL: ensure reopen always works even if other code forgets display:flex ----
+  if (typeof window.showLandmarkPhotos === 'function') {
+    var __oldPhotos = window.showLandmarkPhotos;
+    window.showLandmarkPhotos = function(landmarkName){
+      __oldPhotos(landmarkName);
+      show(IDS.photos);  // enforce visible for subsequent opens
+    };
+  }
+
+  // ---- DETAILS: fallback when Supabase fails/disabled ----
+  var __lastClicked = null;
+  document.addEventListener('pointerdown', function(e){ __lastClicked = e.target; }, true);
+
+  function t(el, def){ return (el && (el.textContent || el.innerText || '').trim()) || (def || ''); }
+  function fillDetailsFromCard(card){
+    var name = t(card.querySelector('.place-name'), 'تفاصيل');
+    var address = t(card.querySelector('.place-location span:not(.map-hint)'));
+    if (!address) {
+      var spans = card.querySelectorAll('.place-location span');
+      if (spans && spans.length) address = t(spans[0]);
+    }
+    var phone = t(card.querySelector('.place-phone span'), '');
+    var desc  = t(card.querySelector('.place-description'), 'لا يوجد وصف');
+    var cat   = t(card.querySelector('.place-badge'), 'خدمات');
+
+    var map = { detailName:name, detailAddress:address, detailPhone:phone, detailDescription:desc, detailCategory:cat };
+    var titleEl = document.getElementById('modalTitle');
+    if (titleEl) titleEl.innerHTML = '<i class="fas fa-info-circle"></i> ' + name;
+    Object.keys(map).forEach(function(id){ var el = document.getElementById(id); if (el) el.textContent = map[id]; });
+    var callBtn = document.getElementById('modalCallBtn');
+    if (callBtn && phone) callBtn.href = 'tel:' + phone;
+
+    show(IDS.details);
+  }
+
+  var __oldShowPlaceDetails = window.showPlaceDetails;
+  window.showPlaceDetails = async function(placeId){
+    try {
+      // Prefer DOM fallback (zero network, zero errors)
+      var btn = (__lastClicked && __lastClicked.closest) ? __lastClicked.closest('.place-details-link, .btn, a') : null;
+      var card = btn && btn.closest ? btn.closest('.place-card') : null;
+      if (card) { fillDetailsFromCard(card); return; }
+
+      if (typeof __oldShowPlaceDetails === 'function') return __oldShowPlaceDetails(placeId);
+      alert('تعذّر عرض التفاصيل حالياً.');
+    } catch (e) {
+      try { if (typeof __oldShowPlaceDetails === 'function') return __oldShowPlaceDetails(placeId); } catch(_) {}
+      console.error('Details fallback error:', e);
+      alert('تعذّر عرض التفاصيل حالياً.');
+    }
+  };
 })();
 </script>
-<!-- === /FIX === -->
+<!-- === /FINAL FIX === -->
 </body>
 
 </html>
