@@ -5247,6 +5247,62 @@ document.addEventListener('DOMContentLoaded', function () {
 })();
 </script>
 
+
+<!-- === FIX: photos/details modals re-open + de-duplicate (Code Copilot) === -->
+<script>
+(function(){
+  // Utility
+  function openOverlay(id){
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.style.display = 'flex';            // important: undo any inline 'display:none'
+    el.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeOverlay(id){
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove('active');
+    el.style.display = 'none';            // important: keep in sync with openOverlay
+    document.body.style.overflow = 'auto';
+  }
+
+  // Remove duplicates with same IDs to avoid conflicts
+  ['photosModal','detailsModal'].forEach(function(id){
+    var list = Array.prototype.slice.call(document.querySelectorAll('#'+id));
+    if (list.length > 1) {
+      list.slice(1).forEach(function(n){ n.parentNode && n.parentNode.removeChild(n); });
+    }
+  });
+
+  // Override open/close for photos modal (works even after the "X" patch that sets display:none)
+  window.showPhotosModal = function(){ openOverlay('photosModal'); };
+  window.closePhotosModal = function(){ closeOverlay('photosModal'); };
+
+  // Safe handlers for details modal without clashing with mapWarning closeModal()
+  window.showDetailsModal = function(){ openOverlay('detailsModal'); };
+  window.closeDetailsModal = function(){ closeOverlay('detailsModal'); };
+
+  // If someone calls legacy names, try to do the right thing
+  var _legacyShow = window.showModal;
+  window.showModal = function(){ openOverlay('detailsModal'); };
+
+  // Intercept clicks on the blue "إغلاق" button inside details/photos modals
+  document.addEventListener('click', function(e){
+    if (e.target.closest('#detailsModal .modal-footer .btn')) { e.preventDefault(); closeOverlay('detailsModal'); }
+    if (e.target.closest('#photosModal .modal-footer .btn'))  { e.preventDefault(); closeOverlay('photosModal'); }
+  });
+
+  // ESC closes any active modal
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') {
+      var open = document.querySelector('.modal-overlay.active');
+      if (open) { open.classList.remove('active'); open.style.display = 'none'; document.body.style.overflow = 'auto'; }
+    }
+  });
+})();
+</script>
+<!-- === /FIX === -->
 </body>
 
 </html>
