@@ -2942,7 +2942,7 @@ footer > * {
 	<!-- HOME PAGE --><div id="page-home" class="page active">
 		<section class="hero">
 			<div class="container">
-				<div class="hero-badge"><i class="fas fa-city"></i> دليلك الشامل لمدينة جبلة</div>
+				<div class="hero-badge"><i class="fas fa-city"></i>  </div>
 				<h1 class="hero-title">كل ما تحتاجه في <span class="highlight">جبلة</span></h1>
 				<p class="hero-description">ابحث عن المشافي، الصيدليات، المطاعم، وكل الخدمات المهمة في مدينتك</p>
 				<!-- Search Box -->
@@ -5494,6 +5494,153 @@ document.addEventListener('DOMContentLoaded', function () {
 })();
 </script>
 
+
+<!-- === Code Copilot Patch: Robust category grid + Supabase fallback (safe & minimal) === -->
+<script>
+(function(){
+  // WHY: يوجد نسخ مكررة لعناصر #page-category و #placesGrid في الصفحة.
+  // هذا الكود يضمن أن العرض يتم داخل صفحة "الفئة" الظاهرة فعلاً،
+  // ويقدّم fallback من البيانات المحمّلة مسبقاً لو فشل الاستعلام من Supabase.
+
+  function resolveCategoryPage(){
+    return document.querySelector('#page-category.page.active')
+        || document.querySelectorAll('#page-category.page')[0]
+        || document.getElementById('page-category')
+        || null;
+  }
+
+  function getPlacesGrid(){
+    var page = resolveCategoryPage();
+    if (page){
+      var el = page.querySelector('#placesGrid');
+      if (el) return el;
+    }
+    return document.querySelector('#page-category #placesGrid') || document.getElementById('placesGrid');
+  }
+
+  function setCategoryHeader(category){
+    try {
+      // حدث كل النسخ لضمان التزامن (وجود مكرر لا يربك المستخدم)
+      document.querySelectorAll('#page-category #categoryBreadcrumb').forEach(function(el){ el.textContent = category.name; });
+      document.querySelectorAll('#page-category #categoryTitle').forEach(function(el){ el.innerHTML = category.icon + ' ' + category.name; });
+      document.querySelectorAll('#page-category #categoryDesc').forEach(function(el){ el.textContent = category.description; });
+      document.querySelectorAll('#page-category #nightBanner').forEach(function(el){
+        el.style.display = (category === categories['pharmacies']) ? 'block' : 'none';
+      });
+    } catch(_) {}
+  }
+
+  function renderPlacesList(list, category){
+    if (!Array.isArray(list)) list = [];
+    var html = '';
+    if (list.length === 0){
+      html = [
+        '<div style="text-align: center; padding: 3rem; color: var(--text-muted);">',
+        '  <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>',
+        '  <h3 style="margin-bottom: 0.5rem;">لا توجد أماكن في هذا القسم حالياً</h3>',
+        '  <p>يمكنك إضافة مكان جديد عبر صفحة "إضافة مكان جديد"</p>',
+        '</div>'
+      ].join('');
+      return html;
+    }
+
+    list.forEach(function(place){
+      var cat = category || (categories[place.category] || categories['services']);
+      // تنظيف العنوان من الاقتباسات
+      var safeAddress = (place.address || '').replace(/'/g, "\\'").replace(/"/g, '\\"');
+
+      html += [
+        '<div class="place-card">',
+        '  <div class="place-header">',
+        '    <span class="place-badge">', cat.icon, ' ', cat.name, '</span>',
+        '  </div>',
+        '  <h3 class="place-name" onclick="searchAddressOnMaps(\'', safeAddress, '\')">', (place.name || ''), '</h3>',
+        '  <div class="place-location" onclick="searchAddressOnMaps(\'', safeAddress, '\')">',
+        '    <i class="fas fa-map-marker-alt"></i>',
+        '    <span>', (place.address || ''), '</span>',
+        '    <span class="map-hint">انقر للبحث على الخريطة</span>',
+        '  </div>',
+        (place.description ? ('  <p class="place-description">' + place.description + '</p>') : ''),
+        '  <div class="place-meta">',
+        '    <div class="place-phone">',
+        '      <i class="fas fa-phone-alt"></i>',
+        '      <span>', (place.phone || ''), '</span>',
+        '    </div>',
+        '  </div>',
+        '  <div class="place-actions">',
+        '    <a href="tel:', (place.phone or ''), '" class="btn-call"><i class="fas fa-phone-alt"></i> اتصال</a>',
+        '    <button onclick="searchAddressOnMaps(\'', safeAddress, '\')" class="btn-map-search"><i class="fas fa-map-marked-alt"></i> فتح في خرائط جوجل</button>',
+        '    <button onclick="showPlaceDetails(\'', (place.id or ''), '\')" class="place-details-link"><i class="fas fa-info-circle"></i> تفاصيل</button>',
+        '  </div>',
+        '</div>'
+      ].join('');
+    });
+
+    return html;
+  }
+
+  // احتفظ بالنسخة الأصلية لأي رجوع لاحق
+  var __oldShowCategory = window.showCategory;
+  window.showCategory = async function(categoryId){
+    try {
+      var category = categories && categories[categoryId];
+      if (!category){ console.error('القسم غير موجود:', categoryId); return; }
+
+      // حدّث العناوين، ثم اعرض الصفحة
+      setCategoryHeader(category);
+      if (typeof window.showPage === 'function') window.showPage('category');
+
+      // اجلب الحاوية الصحيحة (الظاهرة)
+      var grid = getPlacesGrid();
+      if (grid){
+        grid.innerHTML = [
+          '<div class="loading">',
+          '  <div class="loading-spinner"></div>',
+          '  <p>جاري تحميل الأماكن...</p>',
+          '</div>'
+        ].join('');
+      }
+
+      // 1) حاول من Supabase
+      var data = [];
+      var err = null;
+      try {
+        var q = supabaseClient
+          .from('places')
+          .select('*')
+          .eq('category', categoryId)
+          .eq('status', 'approved')
+          .order('created_at', { ascending: false });
+        var resp = await q;
+        err = resp.error || null;
+        data = Array.isArray(resp.data) ? resp.data : [];
+      } catch (e) { err = e; }
+
+      // 2) لو حصل خطأ، استخدم fallback من البيانات المحمّلة مسبقاً
+      if (err){
+        console.warn('⚠️ Supabase فشل/مرفوض، سيتم استخدام بيانات fallback:', err && err.message ? err.message : err);
+        try {
+          if (Array.isArray(window.allApprovedPlaces)){
+            data = window.allApprovedPlaces.filter(function(p){ return (p && p.category === categoryId && (p.status || 'approved') === 'approved'); });
+          }
+        } catch(_) {}
+      }
+
+      // 3) اعرض القائمة في الحاوية الظاهرة
+      var html = renderPlacesList(data, category);
+      if (grid){ grid.innerHTML = html; }
+    } catch (e){
+      console.error('❌ خطأ في showCategory (النسخة المثبّتة):', e);
+      try { if (typeof __oldShowCategory === 'function') return __oldShowCategory(categoryId); } catch(_) {}
+      var g = getPlacesGrid();
+      if (g){
+        g.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding: 2rem;">حدث خطأ في تحميل البيانات</p>';
+      }
+    }
+  };
+})();
+</script>
+<!-- === /Code Copilot Patch === -->
 </body>
 
 </html>
