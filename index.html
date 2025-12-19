@@ -2894,6 +2894,13 @@ footer > * {
     line-height: 1.3;
   }
 </style>
+
+<style id="no-map-warning-style">
+  /* Remove/hide the Google Maps warning modal entirely */
+  #mapWarningModal,
+  .map-warning-modal { display: none !important; visibility: hidden !important; }
+</style>
+
 </head>
 
 <body>
@@ -3516,7 +3523,7 @@ footer > * {
 		<div class="modal">
 			<div class="modal-header">
 				<h3 class="modal-title" id="modalTitle"><i class="fas fa-info-circle"></i> تفاصيل المكان</h3>
-				<button class="modal-close" onclick="closeModal()">&times;</button>
+				<button type="button" class="modal-close" onclick="closeModal()">&times;</button>
 			</div>
 			<div class="modal-body" id="modalBody">
 				<div class="modal-details">
@@ -3546,7 +3553,7 @@ footer > * {
 				<a href="#" class="btn-call" id="modalCallBtn">
 					<i class="fas fa-phone-alt"></i> الاتصال
 				</a>
-				<button class="btn btn-primary" onclick="closeModal()">
+				<button type="button" class="btn btn-primary" onclick="closeModal()">
 					<i class="fas fa-times"></i> إغلاق
 				</button>
 			</div>
@@ -3891,7 +3898,7 @@ footer > * {
             <button class="btn btn-primary" onclick="showLandmarkPhotos('${title}')">
                 <i class="fas fa-images"></i> عرض الصور
             </button>
-            <button class="btn btn-primary" onclick="closeModal()">
+            <button type="button" class="btn btn-primary" onclick="closeModal()">
                 <i class="fas fa-times"></i> إغلاق
             </button>
         `;
@@ -5101,8 +5108,8 @@ document.addEventListener('DOMContentLoaded', function () {
         <h3 style="color: var(--emergency);">تنويه : </h3>
         <p>ستُفتح الخريطة في برنامج google maps</p>
         <div class="modal-actions">
-            <button id="modalContinueBtn" class="modal-btn modal-btn-primary">متابعة <i class="fas fa-arrow-left"></i></button>
-            <button onclick="closeModal()" class="modal-btn modal-btn-secondary">إلغاء</button>
+            <button type="button" id="modalContinueBtn" class="modal-btn modal-btn-primary">متابعة <i class="fas fa-arrow-left"></i></button>
+            <button type="button" onclick="closeModal()" class="modal-btn modal-btn-secondary">إلغاء</button>
         </div>
     </div>
 </div>
@@ -5423,6 +5430,70 @@ document.addEventListener('DOMContentLoaded', function () {
 })();
 </script>
 <!-- === /FINAL FIX === -->
+
+<!-- Patch: unify currentMapUrl & make Continue button always open it -->
+<script>
+(function () {
+  // Keep one global place for the URL
+  window.currentMapUrl = window.currentMapUrl || '';
+
+  // Harden/override openModal to always set global link and show modal
+  (function hardenOpenModal(){
+    var prev = window.openModal;
+    window.openModal = function(url){
+      if (url) window.currentMapUrl = url;
+      if (typeof prev === 'function') {
+        return prev(url);
+      }
+      var el = document.getElementById('mapWarningModal');
+      if (el){ el.style.display = 'flex'; el.classList.add('active'); }
+    };
+  })();
+
+  // Delegate click for the Continue button
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!t) return;
+    if (t.id === 'modalContinueBtn') {
+      if (window.currentMapUrl) {
+        // open in same tab to satisfy "الموقع المضاف" expectation
+        window.location.href = window.currentMapUrl;
+      }
+      try { if (typeof window.closeMapWarningModal === 'function') window.closeMapWarningModal(); } catch(_) {}
+      try { if (typeof window.closeModal === 'function') window.closeModal(); } catch(_) {}
+    }
+  });
+})();
+</script>
+
+
+<!-- No-Modal Patch: open maps immediately on the same page -->
+<script>
+(function(){
+  // open in same tab as requested
+  function go(u){ if(u){ window.location.href = u; } }
+
+  // Override any existing modal openers
+  window.openModal = function(url){ go(url); };
+  window.openMapWarningModal = function(url){ go(url); };
+
+  // Defensive: intercept any clicks on elements carrying data-map-url
+  document.addEventListener('click', function(e){
+    var t = e.target && e.target.closest ? e.target.closest('[data-map-url]') : null;
+    if (t){
+      var u = t.getAttribute('data-map-url') || t.dataset.mapUrl;
+      if (u){ e.preventDefault(); go(u); }
+    }
+  });
+
+  // Optional cleanup: remove modal element if present
+  try {
+    var m = document.getElementById('mapWarningModal');
+    if (m && m.parentNode) m.parentNode.removeChild(m);
+  } catch(_) {}
+})();
+</script>
+
 </body>
 
 </html>
