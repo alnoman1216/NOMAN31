@@ -3301,7 +3301,7 @@
 				<div class="form-card">
 					<div id="successMessage" class="form-success" style="display: none;">
 						<h3><i class="fas fa-check-circle"></i> تم الإرسال بنجاح</h3>
-						<p>تم إرسال بيانات المكان بنجاح وبانتظار الموافقة ✅</p>
+						<p>تم إرسال بيانات المكان بنجاح وبانتظار الموافقة </p>
 					</div>
 
 					<form id="addPlaceForm">
@@ -5045,14 +5045,207 @@ document.addEventListener('DOMContentLoaded', function () {
    ================================ -->
 <div id="mapWarningModal" class="map-warning-modal" onclick="closeModal(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
-        <h3 style="color: var(--emergency);">تنبيه هام بخصوص الموقع</h3>
-        <p>قد يكون الموقع المرفق غير دقيق او مضاف بشكل خاطئ من قبل المستخدم الرجاء الإتصال إن وجد الرقم والتأكد قبل الذهاب</p>
+        <h3 style="color: var(--emergency);">تنويه : </h3>
+        <p>ستُفتح الخريطة في برنامج google maps</p>
         <div class="modal-actions">
             <button id="modalContinueBtn" class="modal-btn modal-btn-primary">متابعة <i class="fas fa-arrow-left"></i></button>
             <button onclick="closeModal()" class="modal-btn modal-btn-secondary">إلغاء</button>
         </div>
     </div>
 </div>
+
+
+<!-- =====================================
+     PATCH v2: Warning Box placement + Modal buttons (type), X fixes, Pre-submit confirm
+     ===================================== -->
+<style>
+/* Location warning box (category pages, white section) */
+.location-warning{
+  background: var(--emergency-soft, #fee2e2);
+  border: 1px solid var(--emergency, #ef4444);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin: 1rem 0 1.25rem 0;
+  box-shadow: 0 0 0 1px rgba(239,68,68,0.08);
+  direction: rtl;
+}
+.location-warning .lw-title{
+  text-align: center;
+  color: var(--emergency, #b91c1c);
+  font-weight: 800;
+  margin-bottom: .5rem;
+}
+.location-warning .lw-body{
+  line-height: 1.8;
+  font-size: .95rem;
+}
+
+/* Ensure modal X is always clickable */
+.modal .modal-close{ position: relative; z-index: 2; }
+</style>
+
+
+<script>
+(function () {
+  // ============= A) Fix all (X) buttons for every modal =============
+  document.addEventListener('click', function (e) {
+    if (e.target && e.target.classList && e.target.classList.contains('modal-close')) {
+      const overlay = e.target.closest('.modal-overlay');
+      if (overlay) {
+        overlay.classList.remove('active');
+        overlay.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    }
+  });
+
+  // Also close when clicking outside the modal in our confirm modal
+  document.getElementById('confirmSubmitModal')?.addEventListener('click', function(e){
+    if (e.target.id === 'confirmSubmitModal') {
+      this.classList.remove('active');
+      this.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+  });
+
+  function openConfirmModal() {
+    const overlay = document.getElementById('confirmSubmitModal');
+    if (!overlay) return;
+    overlay.style.display = 'flex';
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeConfirmModal() {
+    const overlay = document.getElementById('confirmSubmitModal');
+    if (!overlay) return;
+    overlay.classList.remove('active');
+    overlay.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+
+  // ============= B) Warning box in white content (not blue header) =============
+  (function attachCategoryWarning() {
+    const originalShowCategory = window.showCategory;
+    if (typeof originalShowCategory !== 'function') return;
+
+    window.showCategory = async function(categoryKey) {
+      const result = await originalShowCategory.apply(this, arguments);
+
+      try {
+        // Remove any previously misplaced box inside the blue header
+        const header = document.querySelector('#page-category .category-header, .category-header');
+        header?.querySelector('#locationWarningBox')?.remove();
+
+        if (categoryKey !== 'emergency' && categoryKey !== 'mosques') {
+          // Prefer white content container after header
+          const target =
+            document.querySelector('#page-category .places-section .container') ||
+            document.querySelector('.places-section .container');
+
+          if (target && !document.getElementById('locationWarningBox')) {
+            const box = document.createElement('div');
+            box.id = 'locationWarningBox';
+            box.className = 'location-warning';
+            box.innerHTML = [
+              '<div class="lw-title">تنبيه هام</div>',
+              '<div class="lw-body">قد يكون الموقع المرفق غير دقيق او مضاف بشكل خاطئ من قبل المستخدم<br>الرجاء الإتصال إن وجد الرقم والتأكد قبل الذهاب</div>'
+            ].join('');
+            target.prepend(box);
+          }
+        } else {
+          // Ensure not shown for excluded categories
+          document.getElementById('locationWarningBox')?.remove();
+        }
+      } catch (err) {
+        console.warn('Warning box injection skipped:', err);
+      }
+
+      return result;
+    };
+  })();
+
+  // ============= C) Confirmation modal before Add Place submit =============
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('addPlaceForm');
+    if (!form) return;
+
+    function buildConfirmationSummary(frm) {
+      const rows = [];
+      const controls = Array.from(frm.elements).filter(function(el){
+        return ['INPUT','TEXTAREA','SELECT'].includes(el.tagName);
+      });
+
+      controls.forEach(function(el){
+        if (!el.name && !el.id) return;
+        if ((el.type === 'radio' || el.type === 'checkbox') && !el.checked) return;
+
+        const labelEl = el.id ? frm.querySelector('label[for="' + el.id + '"]') : null;
+        const niceLabel = (labelEl ? labelEl.textContent.trim() : (el.getAttribute('data-label') || el.name || el.id || '')) || '';
+
+        let valueText = '';
+        if (el.type === 'file') {
+          const files = el.files && el.files.length ? Array.from(el.files).map(f => f.name) : [];
+          valueText = files.join(', ');
+        } else if (el.tagName === 'SELECT') {
+          valueText = el.options && el.selectedIndex >= 0 ? el.options[el.selectedIndex].text : (el.value || '');
+        } else {
+          valueText = (el.value || '').toString();
+        }
+        valueText = valueText.replace(/\s+/g,' ').trim();
+
+        rows.push(
+          '<div style="display:flex;gap:.5rem;border-bottom:1px solid var(--border-light);padding:.5rem 0;">' +
+            '<div style="min-width:140px;color:var(--primary);font-weight:700;">' + niceLabel + '</div>' +
+            '<div style="flex:1;">' + (valueText || '<span style="color:var(--text-muted)">—</span>') + '</div>' +
+          '</div>'
+        );
+      });
+
+      return rows.join('');
+    }
+
+    function confirmThenSubmit(e) {
+      if (e) {
+        e.preventDefault();          // stop immediate submit
+        e.stopPropagation();         // block bubbling to other handlers
+      }
+      const summaryEl = document.getElementById('confirmSummary');
+      if (summaryEl) {
+        summaryEl.innerHTML = buildConfirmationSummary(form);
+      }
+      openConfirmModal();
+    }
+
+    // Intercept submit in capture phase to be first, without removing existing listeners
+    form.addEventListener('submit', confirmThenSubmit, true);
+
+    // Wire modal buttons (explicit type="button")
+    const sendBtn = document.getElementById('confirmSendBtn');
+    const cancelBtn = document.getElementById('confirmCancelBtn');
+    const xBtn = document.querySelector('#confirmSubmitModal .modal-close');
+
+    cancelBtn?.addEventListener('click', function(){
+      closeConfirmModal(); // back to form, keep data
+    });
+
+    xBtn?.addEventListener('click', function(){
+      closeConfirmModal();
+    });
+
+    sendBtn?.addEventListener('click', function(){
+      // Honor built-in HTML validation if available
+      if (typeof form.reportValidity === 'function' && !form.reportValidity()) return;
+      closeConfirmModal();
+      // True form submission (bypasses submit event handlers as requested)
+      if (HTMLFormElement.prototype.submit) {
+        HTMLFormElement.prototype.submit.call(form);
+      } else {
+        form.submit();
+      }
+    });
+  });
+})();
+</script>
 
 </body>
 
